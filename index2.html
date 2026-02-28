@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UJS Travel - Travel Malang Juanda Surabaya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "travellora-blue": "#305492",
+            "travellora-dark": "#2C3E50",
+            "travellora-gray": "#7F8C8D",
+          },
+          fontFamily: {
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body class="font-sans bg-gray-50">
+  <!-- Navigation Header -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <div class="flex items-center">
+              <!-- Logo gambar -->
+              <img src="img/logo.png" alt="Logo UJS Travel" class="w-10 h-10 object-contain" />
+
+              <span class="text-xl font-bold text-travellora-dark"> TRAVEL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-8">
+            <a href="#hero" class="text-travellora-blue font-medium hover:text-blue-600 transition-colors">Beranda</a>
+            <a href="#carter" class="text-travellora-gray hover:text-travellora-dark transition-colors">Travel Drop</a>
+            <a href="#layanan" class="text-travellora-gray hover:text-travellora-dark transition-colors">Layanan</a>
+
+            <a href="#jadwal" class="text-travellora-gray hover:text-travellora-dark transition-colors">Jadwal</a>
+            <a href="#aboutus" class="text-travellora-gray hover:text-travellora-dark transition-colors">About Us</a>
+            <a href="#contact" class="text-travellora-gray hover:text-travellora-dark transition-colors">Kontak</a>
+
+          </div>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button type="button"
+            class="text-travellora-gray hover:text-travellora-dark focus:outline-none focus:text-travellora-dark"
+            onclick="toggleMobileMenu()">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="#hero" class="block px-3 py-2 text-travellora-blue font-medium">Beranda</a>
+        <a href="#layanan" class="block px-3 py-2 text-travellora-gray hover:text-travellora-dark">Malang Surabaya</a>
+        <a href="#" class="block px-3 py-2 text-travellora-gray hover:text-travellora-dark">Malang Juanda</a>
+        <a href="#" class="block px-3 py-2 text-travellora-gray hover:text-travellora-dark">Juanda Malang</a>
+        <a href="#" class="block px-3 py-2 text-travellora-gray hover:text-travellora-dark">Surabaya Malang</a>
+        <a href="#" class="block px-3 py-2 text-travellora-gray hover:text-travellora-dark">Sewa Mobil</a>
+        <a href="#" class="block px-3 py-2 text-travellora-gray hover:text-travellora-dark">Promo</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center">
+    <!-- Background Image Full -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/img/bg.jpg');"></div>
+
+    <!-- Overlay untuk menjaga readability teks -->
+    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+    <!-- Konten teks -->
+    <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+        <span class="block">TRAVEL MALANG</span>
+        <span class="block">JUANDA SURABAYA</span>
+      </h1>
+
+      <p class="text-lg sm:text-xl text-gray-100 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+        Melayani segala kebutuhan transportasi Anda. Travel Reguler Malang
+        Juanda Surabaya PP, Travel Drop, Rental Mobil, City Tour, Open Trip
+        Bromo dan Paket Wisata.
+      </p>
+
+      <div class="mb-10">
+        <div class="text-2xl sm:text-3xl font-bold text-white mb-2 drop-shadow-lg">
+          HARGA MULAI
+        </div>
+        <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-yellow-400 drop-shadow-lg">
+          Rp. 150.000,-
+        </div>
+      </div>
+
+
+
+      <a href="https://wa.me/6282316290290" target="_blank"
+        class="bg-travellora-blue border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-travellora-blue transition-colors duration-300">
+        PESAN SEKARANG
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Carter Section -->
+  <section id="carter" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-travellora-dark mb-4">
+          Travel Drop
+        </h2>
+        <p class="text-xl text-travellora-gray max-w-2xl mx-auto">
+          Berbagai pilihan layanan transportasi untuk memenuhi kebutuhan
+          perjalanan Anda
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <!-- Service 1 -->
+        <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition-shadow duration-300">
+          <div class="w-16 h-16 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-4">INNOVA REBORN (Unit baru 2025)</h3>
+          <p class="text-travellora-gray">
+            Malang - Juanda /Sby kota
+            <br>
+            700.000
+            <br>
+            (All inn > include mobil+driver+bbm+parkir bandara+full toll)
+            <br>
+            <br>
+            Batu - Juanda/Sby kota
+            <br>
+            750.000
+            <br>
+            ( All inn > include mobil + driver +bbm+ parkir bandara+ full toll)
+          </p>
+          <br>
+          <br>
+          <a href="https://wa.me/6285106655664?text=*Form%20Reservasi%20UJS%20Travel*%0AMalang%20-%20SDA%0A(keterangan%20Reguler/Drop)%0A%0ATravel%20tgl%20:%20%0ANama%20:%20%0AAlamat%20:%20%0ANo%20telf%20:%20%0ATujuan%20:%20%0AJam%20:%20%0AJumlah%20penumpang%20:%20%0A%0AMohon%20diisi%20ya"
+            target="_blank"
+            class="bg-travellora-blue border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-travellora-blue transition-colors duration-300">
+            PESAN SEKARANG
+          </a>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition-shadow duration-300">
+          <div class="w-16 h-16 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+              </path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-4">AVANSA</h3>
+          <p class="text-travellora-gray">
+            Malang - Juanda /Sby kota
+            <br>
+            (atau sebaliknya)
+            <br>500.000
+            <br>(All inn > include mobil+driver+bbm+parkir bandara+full toll)
+            <br>
+            <br>
+            Batu - Juanda/Sby kota
+            <br>(Atau sebaliknya)
+            <br>600.000
+            <br>(All inn > include mobil + driver +bbm+ parkir bandara+ full toll)
+          </p>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="layanan" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-travellora-dark mb-4">
+          Layanan Kami
+        </h2>
+        <p class="text-xl text-travellora-gray max-w-2xl mx-auto">
+          Berbagai pilihan layanan transportasi untuk memenuhi kebutuhan
+          perjalanan Anda
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Service 1 -->
+        <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition-shadow duration-300">
+          <div class="w-16 h-16 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-4">Reguler</h3>
+          <p class="text-travellora-gray">
+            Satu mobil bersama dengan penumpang lain dan maksimal isi 4 penumpang dengan menggunakan armada avansa.
+            Untuk penjemputan dan pengantaran sesuai alamat (door to door). Setiap penumpang dapat Free snack dari kita.
+          </p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition-shadow duration-300">
+          <div class="w-16 h-16 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+              </path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-4">Travel Drop</h3>
+          <p class="text-travellora-gray">
+            Satu mobil dipakai sendiri tanpa ada penumpang lain. (satu titik penjemputan dan satu titik pengantaran).
+            Jam penjemputan sesuai request dan sudah full toll tanpa ada tambahan biaya lain lain. Dapat free snack dan
+            bisa mampir makan atau beli oleh oleh yang searah dalam perjalanan.
+          </p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition-shadow duration-300">
+          <div class="w-16 h-16 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-4">
+            City Tour
+          </h3>
+          <p class="text-travellora-gray">
+            Carter mobil sudah termasuk mobil plus driver plus bbm untuk menemani dan mengantarkan anda wisata atau
+            kuliner atau acara wisuda atau nikahan atau acara kantor di area malang dan batu
+          </p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition-shadow duration-300">
+          <div class="w-16 h-16 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-4">
+            Kirim Paket
+          </h3>
+          <p class="text-travellora-gray">
+            Pengiriman barang atau dokumen satu hari sampai (express)
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule Section -->
+  <section id="jadwal" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-travellora-dark mb-4">
+          Jadwal Keberangkatan
+        </h2>
+        <p class="text-xl text-travellora-gray max-w-2xl mx-auto">
+          Jadwal keberangkatan reguler dan harga tiket untuk berbagai rute
+          perjalanan
+        </p>
+      </div>
+
+      <!-- Price Table -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-travellora-dark mb-8 text-center">
+          Harga Tiket
+        </h3>
+        <!--Reguler-->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-travellora-blue text-white">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold">Reguler</th>
+                  <th class="px-6 py-4 text-center font-semibold">Harga</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Malang - Juanda/SBY Kota
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 150.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Malang - Perak
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 170.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Batu - Juanda/SBY Kota
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 170.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Batu - Perak
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 180.000
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br />
+        <!--Drop-->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-travellora-blue text-white">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold">
+                    Travel Drop
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold">Harga</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Malang - Juanda/SBY Kota
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 500.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Malang - Perak
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 500.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Batu - Juanda/SBY Kota
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 600.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Batu - Perak
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 600.000
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br />
+        <!--City Tour-->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-travellora-blue text-white">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold">City Tour</th>
+                  <th class="px-6 py-4 text-center font-semibold">Harga</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Transportasi Wisuda
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 500.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Tour Malang - Batu
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 500.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Tour Malang - Pantai
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 600.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Tour Malang - Bromo
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 600.000
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Tour Kota Malang - Surabaya
+                  </td>
+                  <td class="px-6 py-4 text-center text-travellora-blue font-bold">
+                    Rp. 650.000
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br />
+
+      </div>
+
+      <!-- Schedule Table -->
+      <div>
+        <h3 class="text-2xl font-bold text-travellora-dark mb-8 text-center">
+          Jadwal Keberangkatan
+        </h3>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-travellora-blue text-white">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold">
+                    Jadwal Keberangkatan
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold">
+                    Pagi
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold">
+                    Siang
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold">
+                    Sore
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold">
+                    Malam
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Dari Surabaya / Perak
+                  </td>
+                  <td class="px-6 py-4 text-center text-green-600 font-medium">
+                    ✓ 06:00 - 08:00
+                    <br>
+                    ✓ 08:01 - 10:00
+                  </td>
+                  <td class="px-6 py-4 text-center text-green-600 font-medium">
+                    ✓ 10:01 - 12:00
+                    <br>
+                    ✓ 12:01 - 14:00
+                  </td>
+                  <td class="px-6 py-4 text-center text-green-600 font-medium">
+                    ✓ 14:01 - 16:00
+                    <br>
+                    ✓ 16:01 - 18:00
+                  </td>
+                  <td class="px-6 py-4 text-center text-green-600 font-medium">
+                    ✓ 18:01 - 20:00
+                    <br>
+                    ✓ 20:01 - 22:00
+                    <br>
+                    ✓ 22:01 - 24:00
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-travellora-dark font-medium">
+                    Dari Juanda
+                  </td>
+                  <td class="px-6 py-4 text-center text-green-600 font-medium">
+                    ✓ 06:00-07.00
+                    <br>
+                    ✓ 07:01-08.00
+                    <br>
+                    ✓ 08:01-09.00
+                    <br>
+                    ✓ 09:01-10.00
+                  </td>
+                  <td class="px-6 py-4 text-center text-green-600 font-medium">
+                    ✓ 10:01-11.00
+                    <br>
+                    ✓ 11:01-12.00
+                    <br>
+                    ✓ 12:01-13.00
+                    <br>
+                    ✓ 13:01-14.00
+                  </td>
+                  <td class="px-6 py-4 text-center text-green-600 font-medium">
+                    ✓ 14:01-15.00
+                    <br>
+                    ✓ 15:01-16.00
+                    <br>
+                    ✓ 16:01-17.00
+                    <br>
+                    ✓ 17:01-18.00
+                  </td>
+                  <td class="px-6 py-4 text-center text-green-600 font-medium">
+                    ✓ 18:01-19.00
+                    <br>
+                    ✓ 19:01-20.00
+                    <br>
+                    ✓ 20:01-21.00
+                    <br>
+                    ✓ 21:01-22.00
+                    <br>
+                    ✓ 22:01-23.00
+                  </td>
+                </tr>
+
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-travellora-blue text-white">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold">
+                    Dari Malang
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold">
+                    Jadwal Travel
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold">
+                    Jadwal Pesawat (Domestik)
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold">
+                    Jadwal Pesawat (Internasional)
+                  </th>
+
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-2 text-travellora-dark font-medium">
+                    Dini Hari
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 01:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 05:00 - 06:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 06:00 - 07:00
+                  </td>
+
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-2 text-travellora-dark font-medium">
+
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 03:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 06:00 - 08:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 07:00 - 09:00
+                  </td>
+
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-2 text-travellora-dark font-medium">
+                    Pagi
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 05:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 09:00 - 10:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 10:00 - 11:00
+                  </td>
+
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-2 text-travellora-dark font-medium">
+
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 07:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 11:00 - 12:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 12:00 - 13:00
+                  </td>
+
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-2 text-travellora-dark font-medium">
+
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 09:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 13:00 - 14:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 14:00 - 15:00
+                  </td>
+
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-2 text-travellora-dark font-medium">
+                    Siang
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 11:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 15:00 - 16:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 16:00 - 17:00
+                  </td>
+
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-2 text-travellora-dark font-medium">
+
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 13:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 17:00 - 18:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 18:00 - 19:00
+                  </td>
+
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-2 text-travellora-dark font-medium">
+                    Sore
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 15:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 19:00 - 20:00
+                  </td>
+                  <td class="px-6 py-2 text-center text-green-600 font-medium">
+                    ✓ 20:00 - 21:00
+                  </td>
+
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+
+
+        <!-- Schedule Notes -->
+        <div class="mt-6 bg-blue-50 border-l-4 border-travellora-blue p-4 rounded-r-lg">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-5 w-5 text-travellora-blue" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-travellora-dark">
+                <strong>Catatan:</strong> Jadwal dapat berubah sewaktu-waktu.
+                Mohon konfirmasi jadwal keberangkatan sebelum melakukan
+                perjalanan. Waktu perjalanan estimasi 2-3 jam tergantung
+                kondisi lalu lintas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section id="aboutus" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-travellora-dark mb-4">
+          Mengapa Memilih Kami?
+        </h2>
+        <p class="text-xl text-travellora-gray max-w-2xl mx-auto">
+          Kepercayaan dan kepuasan pelanggan adalah prioritas utama kami
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <!-- Feature 1 -->
+        <div class="text-center group">
+          <div
+            class="w-20 h-20 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            <img src="img/nyaman.png" alt="Logo" class="w-12 h-12 object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-3">
+            Nyaman
+          </h3>
+          <p class="text-travellora-gray">
+            Mengutamakan kenyamanan Anda selama perjalanan.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="text-center group">
+          <div
+            class="w-20 h-20 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            <img src="img/tepat waktu.png" alt="Logo" class="w-12 h-12 object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-3">
+            Tepat Waktu
+          </h3>
+          <p class="text-travellora-gray">
+            Ketepatan waktu adalah nilai penting bagi layanan kami.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="text-center group">
+          <div
+            class="w-20 h-20 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            <img src="img/layanan.png" alt="Logo" class="w-12 h-12 object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-3">
+            Layanan
+          </h3>
+          <p class="text-travellora-gray">
+            Admin ramah yang siap membantu Anda.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="text-center group">
+          <div
+            class="w-20 h-20 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            <img src="img/profesional.png" alt="Logo" class="w-12 h-12 object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-3">
+            Profesional
+          </h3>
+          <p class="text-travellora-gray">
+            Memiliki driver yang handal dan tentunya berpengalaman.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="text-center group">
+          <div
+            class="w-20 h-20 bg-travellora-blue rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            <img src="img/terpercaya.png" alt="Logo" class="w-12 h-12 object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-travellora-dark mb-3">
+            Terpercaya
+          </h3>
+          <p class="text-travellora-gray">
+            Travel kami berdiri sejak tahun 2011.
+          </p>
+        </div>
+      </div>
+
+      <!-- Statistics Section -->
+      <div class="mt-20 bg-gray-50 rounded-2xl p-8 lg:p-12">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-3xl lg:text-4xl font-bold text-travellora-blue mb-2">
+              5000+
+            </div>
+            <div class="text-travellora-gray font-medium">Pelanggan Puas</div>
+          </div>
+          <div>
+            <div class="text-3xl lg:text-4xl font-bold text-travellora-blue mb-2">
+              10+
+            </div>
+            <div class="text-travellora-gray font-medium">
+              Tahun Pengalaman
+            </div>
+          </div>
+          <div>
+            <div class="text-3xl lg:text-4xl font-bold text-travellora-blue mb-2">
+              50+
+            </div>
+            <div class="text-travellora-gray font-medium">Trip Per Hari</div>
+          </div>
+          <div>
+            <div class="text-3xl lg:text-4xl font-bold text-travellora-blue mb-2">
+              99%
+            </div>
+            <div class="text-travellora-gray font-medium">
+              Tingkat Kepuasan
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="mt-20">
+        <h3 class="text-2xl font-bold text-travellora-dark mb-12 text-center">
+          Apa Kata Pelanggan Kami
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div
+            class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="flex items-center mb-4">
+              <div class="flex text-yellow-400">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+            <p class="text-travellora-gray mb-4">
+              "Pelayanan sangat memuaskan! Driver ramah dan kendaraan bersih.
+              Selalu tepat waktu dan harga terjangkau."
+            </p>
+            <div class="font-semibold text-travellora-dark">Budi Santoso</div>
+            <div class="text-sm text-travellora-gray">Pelanggan Reguler</div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div
+            class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="flex items-center mb-4">
+              <div class="flex text-yellow-400">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+            <p class="text-travellora-gray mb-4">
+              "Sudah beberapa kali menggunakan jasa UJS Travel untuk ke
+              bandara. Tidak pernah mengecewakan!"
+            </p>
+            <div class="font-semibold text-travellora-dark">Sari Dewi</div>
+            <div class="text-sm text-travellora-gray">Frequent Traveler</div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div
+            class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="flex items-center mb-4">
+              <div class="flex text-yellow-400">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+            <p class="text-travellora-gray mb-4">
+              "Recommended banget! Customer service responsif dan booking
+              mudah. Pasti akan pakai lagi."
+            </p>
+            <div class="font-semibold text-travellora-dark">Ahmad Rizki</div>
+            <div class="text-sm text-travellora-gray">Business Traveler</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-travellora-blue">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-8">
+        Siap Untuk Perjalanan Anda?
+      </h2>
+      <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+        Hubungi kami sekarang untuk reservasi dan informasi lebih lanjut
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <button
+          class="bg-white text-travellora-blue font-bold py-4 px-8 rounded-full hover:bg-gray-100 transition-colors duration-300 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+          </svg>
+          WhatsApp
+        </button>
+        <a href="https://wa.me/6282316290290" target="_blank"
+          class="bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-travellora-blue transition-colors duration-300">
+          Hubungi Kami
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-travellora-blue to-blue-700 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Company Info -->
+        <div class="lg:col-span-1">
+          <div class="flex items-center mb-6">
+            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+              <img src="img/logo.png" alt="WhatsApp" class="w-12 h-12">
+            </div>
+            <div>
+              <div class="text-white font-bold text-xl">Travel</div>
+            </div>
+          </div>
+          <p class="text-blue-100 mb-6 leading-relaxed">
+            Perusahaan Travel, Rental Mobil, Rental Motor, Tour Agency
+            Terbesar Di Kota Malang Dengan Crew Profesional Yang Dapat Dapat
+            Dipercaya Untuk Menyediakan Semua Kebutuhan Anda
+          </p>
+
+          <!-- Social Media Icons -->
+          <div class="flex space-x-4">
+            <a href="#"
+              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all duration-300">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all duration-300">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-4.358-.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.205.013 3.663.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.204 0 3.663-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.204-.013-3.662-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.057-1.69-.073-4.949-.073zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.205.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.204 0 3.663-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.204-.013-3.662-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.057-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all duration-300">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Company Links -->
+        <div>
+          <h3 class="text-lg font-semibold mb-6 text-white">Company</h3>
+          <ul class="space-y-3 text-blue-100">
+            <li>
+              <a href="#" class="hover:text-white transition-colors duration-300">About Us</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-white transition-colors duration-300">Our Team</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-white transition-colors duration-300">Careers</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-white transition-colors duration-300">News</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service Links -->
+        <div>
+          <h3 class="text-lg font-semibold mb-6 text-white">Service</h3>
+          <ul class="space-y-3 text-blue-100">
+            <li>
+              <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-white transition-colors duration-300">Terms and Conditions</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-white transition-colors duration-300">Contact Us</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-white transition-colors duration-300">Support</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Our Office with Map -->
+        <div>
+          <h3 class="text-lg font-semibold mb-6 text-white">Our Office</h3>
+          <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+            <div class="h-48 bg-gray-200 relative">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.4234567890123!2d112.6123456!3d-7.9876543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd629c123456789%3A0x123456789abcdef0!2sJl.%20Atletik%2C%20Malang%2C%20Jawa%20Timur!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
+                width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade" class="w-full h-full">
+              </iframe>
+            </div>
+            <div class="p-3 bg-white">
+              <div class="text-sm text-gray-600 font-medium">Jl. Atletik</div>
+              <div class="text-xs text-gray-500">Lihat peta lebih besar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="border-t border-blue-400 border-opacity-30 mt-12 pt-8 text-center">
+        <p class="text-blue-100">
+          &copy; 2024. Travel Ujs. All Rights Reserved | Design By FWD
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <a href="https://wa.me/6282316290290" target="_blank"
+      class="bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 group">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+      </svg>
+      <span class="hidden group-hover:inline-block text-sm font-medium whitespace-nowrap">Contact Admin In
+        Whatsapp</span>
+    </a>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById("mobile-menu");
+      mobileMenu.classList.toggle("hidden");
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
+    });
+
+    // Add scroll effect to header
+    window.addEventListener("scroll", function () {
+      const nav = document.querySelector("nav");
+      if (window.scrollY > 100) {
+        nav.classList.add("shadow-lg");
+      } else {
+        nav.classList.remove("shadow-lg");
+      }
+    });
+  </script>
+</body>
+
+</html>
