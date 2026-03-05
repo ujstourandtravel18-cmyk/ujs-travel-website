@@ -39,10 +39,32 @@
     .upload-area:hover { background:#eef3ff; border-color:#1e3a6e; }
     .upload-area.drag-over { background:#dce8ff; border-color:#1e3a6e; transform:scale(1.01); }
     .preview-img { max-height:200px; border-radius:8px; margin:12px auto 0; display:block; border:2px solid #e5e7eb; }
+
+    #loadingOverlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.72);
+      z-index:9999; flex-direction:column; align-items:center; justify-content:center; gap:20px;
+    }
+    #loadingOverlay.show { display:flex; }
+    .spinner {
+      width:60px; height:60px;
+      border:5px solid rgba(255,255,255,0.2);
+      border-top-color:#ffffff;
+      border-radius:50%;
+      animation:spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
   </style>
 </head>
-
 <body class="font-sans bg-gray-50">
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="text-center px-8">
+      <p class="text-white font-bold text-xl mb-2">Mengupload Bukti Transfer...</p>
+      <p class="text-blue-200 text-sm">Mohon tunggu sebentar, jangan tutup halaman ini</p>
+    </div>
+  </div>
 
   <!-- Navbar -->
   <nav class="bg-white shadow-sm sticky top-0 z-50">
@@ -112,11 +134,10 @@
     </div>
   </nav>
 
-  <!-- Main -->
+  <!-- Main Content -->
   <div class="py-10">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <!-- Header -->
       <div class="text-center mb-10 reveal fade-bottom">
         <div class="flex justify-center mb-4">
           <img src="img/logo.png" alt="Logo UJS Travel" class="w-20 h-20 object-contain" />
@@ -125,7 +146,6 @@
         <p class="text-lg text-travellora-gray">Pesan travel Malang – Juanda – Surabaya dengan mudah, cepat, dan terbaik.</p>
       </div>
 
-      <!-- Form Card -->
       <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8 reveal fade-bottom">
         <div class="bg-travellora-blue p-6 text-white">
           <h2 class="text-xl font-bold">Formulir Reservasi Travel</h2>
@@ -141,8 +161,7 @@
               <h3 class="text-lg font-bold text-travellora-dark">Pilih Jenis Layanan</h3>
             </div>
             <label for="jenisLayanan" class="block text-gray-700 font-medium mb-2">Jenis Layanan <span class="text-red-500">*</span></label>
-            <select id="jenisLayanan" name="jenisLayanan"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" required
+            <select id="jenisLayanan" name="jenisLayanan" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" required
               onchange="toggleCarterFields(); updateRouteOptions(); calculatePrice(); toggleMaxPenumpang();">
               <option value="">Pilih Jenis Layanan</option>
               <option value="Travel Reguler">Travel Reguler</option>
@@ -159,8 +178,7 @@
               <h3 class="text-lg font-bold text-travellora-dark">Pilih Rute Perjalanan</h3>
             </div>
             <label for="rutePerjalanan" class="block text-gray-700 font-medium mb-2">Rute Perjalanan <span class="text-red-500">*</span></label>
-            <select id="rutePerjalanan" name="rutePerjalanan"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" required
+            <select id="rutePerjalanan" name="rutePerjalanan" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" required
               onchange="toggleBandaraFields(); updateJamKeberangkatanOptions(); calculatePrice(); autoFillAlamatTujuan();">
               <option value="">Pilih Rute Perjalanan</option>
             </select>
@@ -176,13 +194,11 @@
               <div>
                 <label for="tanggalKeberangkatan" class="block text-gray-700 font-medium mb-2">Tanggal Keberangkatan <span class="text-red-500">*</span></label>
                 <input type="date" id="tanggalKeberangkatan" name="tanggalKeberangkatan"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors"
-                  required onchange="calculatePrice()" />
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" required onchange="calculatePrice()" />
               </div>
               <div>
                 <label for="jamKeberangkatan" class="block text-gray-700 font-medium mb-2">Jam Keberangkatan <span class="text-red-500">*</span></label>
-                <select id="jamKeberangkatan" name="jamKeberangkatan"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" required>
+                <select id="jamKeberangkatan" name="jamKeberangkatan" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" required>
                   <option value="">Pilih Jam Keberangkatan</option>
                 </select>
               </div>
@@ -198,33 +214,24 @@
             <div class="space-y-4">
               <div>
                 <label for="namaLengkap" class="block text-gray-700 font-medium mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
-                <input type="text" id="namaLengkap" name="namaLengkap"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors"
-                  placeholder="Masukkan nama lengkap" required />
+                <input type="text" id="namaLengkap" name="namaLengkap" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" placeholder="Masukkan nama lengkap" required />
               </div>
               <div>
                 <label for="nomorWhatsApp" class="block text-gray-700 font-medium mb-2">Nomor WhatsApp <span class="text-red-500">*</span></label>
-                <input type="tel" id="nomorWhatsApp" name="nomorWhatsApp"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors"
-                  placeholder="Contoh: 6281234567890" required />
+                <input type="tel" id="nomorWhatsApp" name="nomorWhatsApp" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" placeholder="Contoh: 6281234567890" required />
               </div>
               <div>
                 <label for="alamatPenjemputan" class="block text-gray-700 font-medium mb-2">Alamat Penjemputan <span class="text-red-500">*</span></label>
-                <textarea id="alamatPenjemputan" name="alamatPenjemputan" rows="3"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors resize-none"
-                  placeholder="Detail alamat penjemputan" required></textarea>
+                <textarea id="alamatPenjemputan" name="alamatPenjemputan" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors resize-none" placeholder="Detail alamat penjemputan" required></textarea>
               </div>
               <div>
                 <label for="alamatTujuan" class="block text-gray-700 font-medium mb-2">Alamat Tujuan <span class="text-red-500">*</span></label>
-                <textarea id="alamatTujuan" name="alamatTujuan" rows="3"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors resize-none"
-                  placeholder="Detail alamat tujuan" required></textarea>
+                <textarea id="alamatTujuan" name="alamatTujuan" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors resize-none" placeholder="Detail alamat tujuan" required></textarea>
               </div>
               <div>
                 <label for="jumlahPenumpang" class="block text-gray-700 font-medium mb-2">Jumlah Penumpang <span class="text-red-500">*</span></label>
                 <input type="number" id="jumlahPenumpang" name="jumlahPenumpang" min="1" max="10"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors"
-                  required onchange="calculatePrice()" />
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" required onchange="calculatePrice()" />
                 <p class="text-xs text-gray-500 mt-1" id="penumpangNote">Maksimal 10 penumpang untuk Travel Reguler</p>
               </div>
             </div>
@@ -239,22 +246,17 @@
             <div class="space-y-4 bg-blue-50 p-4 rounded-lg">
               <div>
                 <label for="maskapai" class="block text-gray-700 font-medium mb-2">Maskapai</label>
-                <input type="text" id="maskapai" name="maskapai"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors"
-                  placeholder="Nama maskapai penerbangan" />
+                <input type="text" id="maskapai" name="maskapai" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" placeholder="Nama maskapai penerbangan" />
               </div>
               <div>
                 <label for="kodePenerbangan" class="block text-gray-700 font-medium mb-2">Kode Penerbangan</label>
-                <input type="text" id="kodePenerbangan" name="kodePenerbangan"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors"
-                  placeholder="Contoh: GA123" />
+                <input type="text" id="kodePenerbangan" name="kodePenerbangan" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" placeholder="Contoh: GA123" />
               </div>
               <div>
                 <label for="jamPenerbangan" class="block text-gray-700 font-medium mb-2">
                   <span id="jamPenerbanganLabel">Jam Landing Pesawat</span>
                 </label>
-                <input type="time" id="jamPenerbangan" name="jamPenerbangan"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" />
+                <input type="time" id="jamPenerbangan" name="jamPenerbangan" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors" />
               </div>
             </div>
           </div>
@@ -268,9 +270,7 @@
             <div class="space-y-4 bg-green-50 p-4 rounded-lg">
               <div>
                 <label for="rencanaPerjalanan" class="block text-gray-700 font-medium mb-2">Rencana Perjalanan (Opsional)</label>
-                <textarea id="rencanaPerjalanan" name="rencanaPerjalanan" rows="3"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors resize-none"
-                  placeholder="Deskripsikan rencana perjalanan Anda..."></textarea>
+                <textarea id="rencanaPerjalanan" name="rencanaPerjalanan" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors resize-none" placeholder="Deskripsikan rencana perjalanan Anda..."></textarea>
               </div>
             </div>
           </div>
@@ -281,8 +281,7 @@
               <div class="w-8 h-8 bg-travellora-blue text-white rounded-full flex items-center justify-center mr-3 font-bold text-sm">G</div>
               <h3 class="text-lg font-bold text-travellora-dark">Barang Bawaan</h3>
             </div>
-            <select id="barangBawaan" name="barangBawaan"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors">
+            <select id="barangBawaan" name="barangBawaan" class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors">
               <option value="">Pilih Barang Bawaan</option>
               <option value="1 koper + 1 ransel">1 koper + 1 ransel</option>
               <option value="Lebih dari 1 koper (konfirmasi admin)">Lebih dari 1 koper (konfirmasi admin)</option>
@@ -296,8 +295,6 @@
               <div class="w-8 h-8 bg-travellora-blue text-white rounded-full flex items-center justify-center mr-3 font-bold text-sm">H</div>
               <h3 class="text-lg font-bold text-travellora-dark">Pembayaran & Bukti Transfer</h3>
             </div>
-
-            <!-- Info Rekening BCA -->
             <div class="p-6 bg-blue-50 rounded-xl border-2 border-blue-200 mb-5">
               <div class="flex flex-col items-center text-center">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" alt="BCA" class="h-8 mb-4">
@@ -309,8 +306,6 @@
                 <p class="text-sm text-blue-700">Transfer sesuai total harga, lalu upload bukti di bawah</p>
               </div>
             </div>
-
-            <!-- Upload Area -->
             <label class="block text-gray-700 font-medium mb-3">Upload Bukti Transfer <span class="text-red-500">*</span></label>
             <div class="upload-area" id="uploadArea"
               onclick="document.getElementById('buktiTransfer').click()"
@@ -367,8 +362,7 @@
           <!-- Persetujuan -->
           <div class="mb-8">
             <div class="flex items-start">
-              <input id="persetujuan" type="checkbox"
-                class="h-5 w-5 mt-0.5 text-travellora-blue border-gray-300 rounded" required />
+              <input id="persetujuan" type="checkbox" class="h-5 w-5 mt-0.5 text-travellora-blue border-gray-300 rounded" required />
               <label for="persetujuan" class="ml-3 text-gray-700 font-medium">
                 Saya menyetujui syarat &amp; ketentuan yang berlaku
               </label>
@@ -377,7 +371,7 @@
 
           <!-- Submit -->
           <div class="text-center">
-            <button type="submit"
+            <button type="submit" id="submitBtn"
               class="bg-travellora-blue hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-lg transition-colors duration-300 text-lg w-full md:w-auto">
               <span class="flex items-center justify-center">
                 <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -386,13 +380,12 @@
                 Kirim Booking via WhatsApp
               </span>
             </button>
-            <p class="text-xs text-gray-400 mt-3">Foto bukti transfer akan tersimpan otomatis ke Google Drive UJS Travel</p>
+            <p class="text-xs text-gray-400 mt-3">Foto bukti transfer tersimpan otomatis ke Google Drive UJS Travel</p>
           </div>
 
         </form>
       </div>
 
-      <!-- Info Tambahan -->
       <div class="bg-white rounded-xl shadow-lg p-6 text-center">
         <img src="img/logo.png" alt="Logo UJS Travel" class="w-16 h-16 object-contain mx-auto mb-4" />
         <h3 class="text-lg font-bold text-travellora-dark mb-3">Butuh Bantuan?</h3>
@@ -421,34 +414,17 @@
           </div>
           <p class="text-blue-100 mb-6 leading-relaxed">Perusahaan travel terbaik di Kota Malang dengan crew profesional. Berpengalaman sejak 2011.</p>
           <div class="space-y-3 mb-6">
-            <div class="flex items-start">
-              <svg class="w-5 h-5 text-white mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-              <div><div class="text-white font-semibold">Telepon</div><a href="tel:+6282316290290" class="text-blue-100 hover:text-white">0823-1629-0290</a></div>
-            </div>
-            <div class="flex items-start">
-              <svg class="w-5 h-5 text-white mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              <div><div class="text-white font-semibold">Email</div><a href="mailto:ujs.tourandtravel18@gmail.com" class="text-blue-100 hover:text-white">ujs.tourandtravel18@gmail.com</a></div>
-            </div>
-            <div class="flex items-start">
-              <svg class="w-5 h-5 text-white mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              <div><div class="text-white font-semibold">Alamat</div><span class="text-blue-100">Jl. Atletik, Malang, Jawa Timur</span></div>
-            </div>
+            <div class="flex items-start"><svg class="w-5 h-5 text-white mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><div><div class="text-white font-semibold">Telepon</div><a href="tel:+6282316290290" class="text-blue-100 hover:text-white">0823-1629-0290</a></div></div>
+            <div class="flex items-start"><svg class="w-5 h-5 text-white mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><div><div class="text-white font-semibold">Email</div><a href="mailto:ujs.tourandtravel18@gmail.com" class="text-blue-100 hover:text-white">ujs.tourandtravel18@gmail.com</a></div></div>
+            <div class="flex items-start"><svg class="w-5 h-5 text-white mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><div><div class="text-white font-semibold">Alamat</div><span class="text-blue-100">Jl. Atletik, Malang, Jawa Timur</span></div></div>
           </div>
           <div>
             <h3 class="text-lg font-semibold mb-4 text-white">Ikuti Kami</h3>
             <div class="flex space-x-4">
-              <a href="https://www.facebook.com/ujstravel" target="_blank" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              </a>
-              <a href="https://www.instagram.com/ujstravel" target="_blank" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.07-1.644-.07-4.849 0-3.204.012-3.584.07-4.849.148-3.227 1.664-4.771 4.919-4.919 1.266-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              </a>
-              <a href="https://wa.me/6282316290290" target="_blank" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-all">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
-              </a>
-              <a href="https://www.tiktok.com/@ujs_tourtravel" target="_blank" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
-                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-              </a>
+              <a href="https://www.facebook.com/ujstravel" target="_blank" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all"><svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+              <a href="https://www.instagram.com/ujstravel" target="_blank" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all"><svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.07-1.644-.07-4.849 0-3.204.012-3.584.07-4.849.148-3.227 1.664-4.771 4.919-4.919 1.266-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+              <a href="https://wa.me/6282316290290" target="_blank" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-all"><svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg></a>
+              <a href="https://www.tiktok.com/@ujs_tourtravel" target="_blank" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all"><svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
             </div>
           </div>
         </div>
@@ -464,15 +440,8 @@
         <div>
           <h3 class="text-lg font-semibold mb-6 text-white">Kantor Kami</h3>
           <div class="bg-white rounded-lg overflow-hidden shadow-xl">
-            <div class="h-48">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.317833715557!2d112.6100521!3d-7.9818947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd628a1c5d5d5d5%3A0x5d5d5d5d5d5d5d5d!2sJl.%20Atletik%2C%20Klojen%2C%20Kota%20Malang%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
-                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-            <div class="p-4">
-              <div class="font-semibold text-travellora-dark">UJS Travel Malang</div>
-              <div class="text-sm text-gray-600 mt-1">Jl. Atletik, Klojen, Kota Malang</div>
-              <div class="text-xs text-gray-500 mt-1">Buka: 24/7</div>
-            </div>
+            <div class="h-48"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.317833715557!2d112.6100521!3d-7.9818947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd628a1c5d5d5d5%3A0x5d5d5d5d5d5d5d5d!2sJl.%20Atletik%2C%20Klojen%2C%20Kota%20Malang%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+            <div class="p-4"><div class="font-semibold text-travellora-dark">UJS Travel Malang</div><div class="text-sm text-gray-600 mt-1">Jl. Atletik, Klojen, Kota Malang</div><div class="text-xs text-gray-500 mt-1">Buka: 24/7</div></div>
           </div>
           <div class="mt-4 bg-white bg-opacity-10 rounded-lg p-4">
             <h4 class="font-semibold mb-3 text-white">Jam Operasional</h4>
@@ -503,64 +472,15 @@
   </div>
 
   <script>
-  // ============================================================
-  // KONFIGURASI
-  // ============================================================
   var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxRrzIj-zb0ubdql2hNs_RSa7yh_grSAOjxtnDPWQFRsUmjzuw65NXsmU-8AzduUvdX/exec";
 
-  // ============================================================
-  // DATA HARGA
-  // ============================================================
   var hargaData = {
-    "Travel Reguler": {
-      "Malang → Juanda":150000,"Juanda → Malang":150000,
-      "Malang → SBY Kota":165000,"SBY Kota → Malang":165000,
-      "Malang → SBY Utara / SBY Barat / Perak":180000,"SBY Utara / SBY Barat / Perak → Malang":180000,
-      "Batu → Juanda":170000,"Juanda → Batu":170000,
-      "Batu → SBY Kota":180000,"SBY Kota → Batu":180000,
-      "Batu → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Batu":200000,
-      "Malang (Dau) → Juanda":160000,"Juanda → Malang (Dau)":160000,
-      "Malang (Wagir) → Juanda":160000,"Juanda → Malang (Wagir)":160000,
-      "Malang (Kebunagung) → Juanda":160000,"Juanda → Malang (Kebunagung)":160000,
-      "Malang (Kedungkandang) → Juanda":160000,"Juanda → Malang (Kedungkandang)":160000,
-      type:"per_orang", max_penumpang:10
-    },
-    "Travel Drop": {
-      "Malang → Juanda":500000,"Juanda → Malang":500000,
-      "Malang → SBY Kota":500000,"SBY Kota → Malang":500000,
-      "Malang → SBY Utara / SBY Barat / Perak":550000,"SBY Utara / SBY Barat / Perak → Malang":550000,
-      "Batu → Juanda":550000,"Juanda → Batu":550000,
-      "Batu → SBY Kota":550000,"SBY Kota → Batu":550000,
-      "Batu → SBY Utara / SBY Barat / Perak":600000,"SBY Utara / SBY Barat / Perak → Batu":600000,
-      type:"mobil", max_penumpang:5
-    },
-    "Carter": {
-      "Malang → Juanda":500000,"Juanda → Malang":500000,
-      "Malang → SBY Kota":500000,"SBY Kota → Malang":500000,
-      "Malang → SBY Utara / SBY Barat / Perak":550000,"SBY Utara / SBY Barat / Perak → Malang":550000,
-      "Batu → Juanda":550000,"Juanda → Batu":550000,
-      "Batu → SBY Kota":550000,"SBY Kota → Batu":550000,
-      "Batu → SBY Utara / SBY Barat / Perak":600000,"SBY Utara / SBY Barat / Perak → Batu":600000,
-      type:"mobil", max_penumpang:5
-    },
-    "Kirim Paket": {
-      "Malang → Juanda":150000,"Juanda → Malang":150000,
-      "Malang → SBY Kota":165000,"SBY Kota → Malang":165000,
-      "Malang → SBY Utara / SBY Barat / Perak":180000,"SBY Utara / SBY Barat / Perak → Malang":180000,
-      "Batu → Juanda":170000,"Juanda → Batu":170000,
-      "Batu → SBY Kota":180000,"SBY Kota → Batu":180000,
-      "Batu → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Batu":200000,
-      "Malang (Dau) → Juanda":160000,"Juanda → Malang (Dau)":160000,
-      "Malang (Wagir) → Juanda":160000,"Juanda → Malang (Wagir)":160000,
-      "Malang (Kebunagung) → Juanda":160000,"Juanda → Malang (Kebunagung)":160000,
-      "Malang (Kedungkandang) → Juanda":160000,"Juanda → Malang (Kedungkandang)":160000,
-      type:"per_item", max_penumpang:1
-    }
+    "Travel Reguler": { "Malang → Juanda":150000,"Juanda → Malang":150000,"Malang → SBY Kota":165000,"SBY Kota → Malang":165000,"Malang → SBY Utara / SBY Barat / Perak":180000,"SBY Utara / SBY Barat / Perak → Malang":180000,"Batu → Juanda":170000,"Juanda → Batu":170000,"Batu → SBY Kota":180000,"SBY Kota → Batu":180000,"Batu → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Batu":200000,"Malang (Dau) → Juanda":160000,"Juanda → Malang (Dau)":160000,"Malang (Wagir) → Juanda":160000,"Juanda → Malang (Wagir)":160000,"Malang (Kebunagung) → Juanda":160000,"Juanda → Malang (Kebunagung)":160000,"Malang (Kedungkandang) → Juanda":160000,"Juanda → Malang (Kedungkandang)":160000, type:"per_orang", max_penumpang:10 },
+    "Travel Drop":    { "Malang → Juanda":500000,"Juanda → Malang":500000,"Malang → SBY Kota":500000,"SBY Kota → Malang":500000,"Malang → SBY Utara / SBY Barat / Perak":550000,"SBY Utara / SBY Barat / Perak → Malang":550000,"Batu → Juanda":550000,"Juanda → Batu":550000,"Batu → SBY Kota":550000,"SBY Kota → Batu":550000,"Batu → SBY Utara / SBY Barat / Perak":600000,"SBY Utara / SBY Barat / Perak → Batu":600000, type:"mobil", max_penumpang:5 },
+    "Carter":         { "Malang → Juanda":500000,"Juanda → Malang":500000,"Malang → SBY Kota":500000,"SBY Kota → Malang":500000,"Malang → SBY Utara / SBY Barat / Perak":550000,"SBY Utara / SBY Barat / Perak → Malang":550000,"Batu → Juanda":550000,"Juanda → Batu":550000,"Batu → SBY Kota":550000,"SBY Kota → Batu":550000,"Batu → SBY Utara / SBY Barat / Perak":600000,"SBY Utara / SBY Barat / Perak → Batu":600000, type:"mobil", max_penumpang:5 },
+    "Kirim Paket":    { "Malang → Juanda":150000,"Juanda → Malang":150000,"Malang → SBY Kota":165000,"SBY Kota → Malang":165000,"Malang → SBY Utara / SBY Barat / Perak":180000,"SBY Utara / SBY Barat / Perak → Malang":180000,"Batu → Juanda":170000,"Juanda → Batu":170000,"Batu → SBY Kota":180000,"SBY Kota → Batu":180000,"Batu → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Batu":200000,"Malang (Dau) → Juanda":160000,"Juanda → Malang (Dau)":160000,"Malang (Wagir) → Juanda":160000,"Juanda → Malang (Wagir)":160000,"Malang (Kebunagung) → Juanda":160000,"Juanda → Malang (Kebunagung)":160000,"Malang (Kedungkandang) → Juanda":160000,"Juanda → Malang (Kedungkandang)":160000, type:"per_item", max_penumpang:1 }
   };
 
-  // ============================================================
-  // DATA JADWAL
-  // ============================================================
   var jadwalData = {
     "Malang → Juanda":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
     "Malang → SBY Kota":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
@@ -584,9 +504,7 @@
     "SBY Utara / SBY Barat / Perak → Batu":["06:00-08:00","08:00-10:00","10:00-12:00","12:00-14:00","14:00-16:00","16:00-18:00","18:00-20:00","20:00-22:00"]
   };
 
-  // ============================================================
-  // UPLOAD FILE — Base64 disimpan saat file dipilih
-  // ============================================================
+  // Upload state
   var selectedFileBase64 = null;
   var selectedFileMime   = null;
 
@@ -594,8 +512,7 @@
   function handleDragOver(e)   { e.preventDefault(); document.getElementById("uploadArea").classList.add("drag-over"); }
   function handleDragLeave()   { document.getElementById("uploadArea").classList.remove("drag-over"); }
   function handleDrop(e) {
-    e.preventDefault();
-    document.getElementById("uploadArea").classList.remove("drag-over");
+    e.preventDefault(); document.getElementById("uploadArea").classList.remove("drag-over");
     var f = e.dataTransfer.files[0];
     if (f && f.type.startsWith("image/")) { document.getElementById("buktiTransfer").files = e.dataTransfer.files; processFile(f); }
   }
@@ -605,9 +522,8 @@
     reader.onload = function(e) {
       selectedFileBase64 = e.target.result.split(",")[1];
       selectedFileMime   = file.type;
-      var prev = document.getElementById("previewImg");
-      prev.src = e.target.result;
-      prev.classList.remove("hidden");
+      document.getElementById("previewImg").src = e.target.result;
+      document.getElementById("previewImg").classList.remove("hidden");
       document.getElementById("uploadPlaceholder").classList.add("hidden");
       var nm = document.getElementById("uploadedFileName");
       nm.textContent = "✅ " + file.name + " (" + (file.size/1024).toFixed(0) + " KB)";
@@ -616,22 +532,16 @@
     reader.readAsDataURL(file);
   }
 
-  // ============================================================
-  // SUBMIT — WA dibuka langsung, Drive upload di background
-  // ============================================================
+  // =============================================================
+  // SUBMIT — Teknik: buka tab blank dulu (sinkron dalam klik),
+  // upload ke Drive, setelah dapat fotoUrl arahkan tab ke WA
+  // =============================================================
   function submitBooking(event) {
     event.preventDefault();
 
-    if (!document.getElementById("persetujuan").checked) {
-      alert("Harap setujui syarat dan ketentuan terlebih dahulu.");
-      return;
-    }
-    if (!selectedFileBase64) {
-      alert("Harap upload bukti transfer terlebih dahulu.");
-      return;
-    }
+    if (!document.getElementById("persetujuan").checked) { alert("Harap setujui syarat dan ketentuan terlebih dahulu."); return; }
+    if (!selectedFileBase64) { alert("Harap upload bukti transfer terlebih dahulu."); return; }
 
-    // Kumpulkan data form
     var fd = {
       jenisLayanan:         document.getElementById("jenisLayanan").value,
       rutePerjalanan:       document.getElementById("rutePerjalanan").value,
@@ -651,171 +561,113 @@
       fotoMimeType:         selectedFileMime
     };
 
-    // Hitung total harga
     var sd    = hargaData[fd.jenisLayanan];
     var base  = sd ? (sd[fd.rutePerjalanan] || 0) : 0;
     var tipe  = sd ? (sd.type || "per_orang") : "per_orang";
     var total = tipe === "per_orang" ? base * parseInt(fd.jumlahPenumpang) : base;
     fd.totalHarga = "Rp " + total.toLocaleString("id-ID");
 
-    // Format tanggal
-    var tgl = new Date(fd.tanggalKeberangkatan).toLocaleDateString("id-ID", {
-      weekday:"long", year:"numeric", month:"long", day:"numeric"
-    });
+    var tgl = new Date(fd.tanggalKeberangkatan).toLocaleDateString("id-ID", { weekday:"long", year:"numeric", month:"long", day:"numeric" });
 
-    // Bangun pesan WA
-    var msg = "*FORM BOOKING UJS TRAVEL*%0A%0A";
-    msg += "*Jenis Layanan:* " + fd.jenisLayanan + "%0A";
-    msg += "*Rute:* " + fd.rutePerjalanan + "%0A";
-    msg += "*Tanggal:* " + tgl + "%0A";
-    msg += "*Jam Keberangkatan:* " + fd.jamKeberangkatan + "%0A";
-    msg += "%0A*DATA PENUMPANG*%0A";
-    msg += "Nama: " + fd.namaLengkap + "%0A";
-    msg += "WhatsApp: " + fd.nomorWhatsApp + "%0A";
-    msg += "Penjemputan: " + fd.alamatPenjemputan + "%0A";
-    msg += "Tujuan: " + fd.alamatTujuan + "%0A";
-    msg += "Jumlah: " + fd.jumlahPenumpang + " orang%0A";
-    msg += "%0A*TOTAL HARGA: " + fd.totalHarga + "*%0A";
-    msg += "Pembayaran: Transfer BCA (8160808935 a/n Amir Dewantoro St)%0A";
-    msg += "%0A_Bukti transfer sedang diupload otomatis ke Google Drive UJS Travel._";
-    if (fd.maskapai !== "-") {
-      msg += "%0A%0A*DATA PENERBANGAN*%0A";
-      msg += "Maskapai: " + fd.maskapai + "%0A";
-      msg += "Kode: " + fd.kodePenerbangan + "%0A";
-      msg += "Jam: " + fd.jamPenerbangan;
+    function buildWAMsg(fotoUrl) {
+      var m = "*FORM BOOKING UJS TRAVEL*%0A%0A";
+      m += "*Jenis Layanan:* " + fd.jenisLayanan + "%0A";
+      m += "*Rute:* " + fd.rutePerjalanan + "%0A";
+      m += "*Tanggal:* " + tgl + "%0A";
+      m += "*Jam:* " + fd.jamKeberangkatan + "%0A";
+      m += "%0A*DATA PENUMPANG*%0A";
+      m += "Nama: " + fd.namaLengkap + "%0A";
+      m += "WA: " + fd.nomorWhatsApp + "%0A";
+      m += "Penjemputan: " + fd.alamatPenjemputan + "%0A";
+      m += "Tujuan: " + fd.alamatTujuan + "%0A";
+      m += "Jumlah: " + fd.jumlahPenumpang + " orang%0A";
+      m += "%0A*TOTAL: " + fd.totalHarga + "*%0A";
+      m += "Bayar via: Transfer BCA 8160808935 (Amir Dewantoro St)%0A";
+      if (fotoUrl && fotoUrl !== "-") {
+        m += "%0A📎 *Bukti Transfer (GDrive):*%0A" + encodeURIComponent(fotoUrl) + "%0A";
+      } else {
+        m += "%0A_(Bukti transfer gagal upload, mohon kirim manual)_%0A";
+      }
+      if (fd.maskapai !== "-") { m += "%0A*Penerbangan:* " + fd.maskapai + " " + fd.kodePenerbangan + " jam " + fd.jamPenerbangan + "%0A"; }
+      if (fd.rencanaPerjalanan !== "-") { m += "*Rencana Carter:* " + fd.rencanaPerjalanan + "%0A"; }
+      m += "Barang: " + fd.barangBawaan + "%0A";
+      m += "%0A_via website UJS Travel_";
+      return m;
     }
-    if (fd.rencanaPerjalanan !== "-") {
-      msg += "%0A%0A*RENCANA CARTER:* " + fd.rencanaPerjalanan;
+
+    // ── KUNCI: buka tab kosong SEKARANG (masih dalam konteks klik tombol) ──
+    var waTab = window.open("about:blank", "_blank");
+    if (!waTab) {
+      // Popup blocker aktif — fallback: upload dulu, buka WA di tab sama
+      alert("Browser memblokir popup. Pastikan popup diizinkan untuk website ini, lalu coba lagi.");
+      return;
     }
-    msg += "%0ABarang: " + fd.barangBawaan;
-    msg += "%0A%0A----%0A_Dikirim via website UJS Travel_";
 
-    // ── STEP 1: Buka WA langsung (masih dalam konteks klik — tidak diblokir browser) ──
-    window.open("https://wa.me/6282316290290?text=" + msg, "_blank");
+    // Tampilkan loading
+    document.getElementById("loadingOverlay").classList.add("show");
+    document.getElementById("submitBtn").disabled = true;
 
-    // ── STEP 2: Kirim data + foto ke Apps Script di background ──
+    // Upload ke Apps Script (dengan Content-Type: application/json — WAJIB agar doPost bisa baca JSON)
     fetch(APPS_SCRIPT_URL, {
       method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(fd)
-    }).catch(function(e) { console.warn("Background upload:", e); });
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
+    .then(function(result) {
+      var fotoUrl = (result && result.status === "success" && result.fotoUrl) ? result.fotoUrl : "-";
+      waTab.location.href = "https://wa.me/6282316290290?text=" + buildWAMsg(fotoUrl);
+    })
+    .catch(function(err) {
+      console.error("Upload error:", err);
+      // Tetap buka WA walau upload gagal
+      waTab.location.href = "https://wa.me/6282316290290?text=" + buildWAMsg("-");
+    })
+    .finally(function() {
+      document.getElementById("loadingOverlay").classList.remove("show");
+      document.getElementById("submitBtn").disabled = false;
+    });
   }
 
-  // ============================================================
-  // FUNGSI FORM
-  // ============================================================
-  function toggleCarterFields() {
-    var v = document.getElementById("jenisLayanan").value;
-    document.getElementById("carterFields").classList.toggle("hidden", v !== "Carter");
-  }
+  function toggleCarterFields() { document.getElementById("carterFields").classList.toggle("hidden", document.getElementById("jenisLayanan").value !== "Carter"); }
   function toggleMaxPenumpang() {
-    var v = document.getElementById("jenisLayanan").value;
-    var i = document.getElementById("jumlahPenumpang");
-    var n = document.getElementById("penumpangNote");
-    if (v && hargaData[v]) {
-      var max = hargaData[v].max_penumpang || 10;
-      i.max = max;
-      n.textContent = hargaData[v].type === "mobil" ? "Maksimal " + max + " penumpang (harga per mobil)"
-        : hargaData[v].type === "per_item" ? "Jumlah paket yang dikirim"
-        : "Maksimal " + max + " penumpang";
-      if (parseInt(i.value) > max) i.value = max;
-    }
+    var v = document.getElementById("jenisLayanan").value, i = document.getElementById("jumlahPenumpang"), n = document.getElementById("penumpangNote");
+    if (v && hargaData[v]) { var mx = hargaData[v].max_penumpang||10; i.max=mx; n.textContent = hargaData[v].type==="mobil"?"Maksimal "+mx+" penumpang (harga per mobil)":hargaData[v].type==="per_item"?"Jumlah paket yang dikirim":"Maksimal "+mx+" penumpang"; if(parseInt(i.value)>mx) i.value=mx; }
   }
   function calculatePrice() {
-    var l = document.getElementById("jenisLayanan").value;
-    var r = document.getElementById("rutePerjalanan").value;
-    var p = parseInt(document.getElementById("jumlahPenumpang").value) || 1;
-    var d = document.getElementById("priceDisplay");
-    if (!l || !r) { d.classList.add("hidden"); return; }
-    var sd = hargaData[l]; if (!sd) return;
-    var b  = sd[r] || 0;
-    var t  = sd.type || "per_orang";
-    var fmt = function(v) { return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",minimumFractionDigits:0}).format(v); };
+    var l=document.getElementById("jenisLayanan").value, r=document.getElementById("rutePerjalanan").value, p=parseInt(document.getElementById("jumlahPenumpang").value)||1, d=document.getElementById("priceDisplay");
+    if(!l||!r){d.classList.add("hidden");return;}
+    var sd=hargaData[l]; if(!sd)return;
+    var b=sd[r]||0, t=sd.type||"per_orang", fmt=function(v){return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",minimumFractionDigits:0}).format(v);};
     d.classList.remove("hidden");
-    if (t === "mobil") {
-      document.getElementById("totalPrice").textContent       = fmt(b);
-      document.getElementById("priceTitle").textContent       = "Harga Mobil";
-      document.getElementById("priceDescription").textContent = l + " – " + r;
-      document.getElementById("pricePerPerson").textContent   = "1 mobil, maks " + sd.max_penumpang + " penumpang";
-    } else if (t === "per_item") {
-      document.getElementById("totalPrice").textContent       = fmt(b);
-      document.getElementById("priceTitle").textContent       = "Harga Paket";
-      document.getElementById("priceDescription").textContent = l + " – " + r;
-      document.getElementById("pricePerPerson").textContent   = "Per paket";
-    } else {
-      document.getElementById("totalPrice").textContent       = fmt(b * p);
-      document.getElementById("priceTitle").textContent       = "Total Harga";
-      document.getElementById("priceDescription").textContent = l + " – " + r;
-      document.getElementById("pricePerPerson").textContent   = "@" + fmt(b) + " × " + p + " penumpang";
-    }
-    var pn = document.getElementById("paymentNote");
-    pn.classList.remove("hidden");
-    pn.innerHTML = "<strong>Transfer BCA:</strong> Silakan transfer sesuai total di atas ke rekening yang tercantum, lalu upload bukti transfernya.";
+    if(t==="mobil"){document.getElementById("totalPrice").textContent=fmt(b);document.getElementById("priceTitle").textContent="Harga Mobil";document.getElementById("priceDescription").textContent=l+" – "+r;document.getElementById("pricePerPerson").textContent="1 mobil, maks "+sd.max_penumpang+" penumpang";}
+    else if(t==="per_item"){document.getElementById("totalPrice").textContent=fmt(b);document.getElementById("priceTitle").textContent="Harga Paket";document.getElementById("priceDescription").textContent=l+" – "+r;document.getElementById("pricePerPerson").textContent="Per paket";}
+    else{document.getElementById("totalPrice").textContent=fmt(b*p);document.getElementById("priceTitle").textContent="Total Harga";document.getElementById("priceDescription").textContent=l+" – "+r;document.getElementById("pricePerPerson").textContent="@"+fmt(b)+" × "+p+" penumpang";}
+    var pn=document.getElementById("paymentNote"); pn.classList.remove("hidden"); pn.innerHTML="<strong>Transfer BCA:</strong> Silakan transfer sesuai total di atas ke rekening yang tercantum, lalu upload bukti transfernya.";
   }
-  function toggleBandaraFields() {
-    var r = document.getElementById("rutePerjalanan").value;
-    document.getElementById("bandaraFields").classList.toggle("hidden", !r.includes("Juanda"));
-    document.getElementById("jamPenerbanganLabel").textContent = r.includes("→ Juanda") ? "Jam Take Off Pesawat" : "Jam Landing Pesawat";
-  }
-  function autoFillAlamatTujuan() {
-    var r  = document.getElementById("rutePerjalanan").value;
-    var el = document.getElementById("alamatTujuan");
-    if (r.includes("→ Juanda")) {
-      el.value = "Bandara Internasional Juanda, Surabaya";
-      el.readOnly = true; el.style.backgroundColor = "#f0f9ff"; el.style.cursor = "not-allowed";
-    } else {
-      el.value = ""; el.readOnly = false; el.style.backgroundColor = ""; el.style.cursor = "";
-      el.placeholder = "Detail alamat tujuan";
-    }
-  }
-  function updateJamKeberangkatanOptions() {
-    var r   = document.getElementById("rutePerjalanan").value;
-    var sel = document.getElementById("jamKeberangkatan");
-    sel.innerHTML = "<option value=''>Pilih Jam Keberangkatan</option>";
-    if (!r || !jadwalData[r]) return;
-    jadwalData[r].forEach(function(j) { var o = document.createElement("option"); o.value = j; o.textContent = j; sel.appendChild(o); });
-  }
+  function toggleBandaraFields() { var r=document.getElementById("rutePerjalanan").value; document.getElementById("bandaraFields").classList.toggle("hidden",!r.includes("Juanda")); document.getElementById("jamPenerbanganLabel").textContent=r.includes("→ Juanda")?"Jam Take Off Pesawat":"Jam Landing Pesawat"; }
+  function autoFillAlamatTujuan() { var r=document.getElementById("rutePerjalanan").value, el=document.getElementById("alamatTujuan"); if(r.includes("→ Juanda")){el.value="Bandara Internasional Juanda, Surabaya";el.readOnly=true;el.style.backgroundColor="#f0f9ff";el.style.cursor="not-allowed";}else{el.value="";el.readOnly=false;el.style.backgroundColor="";el.style.cursor="";el.placeholder="Detail alamat tujuan";} }
+  function updateJamKeberangkatanOptions() { var r=document.getElementById("rutePerjalanan").value, sel=document.getElementById("jamKeberangkatan"); sel.innerHTML="<option value=''>Pilih Jam Keberangkatan</option>"; if(!r||!jadwalData[r])return; jadwalData[r].forEach(function(j){var o=document.createElement("option");o.value=j;o.textContent=j;sel.appendChild(o);}); }
   function updateRouteOptions() {
-    var l   = document.getElementById("jenisLayanan").value;
-    var sel = document.getElementById("rutePerjalanan");
-    sel.innerHTML = "<option value=''>Pilih Rute Perjalanan</option>";
-    if (!l) return;
-    var rM = "<optgroup label='Rute Malang'>" +
-      "<option value='Malang → Juanda'>Malang → Juanda</option>" +
-      "<option value='Juanda → Malang'>Juanda → Malang</option>" +
-      "<option value='Malang → SBY Kota'>Malang → SBY Kota</option>" +
-      "<option value='SBY Kota → Malang'>SBY Kota → Malang</option>" +
-      "<option value='Malang → SBY Utara / SBY Barat / Perak'>Malang → SBY Utara/SBY Barat/Perak</option>" +
-      "<option value='SBY Utara / SBY Barat / Perak → Malang'>SBY Utara/SBY Barat/Perak → Malang</option></optgroup>";
-    var rB = "<optgroup label='Rute Batu'>" +
-      "<option value='Batu → Juanda'>Batu → Juanda</option>" +
-      "<option value='Juanda → Batu'>Juanda → Batu</option>" +
-      "<option value='Batu → SBY Kota'>Batu → SBY Kota</option>" +
-      "<option value='SBY Kota → Batu'>SBY Kota → Batu</option>" +
-      "<option value='Batu → SBY Utara / SBY Barat / Perak'>Batu → SBY Utara/SBY Barat/Perak</option>" +
-      "<option value='SBY Utara / SBY Barat / Perak → Batu'>SBY Utara/SBY Barat/Perak → Batu</option></optgroup>";
-    var rK = "<optgroup label='Daerah Khusus Malang'>" +
-      "<option value='Malang (Dau) → Juanda'>Malang (Dau) → Juanda</option>" +
-      "<option value='Juanda → Malang (Dau)'>Juanda → Malang (Dau)</option>" +
-      "<option value='Malang (Wagir) → Juanda'>Malang (Wagir) → Juanda</option>" +
-      "<option value='Juanda → Malang (Wagir)'>Juanda → Malang (Wagir)</option>" +
-      "<option value='Malang (Kebunagung) → Juanda'>Malang (Kebunagung) → Juanda</option>" +
-      "<option value='Juanda → Malang (Kebunagung)'>Juanda → Malang (Kebunagung)</option>" +
-      "<option value='Malang (Kedungkandang) → Juanda'>Malang (Kedungkandang) → Juanda</option>" +
-      "<option value='Juanda → Malang (Kedungkandang)'>Juanda → Malang (Kedungkandang)</option></optgroup>";
-    sel.innerHTML += (l === "Travel Drop" || l === "Carter") ? rM + rB : rM + rB + rK;
+    var l=document.getElementById("jenisLayanan").value, sel=document.getElementById("rutePerjalanan");
+    sel.innerHTML="<option value=''>Pilih Rute Perjalanan</option>"; if(!l)return;
+    var rM="<optgroup label='Rute Malang'><option value='Malang → Juanda'>Malang → Juanda</option><option value='Juanda → Malang'>Juanda → Malang</option><option value='Malang → SBY Kota'>Malang → SBY Kota</option><option value='SBY Kota → Malang'>SBY Kota → Malang</option><option value='Malang → SBY Utara / SBY Barat / Perak'>Malang → SBY Utara/SBY Barat/Perak</option><option value='SBY Utara / SBY Barat / Perak → Malang'>SBY Utara/SBY Barat/Perak → Malang</option></optgroup>";
+    var rB="<optgroup label='Rute Batu'><option value='Batu → Juanda'>Batu → Juanda</option><option value='Juanda → Batu'>Juanda → Batu</option><option value='Batu → SBY Kota'>Batu → SBY Kota</option><option value='SBY Kota → Batu'>SBY Kota → Batu</option><option value='Batu → SBY Utara / SBY Barat / Perak'>Batu → SBY Utara/SBY Barat/Perak</option><option value='SBY Utara / SBY Barat / Perak → Batu'>SBY Utara/SBY Barat/Perak → Batu</option></optgroup>";
+    var rK="<optgroup label='Daerah Khusus Malang'><option value='Malang (Dau) → Juanda'>Malang (Dau) → Juanda</option><option value='Juanda → Malang (Dau)'>Juanda → Malang (Dau)</option><option value='Malang (Wagir) → Juanda'>Malang (Wagir) → Juanda</option><option value='Juanda → Malang (Wagir)'>Juanda → Malang (Wagir)</option><option value='Malang (Kebunagung) → Juanda'>Malang (Kebunagung) → Juanda</option><option value='Juanda → Malang (Kebunagung)'>Juanda → Malang (Kebunagung)</option><option value='Malang (Kedungkandang) → Juanda'>Malang (Kedungkandang) → Juanda</option><option value='Juanda → Malang (Kedungkandang)'>Juanda → Malang (Kedungkandang)</option></optgroup>";
+    sel.innerHTML += (l==="Travel Drop"||l==="Carter") ? rM+rB : rM+rB+rK;
     calculatePrice(); updateJamKeberangkatanOptions(); autoFillAlamatTujuan();
   }
-  function toggleMobileMenu()   { document.getElementById("mobile-menu").classList.toggle("hidden"); }
-  function toggleMobileLayanan(){ document.getElementById("mobile-layanan-menu").classList.toggle("hidden"); document.getElementById("mobile-layanan-icon").classList.toggle("rotate-180"); }
+  function toggleMobileMenu()    { document.getElementById("mobile-menu").classList.toggle("hidden"); }
+  function toggleMobileLayanan() { document.getElementById("mobile-layanan-menu").classList.toggle("hidden"); document.getElementById("mobile-layanan-icon").classList.toggle("rotate-180"); }
 
-  // Init
   document.getElementById("tanggalKeberangkatan").min = new Date().toISOString().split("T")[0];
   document.getElementById("jumlahPenumpang").addEventListener("input", calculatePrice);
   toggleCarterFields(); toggleBandaraFields(); toggleMaxPenumpang(); calculatePrice();
   document.querySelectorAll(".reveal").forEach(function(el) {
-    new IntersectionObserver(function(e) { e.forEach(function(x) { if (x.isIntersecting) x.target.classList.add("active"); }); }, { threshold:0.15 }).observe(el);
+    new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("active");});},{threshold:0.15}).observe(el);
   });
   </script>
 </body>
