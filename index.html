@@ -3184,6 +3184,273 @@
     });
   </script>
 
+<!-- ====== BLOG POPUP RANDOM — UJS TRAVEL (index.html) ====== -->
+<div id="blog-popup-overlay"
+     onclick="blogPopupCloseOutside(event)"
+     style="position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.55);
+            backdrop-filter:blur(4px);display:flex;align-items:center;
+            justify-content:center;padding:1rem;opacity:0;pointer-events:none;
+            transition:opacity 0.35s ease;">
+
+  <div id="blog-popup-card"
+       style="background:white;border-radius:1.5rem;max-width:560px;width:100%;
+              max-height:90vh;overflow-y:auto;
+              transform:scale(0.9) translateY(30px);
+              transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+              box-shadow:0 30px 80px -10px rgba(48,84,146,0.4);position:relative;">
+
+    <!-- TOMBOL CLOSE -->
+    <button onclick="blogPopupClose()"
+            style="position:absolute;top:12px;right:12px;z-index:10;width:36px;height:36px;
+                   background:rgba(255,255,255,0.25);backdrop-filter:blur(4px);border:none;
+                   border-radius:50%;cursor:pointer;display:flex;align-items:center;
+                   justify-content:center;transition:background 0.2s;"
+            onmouseover="this.style.background='rgba(255,255,255,0.5)'"
+            onmouseout="this.style.background='rgba(255,255,255,0.25)'">
+      <svg width="16" height="16" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- GAMBAR HEADER -->
+    <div style="position:relative;height:210px;border-radius:1.5rem 1.5rem 0 0;
+                overflow:hidden;background:linear-gradient(135deg,#305492,#2563eb);">
+      <img id="bpop-img" src="" alt=""
+           style="width:100%;height:100%;object-fit:cover;opacity:0.8;"/>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent 60%);"></div>
+
+      <!-- Badge atas kiri -->
+      <div style="position:absolute;top:14px;left:14px;">
+        <span style="background:rgba(255,255,255,0.2);backdrop-filter:blur(6px);color:white;
+                     font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+                     padding:4px 11px;border-radius:9999px;border:1px solid rgba(255,255,255,0.35);">
+          📖 Artikel Terbaru
+        </span>
+      </div>
+
+      <!-- Judul & kategori di bawah gambar -->
+      <div style="position:absolute;bottom:14px;left:14px;right:50px;">
+        <span id="bpop-cat"
+              style="display:inline-block;background:rgba(255,255,255,0.2);
+                     backdrop-filter:blur(4px);color:white;font-size:0.65rem;font-weight:700;
+                     letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;
+                     border-radius:9999px;margin-bottom:6px;"></span>
+        <h3 id="bpop-title"
+            style="color:white;font-size:1rem;font-weight:700;line-height:1.35;margin:0;"></h3>
+      </div>
+    </div>
+
+    <!-- KONTEN POPUP -->
+    <div style="padding:1.4rem;">
+
+      <!-- Meta tanggal & durasi baca -->
+      <div style="display:flex;gap:14px;font-size:0.72rem;color:#7F8C8D;
+                  margin-bottom:12px;align-items:center;flex-wrap:wrap;">
+        <span id="bpop-date" style="display:flex;align-items:center;gap:4px;"></span>
+        <span style="color:#ddd;">|</span>
+        <span id="bpop-read" style="display:flex;align-items:center;gap:4px;"></span>
+      </div>
+
+      <!-- Deskripsi singkat -->
+      <p id="bpop-desc"
+         style="color:#7F8C8D;line-height:1.7;font-size:0.875rem;margin-bottom:14px;"></p>
+
+      <!-- Highlights -->
+      <div id="bpop-hl"
+           style="background:#eff6ff;border-radius:12px;padding:12px;margin-bottom:16px;"></div>
+
+      <!-- Tombol aksi -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <!-- Baca penuh -->
+        <a id="bpop-link" href="#"
+           style="flex:1;min-width:150px;display:flex;align-items:center;justify-content:center;
+                  gap:6px;background:#305492;color:white;font-weight:700;font-size:0.875rem;
+                  padding:11px;border-radius:12px;text-decoration:none;transition:background 0.2s;"
+           onmouseover="this.style.background='#1e3a6e'"
+           onmouseout="this.style.background='#305492'">
+          Baca Artikel Lengkap
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <!-- Artikel lain (random) -->
+        <button onclick="blogPopupNext()" title="Artikel lain"
+                style="padding:11px 13px;border:2px solid #305492;background:white;color:#305492;
+                       border-radius:12px;cursor:pointer;transition:all 0.2s;"
+                onmouseover="this.style.background='#eff6ff'"
+                onmouseout="this.style.background='white'">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+        </button>
+
+        <!-- Ke halaman blog -->
+        <a href="blog.html" title="Semua artikel"
+           style="padding:11px 13px;border:2px solid #e5e7eb;background:white;color:#7F8C8D;
+                  border-radius:12px;display:flex;align-items:center;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.borderColor='#305492';this.style.color='#305492'"
+           onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#7F8C8D'">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Tutup popup -->
+      <p style="text-align:center;margin-top:10px;">
+        <button onclick="blogPopupClose()"
+                style="background:none;border:none;color:#aaa;cursor:pointer;
+                       font-size:0.78rem;text-decoration:underline;">
+          Lanjut ke beranda →
+        </button>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING BLOG BUTTON (muncul setelah popup ditutup) -->
+<div id="blog-float-btn" style="position:fixed;bottom:90px;left:20px;z-index:40;display:none;">
+  <a href="blog.html"
+     style="display:flex;align-items:center;gap:7px;background:#305492;color:white;
+            padding:9px 15px;border-radius:9999px;
+            box-shadow:0 8px 25px rgba(48,84,146,0.4);
+            text-decoration:none;font-weight:700;font-size:0.8rem;
+            animation:blogFloatAnim 3s ease-in-out infinite;"
+     onmouseover="this.style.transform='scale(1.05)'"
+     onmouseout="this.style.transform='scale(1)'">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+    </svg>
+    Blog ✍️
+  </a>
+</div>
+
+<style>
+@keyframes blogFloatAnim {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+</style>
+
+<script>
+(function () {
+  /* ── DATA ARTIKEL ── */
+  var ARTS = [
+    {
+      title    : 'Revitalisasi Alun-Alun Merdeka Malang: Semakin Mbois tapi Tetap Pertahankan Nilai Sejarah',
+      category : 'Wisata Kota',
+      date     : '28 Januari 2026',
+      readTime : '5 menit baca',
+      img      : 'img/pembukaanalun.png',
+      desc     : 'Setelah 105 hari revitalisasi, Alun-Alun Merdeka Kota Malang resmi dibuka kembali. Dry fountain baru menjadi daya tarik utama yang langsung viral di media sosial!',
+      highlights: [
+        'Dry fountain interaktif pertama di Malang',
+        'Taman hijau yang diperluas dan diperindah',
+        'Spot foto Instagramable baru',
+        'Tetap mempertahankan pohon-pohon bersejarah'
+      ],
+      url: 'artikel-alun-alun-malang.html'
+    },
+    {
+      title    : 'Sering Kamu Sepelekan, Ini 5 Travel Tips yang Harus Kamu Lakukan Sebelum Bepergian!',
+      category : 'Tips Perjalanan',
+      date     : '7 Maret 2026',
+      readTime : '5 menit baca',
+      img      : 'img/travel-tips.jpg',
+      desc     : 'Ada hal-hal penting yang sering terlupakan para traveler. Dari menyiapkan itinerary sampai memahami etika lokal — semua dibahas lengkap!',
+      highlights: [
+        'Cara membuat itinerary yang efisien',
+        'Tips kelola keuangan saat traveling',
+        'Dokumentasi keamanan yang perlu disiapkan',
+        'Memilih transportasi yang terpercaya'
+      ],
+      url: 'artikel-travel-tips.html'
+    }
+  ];
+
+  var idx = 0;
+
+  /* ── RENDER ISI POPUP ── */
+  function render(a) {
+    var img = document.getElementById('bpop-img');
+    img.src = a.img;
+    img.onerror = function () { this.style.display = 'none'; };
+
+    document.getElementById('bpop-cat').textContent   = a.category;
+    document.getElementById('bpop-title').textContent = a.title;
+    document.getElementById('bpop-link').href          = a.url;
+
+    document.getElementById('bpop-date').innerHTML =
+      '<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">'
+      + '<path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> ' + a.date;
+
+    document.getElementById('bpop-read').innerHTML =
+      '<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">'
+      + '<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ' + a.readTime;
+
+    document.getElementById('bpop-desc').textContent = a.desc;
+
+    document.getElementById('bpop-hl').innerHTML =
+      '<p style="font-size:0.68rem;font-weight:700;color:#305492;text-transform:uppercase;letter-spacing:0.07em;margin:0 0 8px;">'
+      + 'Yang Akan Kamu Pelajari:</p>'
+      + '<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;">'
+      + a.highlights.map(function (h) {
+          return '<li style="display:flex;align-items:flex-start;gap:7px;font-size:0.82rem;color:#2C3E50;">'
+            + '<svg width="14" height="14" style="flex-shrink:0;margin-top:2px;" fill="none" stroke="#305492" stroke-width="2.5" viewBox="0 0 24 24">'
+            + '<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>' + h + '</li>';
+        }).join('')
+      + '</ul>';
+  }
+
+  /* ── BUKA POPUP ── */
+  function open(i) {
+    idx = (i !== undefined) ? i : Math.floor(Math.random() * ARTS.length);
+    render(ARTS[idx]);
+    var o = document.getElementById('blog-popup-overlay');
+    var c = document.getElementById('blog-popup-card');
+    o.style.opacity        = '1';
+    o.style.pointerEvents  = 'all';
+    c.style.transform      = 'scale(1) translateY(0)';
+    document.body.style.overflow = 'hidden';
+  }
+
+  /* ── TUTUP POPUP ── */
+  window.blogPopupClose = function () {
+    var o = document.getElementById('blog-popup-overlay');
+    var c = document.getElementById('blog-popup-card');
+    o.style.opacity       = '0';
+    o.style.pointerEvents = 'none';
+    c.style.transform     = 'scale(0.9) translateY(30px)';
+    document.body.style.overflow = '';
+    var fb = document.getElementById('blog-float-btn');
+    if (fb) fb.style.display = 'block';
+  };
+
+  window.blogPopupCloseOutside = function (e) {
+    if (e.target === document.getElementById('blog-popup-overlay')) blogPopupClose();
+  };
+
+  /* ── GANTI ARTIKEL ── */
+  window.blogPopupNext = function () {
+    idx = (idx + 1) % ARTS.length;
+    render(ARTS[idx]);
+  };
+
+  /* ── KEYBOARD ESC ── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') blogPopupClose();
+  });
+
+  /* ── AUTO OPEN: 5 detik setelah halaman dimuat, artikel random ── */
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () { open(); }, 5000);
+  });
+
+})();
+</script>
+<!-- ====== AKHIR BLOG POPUP ====== -->
 </body>
 
 </html>
