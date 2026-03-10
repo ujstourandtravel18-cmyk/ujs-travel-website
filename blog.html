@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog & Tips Perjalanan - UJS Travel Malang Juanda Surabaya</title>
+    <meta name="description" content="Artikel, tips perjalanan, dan informasi wisata terbaru dari UJS Travel Malang. Temukan inspirasi liburanmu di sini." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "travellora-blue": "#305492",
+                        "travellora-dark": "#2C3E50",
+                        "travellora-gray": "#7F8C8D",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* === REVEAL ANIMATIONS === */
+        .reveal { position: relative; opacity: 0; transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; }
+        .fade-bottom { transform: translateY(50px); }
+        .fade-bottom.active { transform: translateY(0); }
+
+        /* === POPUP OVERLAY === */
+        #popup-overlay {
+            position: fixed; inset: 0; z-index: 1000;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 1rem;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+        #popup-overlay.open {
+            opacity: 1; pointer-events: all;
+        }
+        #popup-card {
+            background: white;
+            border-radius: 1.5rem;
+            max-width: 600px; width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.92) translateY(24px);
+            transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow: 0 30px 80px -10px rgba(48,84,146,0.35);
+        }
+        #popup-overlay.open #popup-card {
+            transform: scale(1) translateY(0);
+        }
+        #popup-card::-webkit-scrollbar { width: 6px; }
+        #popup-card::-webkit-scrollbar-track { background: #f1f5f9; }
+        #popup-card::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+        /* === HERO GRADIENT === */
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a6e 0%, #305492 50%, #2563eb 100%);
+        }
+
+        /* === CARD HOVER === */
+        .blog-card {
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px -10px rgba(48,84,146,0.25);
+        }
+
+        /* === FLOATING POPUP TRIGGER (index.html) === */
+        .popup-trigger-float {
+            position: fixed;
+            bottom: 100px; left: 24px;
+            z-index: 40;
+            animation: floatBounce 3s ease-in-out infinite;
+        }
+        @keyframes floatBounce {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* === TAG BADGE === */
+        .tag-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* === ARTICLE CATEGORY FILTER === */
+        .cat-btn {
+            transition: all 0.2s ease;
+        }
+        .cat-btn.active {
+            background: #305492;
+            color: white;
+            box-shadow: 0 4px 12px rgba(48,84,146,0.3);
+        }
+
+        /* === HERO FADE === */
+        .hero-fade {
+            animation: heroFadeUp 0.9s ease-out forwards;
+            opacity: 0;
+        }
+        .hero-fade.d1 { animation-delay: 0.1s; }
+        .hero-fade.d2 { animation-delay: 0.25s; }
+        .hero-fade.d3 { animation-delay: 0.4s; }
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === SCROLLBAR === */
+        body::-webkit-scrollbar { width: 6px; }
+        body::-webkit-scrollbar-track { background: #f8fafc; }
+        body::-webkit-scrollbar-thumb { background: #305492; border-radius: 3px; }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <a href="index.html" class="flex items-center">
+                <img src="img/logo.png" alt="Logo UJS Travel" class="w-10 h-10 object-contain" />
+                <span class="text-xl font-bold text-travellora-dark ml-2">UJS TRAVEL</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-travellora-gray hover:text-travellora-dark transition-colors">Beranda</a>
+                <div class="relative group">
+                    <button class="text-travellora-gray hover:text-travellora-dark transition-colors flex items-center focus:outline-none">
+                        Layanan
+                        <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10 border border-gray-100">
+                        <div class="py-1">
+                            <a href="reguler.html" class="block px-4 py-2 text-sm text-travellora-gray hover:text-travellora-dark hover:bg-gray-50">Reguler</a>
+                            <a href="carter-drop.html" class="block px-4 py-2 text-sm text-travellora-gray hover:text-travellora-dark hover:bg-gray-50">Travel Drop</a>
+                            <a href="city-tour.html" class="block px-4 py-2 text-sm text-travellora-gray hover:text-travellora-dark hover:bg-gray-50">City Tour</a>
+                            <a href="kirim-paket.html" class="block px-4 py-2 text-sm text-travellora-gray hover:text-travellora-dark hover:bg-gray-50">Kirim Paket</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="index.html#jadwal" class="text-travellora-gray hover:text-travellora-dark transition-colors">Jadwal</a>
+                <a href="index.html#tentangkami" class="text-travellora-gray hover:text-travellora-dark transition-colors">Tentang</a>
+                <a href="blog.html" class="text-travellora-blue font-semibold hover:text-blue-700 transition-colors">Blog</a>
+                <a href="index.html#contact" class="text-travellora-gray hover:text-travellora-dark transition-colors">Kontak</a>
+                <a href="Form.html" class="bg-travellora-blue text-white px-5 py-2.5 rounded-lg font-medium border-2 border-travellora-blue hover:bg-white hover:text-travellora-blue transition-colors duration-300">Pesan Sekarang</a>
+            </div>
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="text-travellora-gray hover:text-travellora-dark focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="index.html" class="block px-3 py-2 text-travellora-gray">Beranda</a>
+            <a href="reguler.html" class="block px-3 py-2 text-travellora-gray">Reguler</a>
+            <a href="carter-drop.html" class="block px-3 py-2 text-travellora-gray">Travel Drop</a>
+            <a href="city-tour.html" class="block px-3 py-2 text-travellora-gray">City Tour</a>
+            <a href="blog.html" class="block px-3 py-2 text-travellora-blue font-semibold">Blog</a>
+            <a href="Form.html" class="block px-3 py-2 bg-travellora-blue text-white rounded-lg text-center mt-2">Pesan Sekarang</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero-bg py-16 md:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-10 left-10 w-64 h-64 border-2 border-white rounded-full"></div>
+        <div class="absolute bottom-10 right-10 w-48 h-48 border-2 border-white rounded-full"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white rounded-full"></div>
+    </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="hero-fade d1 inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-full mb-6">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+            Blog UJS Travel
+        </div>
+        <h1 class="hero-fade d2 text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+            Inspirasi & Tips<br><span class="text-yellow-300">Perjalananmu</span>
+        </h1>
+        <p class="hero-fade d3 text-lg text-blue-100 max-w-2xl mx-auto">
+            Artikel wisata, tips traveling, dan info terbaru seputar destinasi Malang & Jawa Timur dari tim UJS Travel
+        </p>
+    </div>
+</section>
+
+<!-- ==================== KATEGORI FILTER ==================== -->
+<div class="bg-white border-b sticky top-16 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-3 overflow-x-auto scrollbar-hide">
+        <button onclick="filterCat('semua')" class="cat-btn active flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border-2 border-travellora-blue" data-cat="semua">Semua</button>
+        <button onclick="filterCat('wisata-kota')" class="cat-btn flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 text-travellora-gray hover:border-travellora-blue hover:text-travellora-blue" data-cat="wisata-kota">🏙️ Wisata Kota</button>
+        <button onclick="filterCat('tips')" class="cat-btn flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 text-travellora-gray hover:border-travellora-blue hover:text-travellora-blue" data-cat="tips">💡 Tips Perjalanan</button>
+        <button onclick="filterCat('kuliner')" class="cat-btn flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 text-travellora-gray hover:border-travellora-blue hover:text-travellora-blue" data-cat="kuliner">🍜 Kuliner</button>
+        <button onclick="filterCat('destinasi')" class="cat-btn flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 text-travellora-gray hover:border-travellora-blue hover:text-travellora-blue" data-cat="destinasi">📍 Destinasi</button>
+    </div>
+</div>
+
+<!-- ==================== FEATURED ARTICLE ==================== -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-8 reveal fade-bottom">
+        <h2 class="text-xl font-bold text-travellora-dark flex items-center gap-2">
+            <span class="w-1 h-6 bg-travellora-blue rounded-full inline-block"></span>
+            Artikel Pilihan
+        </h2>
+    </div>
+
+    <!-- Featured Card (Large) -->
+    <div class="blog-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 mb-10 reveal fade-bottom" data-cat="wisata-kota">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+            <div class="h-72 lg:h-auto overflow-hidden relative">
+                <img src="img/pembukaanalun.png" alt="Alun-Alun Merdeka Malang"
+                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                     onerror="this.parentElement.style.background='linear-gradient(135deg,#305492,#1e3a6e)';this.style.display='none'"/>
+                <div class="absolute top-4 left-4">
+                    <span class="tag-badge bg-travellora-blue text-white">Wisata Kota</span>
+                </div>
+                <div class="absolute top-4 right-4">
+                    <span class="bg-white text-travellora-blue text-xs font-bold px-3 py-1 rounded-full shadow">⭐ Featured</span>
+                </div>
+            </div>
+            <div class="p-8 flex flex-col justify-center">
+                <div class="flex items-center gap-3 text-xs text-travellora-gray mb-3">
+                    <span>📅 28 Januari 2026</span>
+                    <span>·</span>
+                    <span>⏱ 5 menit baca</span>
+                </div>
+                <h3 class="text-2xl font-bold text-travellora-dark leading-tight mb-3">
+                    Revitalisasi Alun-Alun Merdeka Malang: Semakin Mbois tapi Tetap Pertahankan Nilai Sejarah
+                </h3>
+                <p class="text-travellora-gray leading-relaxed mb-6">
+                    Setelah 105 hari revitalisasi, Alun-Alun Merdeka Kota Malang resmi dibuka kembali. Dry fountain baru jadi daya tarik utama yang langsung viral di media sosial. Apa saja yang berubah?
+                </p>
+                <div class="flex items-center gap-4">
+                    <a href="artikel-alun-alun-malang.html" class="inline-flex items-center gap-2 bg-travellora-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-700 transition-colors">
+                        Baca Artikel
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                    <button onclick="openPopup('alun-alun')" class="inline-flex items-center gap-2 text-travellora-blue font-semibold text-sm hover:underline">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        Preview
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid Cards -->
+    <div class="mb-8 reveal fade-bottom">
+        <h2 class="text-xl font-bold text-travellora-dark flex items-center gap-2">
+            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+            Artikel Terbaru
+        </h2>
+    </div>
+
+    <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- ARTIKEL 2: TRAVEL TIPS -->
+        <article class="blog-card bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden border border-gray-100 reveal fade-bottom" data-cat="tips">
+            <div class="h-48 overflow-hidden relative">
+                <img src="img/travel-tips.jpg" alt="5 Travel Tips"
+                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                     onerror="this.parentElement.style.background='linear-gradient(135deg,#f59e0b,#d97706)';this.style.display='none'"/>
+                <div class="absolute top-3 left-3"><span class="tag-badge bg-yellow-500 text-white">Tips Perjalanan</span></div>
+                <div class="absolute top-3 right-3"><span class="bg-white text-travellora-gray text-xs font-bold px-2 py-1 rounded-full">7 Mar 2026</span></div>
+            </div>
+            <div class="p-5">
+                <h3 class="text-base font-bold text-travellora-dark leading-snug mb-2 hover:text-travellora-blue transition-colors">
+                    Sering Kamu Sepelekan, Ini 5 Travel Tips yang Harus Kamu Lakukan Sebelum Bepergian!
+                </h3>
+                <p class="text-travellora-gray text-sm leading-relaxed mb-4">
+                    Ada hal-hal penting yang sering terlupakan para traveler. Yuk simak 5 tips perjalanan yang wajib kamu ketahui!
+                </p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-travellora-gray flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        5 menit baca
+                    </span>
+                    <div class="flex items-center gap-2">
+                        <button onclick="openPopup('travel-tips')" class="text-travellora-gray hover:text-travellora-blue transition-colors" title="Preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        </button>
+                        <a href="artikel-travel-tips.html" class="inline-flex items-center gap-1 text-travellora-blue font-semibold text-sm hover:underline">
+                            Baca
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- PLACEHOLDER 3 -->
+        <article class="blog-card bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 overflow-hidden reveal fade-bottom" data-cat="coming-soon" style="min-height:300px;">
+            <div class="flex flex-col items-center justify-center h-full p-8 text-center min-h-[300px]">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
+                </div>
+                <p class="text-travellora-gray font-semibold mb-1">Artikel Berikutnya</p>
+                <p class="text-gray-400 text-sm">Segera hadir...</p>
+            </div>
+        </article>
+
+        <!-- PLACEHOLDER 4 -->
+        <article class="blog-card bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 overflow-hidden reveal fade-bottom" data-cat="coming-soon" style="min-height:300px;">
+            <div class="flex flex-col items-center justify-center h-full p-8 text-center min-h-[300px]">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
+                </div>
+                <p class="text-travellora-gray font-semibold mb-1">Artikel Berikutnya</p>
+                <p class="text-gray-400 text-sm">Segera hadir...</p>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="bg-gradient-to-r from-travellora-blue to-blue-600 py-14 mt-8">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-2xl font-bold text-white mb-3">Siap Perjalanan ke Malang?</h2>
+        <p class="text-blue-100 mb-6">Pesan tiket travel Malang–Juanda–Surabaya sekarang. Aman, nyaman, tepat waktu sejak 2011.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="Form.html" class="inline-flex items-center justify-center bg-white text-travellora-blue font-bold py-3 px-6 rounded-xl hover:bg-gray-100 transition-colors">Pesan Sekarang</a>
+            <a href="https://wa.me/6282316290290" target="_blank" class="inline-flex items-center justify-center bg-green-500 text-white font-bold py-3 px-6 rounded-xl hover:bg-green-600 transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+                Chat WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER MINI ==================== -->
+<footer class="bg-travellora-blue text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="text-blue-100 text-sm">&copy; 2024 UJS Travel Malang - Juanda Surabaya. Hak Cipta Dilindungi.</p>
+    </div>
+</footer>
+
+<!-- ==================== POPUP OVERLAY ==================== -->
+<div id="popup-overlay" onclick="closePopupOutside(event)">
+    <div id="popup-card">
+        <!-- Header -->
+        <div id="popup-header" class="relative h-52 overflow-hidden rounded-t-2xl bg-gradient-to-br from-travellora-blue to-blue-600">
+            <img id="popup-img" src="" alt="" class="w-full h-full object-cover opacity-80"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <button onclick="closePopup()" class="absolute top-4 right-4 w-9 h-9 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/40 transition-colors">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div class="absolute bottom-4 left-4 right-4">
+                <span id="popup-cat" class="tag-badge bg-white text-travellora-blue mb-2 inline-block"></span>
+                <h3 id="popup-title" class="text-xl font-bold text-white leading-tight"></h3>
+            </div>
+        </div>
+        <!-- Body -->
+        <div class="p-6">
+            <div class="flex items-center gap-4 text-xs text-travellora-gray mb-4">
+                <span id="popup-date" class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </span>
+                <span id="popup-time" class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </span>
+            </div>
+            <p id="popup-desc" class="text-travellora-gray leading-relaxed mb-5 text-sm"></p>
+            <!-- Highlights -->
+            <div id="popup-highlights" class="bg-blue-50 rounded-xl p-4 mb-5"></div>
+            <!-- Action -->
+            <div class="flex gap-3">
+                <a id="popup-link" href="#" class="flex-1 inline-flex items-center justify-center gap-2 bg-travellora-blue text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-colors">
+                    Baca Artikel Lengkap
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <button onclick="nextPopup()" class="px-4 py-3 border-2 border-travellora-blue text-travellora-blue font-bold rounded-xl hover:bg-blue-50 transition-colors text-sm" title="Artikel Lain">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== FLOATING WA ==================== -->
+<div class="fixed bottom-6 right-6 z-50">
+    <a href="https://wa.me/6282316290290" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center space-x-3 hover:scale-105">
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+        <span class="text-base font-bold whitespace-nowrap">Chat WhatsApp 24 Jam</span>
+    </a>
+</div>
+
+<script>
+// ===== DATA ARTIKEL =====
+const artikelData = {
+    'alun-alun': {
+        title: 'Revitalisasi Alun-Alun Merdeka Malang: Semakin Mbois tapi Tetap Pertahankan Nilai Sejarah',
+        category: 'Wisata Kota',
+        date: '28 Januari 2026',
+        readTime: '5 menit baca',
+        img: 'img/pembukaanalun.png',
+        desc: 'Setelah 105 hari revitalisasi, Alun-Alun Merdeka Kota Malang resmi dibuka kembali. Dry fountain baru menjadi daya tarik utama yang langsung viral di berbagai platform media sosial.',
+        highlights: ['Dry fountain interaktif yang pertama di Malang', 'Taman hijau yang diperluas dan diperindah', 'Spot foto Instagramable baru', 'Tetap mempertahankan pohon-pohon bersejarah'],
+        url: 'artikel-alun-alun-malang.html'
+    },
+    'travel-tips': {
+        title: 'Sering Kamu Sepelekan, Ini 5 Travel Tips yang Harus Kamu Lakukan Sebelum Bepergian!',
+        category: 'Tips Perjalanan',
+        date: '7 Maret 2026',
+        readTime: '5 menit baca',
+        img: 'img/travel-tips.jpg',
+        desc: 'Liburan panjang akan segera tiba! Ada hal-hal penting yang sering terlupakan para traveler. Dari menyiapkan itinerary sampai memahami etika lokal — semua dibahas di sini.',
+        highlights: ['Cara membuat itinerary yang efisien', 'Tips kelola keuangan saat traveling', 'Dokumentasi keamanan yang perlu disiapkan', 'Memilih transportasi yang terpercaya'],
+        url: 'artikel-travel-tips.html'
+    }
+};
+
+const artikelKeys = Object.keys(artikelData);
+let currentPopupKey = null;
+
+// ===== POPUP FUNCTIONS =====
+function openPopup(key) {
+    const data = artikelData[key];
+    if (!data) return;
+    currentPopupKey = key;
+
+    document.getElementById('popup-img').src = data.img;
+    document.getElementById('popup-img').onerror = function(){ this.style.display='none'; };
+    document.getElementById('popup-cat').textContent = data.category;
+    document.getElementById('popup-title').textContent = data.title;
+    document.getElementById('popup-date').innerHTML = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> ${data.date}`;
+    document.getElementById('popup-time').innerHTML = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ${data.readTime}`;
+    document.getElementById('popup-desc').textContent = data.desc;
+    document.getElementById('popup-link').href = data.url;
+
+    // Highlights
+    const hl = document.getElementById('popup-highlights');
+    hl.innerHTML = `
+        <p class="text-xs font-bold text-travellora-blue uppercase tracking-wider mb-3">Yang Akan Kamu Pelajari:</p>
+        <ul class="space-y-2">
+            ${data.highlights.map(h => `
+                <li class="flex items-start gap-2 text-sm text-travellora-dark">
+                    <svg class="w-4 h-4 text-travellora-blue mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    ${h}
+                </li>
+            `).join('')}
+        </ul>
+    `;
+
+    document.getElementById('popup-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePopup() {
+    document.getElementById('popup-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function closePopupOutside(e) {
+    if (e.target === document.getElementById('popup-overlay')) closePopup();
+}
+
+function nextPopup() {
+    const keys = Object.keys(artikelData);
+    const idx = keys.indexOf(currentPopupKey);
+    const next = keys[(idx + 1) % keys.length];
+    openPopup(next);
+}
+
+// ===== CATEGORY FILTER =====
+function filterCat(cat) {
+    // Update buttons
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.cat === cat) btn.classList.add('active');
+    });
+
+    // Filter cards
+    document.querySelectorAll('#articles-grid article').forEach(card => {
+        const cardCat = card.dataset.cat;
+        if (cat === 'semua' || cardCat === cat || cardCat === 'coming-soon') {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// ===== AUTO POPUP (random, muncul setelah 4 detik) =====
+setTimeout(() => {
+    const randomKey = artikelKeys[Math.floor(Math.random() * artikelKeys.length)];
+    openPopup(randomKey);
+}, 4000);
+
+// ===== KEYBOARD ESC =====
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePopup();
+});
+
+// ===== MOBILE MENU =====
+function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+}
+
+// ===== REVEAL OBSERVER =====
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+
+<!-- ====== BLOG POPUP RANDOM ====== -->
+<!-- OVERLAY -->
+<div id="blog-popup-overlay"
+     onclick="blogPopupCloseOutside(event)"
+     style="
+       position:fixed; inset:0; z-index:9999;
+       background:rgba(0,0,0,0.55);
+       backdrop-filter:blur(4px);
+       display:flex; align-items:center; justify-content:center;
+       padding:1rem;
+       opacity:0; pointer-events:none;
+       transition:opacity 0.35s ease;
+     ">
+
+  <!-- CARD -->
+  <div id="blog-popup-card"
+       style="
+         background:white;
+         border-radius:1.5rem;
+         max-width:580px; width:100%;
+         max-height:90vh; overflow-y:auto;
+         transform:scale(0.9) translateY(30px);
+         transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+         box-shadow:0 30px 80px -10px rgba(48,84,146,0.4);
+         position:relative;
+       ">
+
+    <!-- CLOSE BUTTON -->
+    <button onclick="blogPopupClose()"
+            style="
+              position:absolute; top:12px; right:12px; z-index:10;
+              width:36px; height:36px;
+              background:rgba(255,255,255,0.25); backdrop-filter:blur(4px);
+              border:none; border-radius:50%; cursor:pointer;
+              display:flex; align-items:center; justify-content:center;
+              transition:background 0.2s;
+            "
+            onmouseover="this.style.background='rgba(255,255,255,0.5)'"
+            onmouseout="this.style.background='rgba(255,255,255,0.25)'">
+      <svg width="16" height="16" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- HEADER IMAGE AREA -->
+    <div id="blog-popup-imgwrap"
+         style="position:relative; height:200px; border-radius:1.5rem 1.5rem 0 0; overflow:hidden; background:linear-gradient(135deg,#305492,#2563eb);">
+      <img id="blog-popup-img" src="" alt=""
+           style="width:100%; height:100%; object-fit:cover; opacity:0.75;"/>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,transparent 60%);"></div>
+      <div style="position:absolute; bottom:14px; left:16px; right:50px;">
+        <span id="blog-popup-cat"
+              style="display:inline-block; background:rgba(255,255,255,0.25); backdrop-filter:blur(4px);
+                     color:white; font-size:0.7rem; font-weight:700; letter-spacing:0.08em;
+                     text-transform:uppercase; padding:3px 10px; border-radius:9999px; margin-bottom:6px;"></span>
+        <h3 id="blog-popup-title"
+            style="color:white; font-size:1.1rem; font-weight:700; line-height:1.35; margin:0;"></h3>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div style="padding:1.5rem;">
+      <!-- Meta -->
+      <div style="display:flex; gap:16px; font-size:0.75rem; color:#7F8C8D; margin-bottom:14px;">
+        <span id="blog-popup-date" style="display:flex; align-items:center; gap:4px;">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </span>
+        <span id="blog-popup-read" style="display:flex; align-items:center; gap:4px;">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </span>
+      </div>
+
+      <!-- Description -->
+      <p id="blog-popup-desc"
+         style="color:#7F8C8D; line-height:1.7; font-size:0.9rem; margin-bottom:16px;"></p>
+
+      <!-- Highlights box -->
+      <div id="blog-popup-hl"
+           style="background:#eff6ff; border-radius:12px; padding:14px; margin-bottom:18px;"></div>
+
+      <!-- CTA Buttons -->
+      <div style="display:flex; gap:10px;">
+        <a id="blog-popup-link" href="#"
+           style="flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+                  background:#305492; color:white; font-weight:700; font-size:0.9rem;
+                  padding:12px; border-radius:12px; text-decoration:none;
+                  transition:background 0.2s;"
+           onmouseover="this.style.background='#1e3a6e'"
+           onmouseout="this.style.background='#305492'">
+          Baca Artikel Lengkap
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <button onclick="blogPopupNext()"
+                title="Artikel lain"
+                style="padding:12px 14px; border:2px solid #305492; background:white; color:#305492;
+                       border-radius:12px; cursor:pointer; font-weight:700; transition:all 0.2s;"
+                onmouseover="this.style.background='#eff6ff'"
+                onmouseout="this.style.background='white'">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Skip link -->
+      <p style="text-align:center; margin-top:12px; font-size:0.8rem; color:#aaa;">
+        <button onclick="blogPopupClose()"
+                style="background:none; border:none; color:#7F8C8D; cursor:pointer; text-decoration:underline; font-size:0.8rem;">
+          Lanjut ke halaman utama →
+        </button>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING BLOG TRIGGER (muncul setelah popup ditutup) -->
+<div id="blog-float-btn"
+     style="
+       position:fixed; bottom:90px; left:20px; z-index:40;
+       display:none;
+       animation: blogFloat 3s ease-in-out infinite;
+     ">
+  <a href="blog.html"
+     style="
+       display:flex; align-items:center; gap:8px;
+       background:#305492; color:white;
+       padding:10px 16px; border-radius:9999px;
+       box-shadow:0 8px 25px rgba(48,84,146,0.4);
+       text-decoration:none; font-weight:700; font-size:0.82rem;
+       transition:transform 0.2s;
+     "
+     onmouseover="this.style.transform='scale(1.05)'"
+     onmouseout="this.style.transform='scale(1)'">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+    </svg>
+    Baca Blog
+  </a>
+</div>
+
+<style>
+@keyframes blogFloat {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+</style>
+
+<script>
+// ===== DATA ARTIKEL BLOG =====
+const _blogArticles = [
+  {
+    key: 'alun-alun',
+    title: 'Revitalisasi Alun-Alun Merdeka Malang: Semakin Mbois tapi Tetap Pertahankan Nilai Sejarah',
+    category: 'Wisata Kota',
+    date: '28 Januari 2026',
+    readTime: '5 menit baca',
+    img: 'img/pembukaanalun.png',
+    desc: 'Setelah 105 hari revitalisasi, Alun-Alun Merdeka Kota Malang resmi dibuka kembali. Dry fountain baru menjadi daya tarik utama yang langsung viral di berbagai platform media sosial.',
+    highlights: [
+      'Dry fountain interaktif pertama di Malang',
+      'Taman hijau yang diperluas dan diperindah',
+      'Spot foto Instagramable baru',
+      'Tetap mempertahankan pohon-pohon bersejarah'
+    ],
+    url: 'artikel-alun-alun-malang.html'
+  },
+  {
+    key: 'travel-tips',
+    title: 'Sering Kamu Sepelekan, Ini 5 Travel Tips yang Harus Kamu Lakukan Sebelum Bepergian!',
+    category: 'Tips Perjalanan',
+    date: '7 Maret 2026',
+    readTime: '5 menit baca',
+    img: 'img/travel-tips.jpg',
+    desc: 'Liburan panjang akan segera tiba! Ada hal-hal penting yang sering terlupakan para traveler. Dari menyiapkan itinerary sampai memahami etika lokal — semua dibahas di sini.',
+    highlights: [
+      'Cara membuat itinerary yang efisien',
+      'Tips kelola keuangan saat traveling',
+      'Dokumentasi keamanan yang perlu disiapkan',
+      'Memilih transportasi yang terpercaya'
+    ],
+    url: 'artikel-travel-tips.html'
+  }
+];
+
+let _blogCurrentIdx = 0;
+
+function _blogRender(article) {
+  // Image
+  const img = document.getElementById('blog-popup-img');
+  img.src = article.img;
+  img.onerror = function(){ this.style.display='none'; };
+
+  // Texts
+  document.getElementById('blog-popup-cat').textContent = article.category;
+  document.getElementById('blog-popup-title').textContent = article.title;
+  document.getElementById('blog-popup-date').innerHTML =
+    `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+       <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+     </svg> ${article.date}`;
+  document.getElementById('blog-popup-read').innerHTML =
+    `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+       <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+     </svg> ${article.readTime}`;
+  document.getElementById('blog-popup-desc').textContent = article.desc;
+  document.getElementById('blog-popup-link').href = article.url;
+
+  // Highlights
+  document.getElementById('blog-popup-hl').innerHTML = `
+    <p style="font-size:0.7rem; font-weight:700; color:#305492; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:10px;">
+      Yang Akan Kamu Pelajari:
+    </p>
+    <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px;">
+      ${article.highlights.map(h => `
+        <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.85rem; color:#2C3E50;">
+          <svg width="16" height="16" style="flex-shrink:0; margin-top:2px; color:#305492;" fill="none" stroke="#305492" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+          ${h}
+        </li>
+      `).join('')}
+    </ul>
+  `;
+}
+
+function _blogOpen(idx) {
+  _blogCurrentIdx = idx;
+  const article = _blogArticles[idx];
+  _blogRender(article);
+
+  const overlay = document.getElementById('blog-popup-overlay');
+  const card    = document.getElementById('blog-popup-card');
+  overlay.style.opacity = '1';
+  overlay.style.pointerEvents = 'all';
+  card.style.transform = 'scale(1) translateY(0)';
+  document.body.style.overflow = 'hidden';
+}
+
+function blogPopupClose() {
+  const overlay = document.getElementById('blog-popup-overlay');
+  const card    = document.getElementById('blog-popup-card');
+  overlay.style.opacity = '0';
+  overlay.style.pointerEvents = 'none';
+  card.style.transform = 'scale(0.9) translateY(30px)';
+  document.body.style.overflow = '';
+
+  // Tampilkan floating button setelah popup ditutup
+  const floatBtn = document.getElementById('blog-float-btn');
+  if (floatBtn) floatBtn.style.display = 'block';
+}
+
+function blogPopupCloseOutside(e) {
+  if (e.target === document.getElementById('blog-popup-overlay')) blogPopupClose();
+}
+
+function blogPopupNext() {
+  const next = (_blogCurrentIdx + 1) % _blogArticles.length;
+  _blogCurrentIdx = next;
+  _blogRender(_blogArticles[next]);
+}
+
+// Keyboard ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') blogPopupClose();
+});
+
+// AUTO-OPEN: pilih artikel random, muncul setelah 5 detik
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    // Cek jika user sudah pernah lihat popup hari ini (pakai sessionStorage)
+    // Hapus baris try/catch berikut jika ingin selalu muncul setiap kali load
+    const randomIdx = Math.floor(Math.random() * _blogArticles.length);
+    _blogOpen(randomIdx);
+  }, 5000); // 5 detik setelah halaman load
+});
+</script>
+<!-- ====== AKHIR BLOG POPUP RANDOM ====== -->
+</body>
+</html>
