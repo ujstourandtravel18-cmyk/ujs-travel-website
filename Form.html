@@ -489,11 +489,28 @@
 // ─────────────────────────────────────────────────
 var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxRrzIj-zb0ubdql2hNs_RSa7yh_grSAOjxtnDPWQFRsUmjzuw65NXsmU-8AzduUvdX/exec";
 var WA_NUMBER = "6282316290290";
+// ─────────────────────────────────────────────────
+// DATA HARGA — 3 Tier:
+//   1. NORMAL        : di luar periode Lebaran
+//   2. HIGH SEASON   : 12-31 Maret 2026 (kecuali 19,20,21)
+//   3. HARI H LEBARAN: 19, 20, 21 Maret 2026
+// ─────────────────────────────────────────────────
 
-// ─────────────────────────────────────────────────
-// DATA HARGA
-// ─────────────────────────────────────────────────
-var hargaData = {
+// Periode
+var HS_START  = "2026-03-12"; // High Season mulai
+var HS_END    = "2026-03-31"; // High Season selesai
+var LBR_START = "2026-03-19"; // Hari H Lebaran mulai
+var LBR_END   = "2026-03-21"; // Hari H Lebaran selesai
+
+function getTierByDate(dateStr) {
+  if (!dateStr) return "normal";
+  if (dateStr >= LBR_START && dateStr <= LBR_END) return "lebaran";
+  if (dateStr >= HS_START  && dateStr <= HS_END)  return "highseason";
+  return "normal";
+}
+
+// ── TIER 1: Harga NORMAL ──────────────────────────
+var hargaNormal = {
   "Travel Reguler": {
     "Malang → Juanda":150000,"Juanda → Malang":150000,
     "Malang → SBY Kota":165000,"SBY Kota → Malang":165000,
@@ -540,29 +557,135 @@ var hargaData = {
   }
 };
 
-var jadwalData = {
-  "Malang → Juanda":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Malang → SBY Kota":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Malang → SBY Utara / SBY Barat / Perak":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Batu → Juanda":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Batu → SBY Kota":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Batu → SBY Utara / SBY Barat / Perak":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Malang (Dau) → Juanda":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Malang (Wagir) → Juanda":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Malang (Kebunagung) → Juanda":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Malang (Kedungkandang) → Juanda":["01:00","03:00","05:00","07:00","09:00","11:00","13:00","15:00"],
-  "Juanda → Malang":["06:00-07:00","07:00-08:00","08:00-09:00","09:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00","20:00-21:00"],
-  "Juanda → Batu":["06:00-07:00","07:00-08:00","08:00-09:00","09:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00","20:00-21:00"],
-  "Juanda → Malang (Dau)":["06:00-07:00","07:00-08:00","08:00-09:00","09:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00","20:00-21:00"],
-  "Juanda → Malang (Wagir)":["06:00-07:00","07:00-08:00","08:00-09:00","09:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00","20:00-21:00"],
-  "Juanda → Malang (Kebunagung)":["06:00-07:00","07:00-08:00","08:00-09:00","09:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00","20:00-21:00"],
-  "Juanda → Malang (Kedungkandang)":["06:00-07:00","07:00-08:00","08:00-09:00","09:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00","20:00-21:00"],
-  "SBY Kota → Malang":["06:00-08:00","08:00-10:00","10:00-12:00","12:00-14:00","14:00-16:00","16:00-18:00","18:00-20:00","20:00-22:00"],
-  "SBY Kota → Batu":["06:00-08:00","08:00-10:00","10:00-12:00","12:00-14:00","14:00-16:00","16:00-18:00","18:00-20:00","20:00-22:00"],
-  "SBY Utara / SBY Barat / Perak → Malang":["06:00-08:00","08:00-10:00","10:00-12:00","12:00-14:00","14:00-16:00","16:00-18:00","18:00-20:00","20:00-22:00"],
-  "SBY Utara / SBY Barat / Perak → Batu":["06:00-08:00","08:00-10:00","10:00-12:00","12:00-14:00","14:00-16:00","16:00-18:00","18:00-20:00","20:00-22:00"]
+// ── TIER 2: HIGH SEASON (12-31 Maret, kecuali 19-21) ──
+var hargaHighSeason = {
+  "Travel Reguler": {
+    "Malang → Juanda":180000,"Juanda → Malang":180000,
+    "Malang → SBY Kota":195000,"SBY Kota → Malang":195000,
+    "Malang → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Malang":200000,
+    "Batu → Juanda":200000,"Juanda → Batu":200000,
+    "Batu → SBY Kota":200000,"SBY Kota → Batu":200000,
+    "Batu → SBY Utara / SBY Barat / Perak":220000,"SBY Utara / SBY Barat / Perak → Batu":220000,
+    "Malang (Dau) → Juanda":180000,"Juanda → Malang (Dau)":180000,
+    "Malang (Wagir) → Juanda":180000,"Juanda → Malang (Wagir)":180000,
+    "Malang (Kebunagung) → Juanda":180000,"Juanda → Malang (Kebunagung)":180000,
+    "Malang (Kedungkandang) → Juanda":180000,"Juanda → Malang (Kedungkandang)":180000,
+    type:"per_orang", max_penumpang:10
+  },
+  "Travel Drop": {
+    "Malang → Juanda":600000,"Juanda → Malang":600000,
+    "Malang → SBY Kota":600000,"SBY Kota → Malang":600000,
+    "Malang → SBY Utara / SBY Barat / Perak":650000,"SBY Utara / SBY Barat / Perak → Malang":650000,
+    "Batu → Juanda":650000,"Juanda → Batu":650000,
+    "Batu → SBY Kota":650000,"SBY Kota → Batu":650000,
+    "Batu → SBY Utara / SBY Barat / Perak":700000,"SBY Utara / SBY Barat / Perak → Batu":700000,
+    type:"mobil", max_penumpang:5
+  },
+  "Carter": {
+    // High Season: Luar Kota/Pantai 800k, Malang-Batu 700k
+    // Mapping ke rute yang ada di form:
+    "Malang → Juanda":800000,"Juanda → Malang":800000,
+    "Malang → SBY Kota":800000,"SBY Kota → Malang":800000,
+    "Malang → SBY Utara / SBY Barat / Perak":800000,"SBY Utara / SBY Barat / Perak → Malang":800000,
+    "Batu → Juanda":800000,"Juanda → Batu":800000,
+    "Batu → SBY Kota":800000,"SBY Kota → Batu":800000,
+    "Batu → SBY Utara / SBY Barat / Perak":800000,"SBY Utara / SBY Barat / Perak → Batu":800000,
+    type:"mobil", max_penumpang:5
+  },
+  "Kirim Paket": {
+    "Malang → Juanda":180000,"Juanda → Malang":180000,
+    "Malang → SBY Kota":195000,"SBY Kota → Malang":195000,
+    "Malang → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Malang":200000,
+    "Batu → Juanda":200000,"Juanda → Batu":200000,
+    "Batu → SBY Kota":200000,"SBY Kota → Batu":200000,
+    "Batu → SBY Utara / SBY Barat / Perak":220000,"SBY Utara / SBY Barat / Perak → Batu":220000,
+    "Malang (Dau) → Juanda":180000,"Juanda → Malang (Dau)":180000,
+    "Malang (Wagir) → Juanda":180000,"Juanda → Malang (Wagir)":180000,
+    "Malang (Kebunagung) → Juanda":180000,"Juanda → Malang (Kebunagung)":180000,
+    "Malang (Kedungkandang) → Juanda":180000,"Juanda → Malang (Kedungkandang)":180000,
+    type:"per_item", max_penumpang:1
+  }
 };
 
+// ── TIER 3: HARI H LEBARAN (19, 20, 21 Maret) ─────
+var hargaLebaran = {
+  "Travel Reguler": {
+    "Malang → Juanda":200000,"Juanda → Malang":200000,
+    "Malang → SBY Kota":215000,"SBY Kota → Malang":215000,
+    "Malang → SBY Utara / SBY Barat / Perak":230000,"SBY Utara / SBY Barat / Perak → Malang":230000,
+    "Batu → Juanda":230000,"Juanda → Batu":230000,
+    "Batu → SBY Kota":250000,"SBY Kota → Batu":250000,
+    "Batu → SBY Utara / SBY Barat / Perak":250000,"SBY Utara / SBY Barat / Perak → Batu":250000,
+    "Malang (Dau) → Juanda":200000,"Juanda → Malang (Dau)":200000,
+    "Malang (Wagir) → Juanda":200000,"Juanda → Malang (Wagir)":200000,
+    "Malang (Kebunagung) → Juanda":200000,"Juanda → Malang (Kebunagung)":200000,
+    "Malang (Kedungkandang) → Juanda":200000,"Juanda → Malang (Kedungkandang)":200000,
+    type:"per_orang", max_penumpang:10
+  },
+  "Travel Drop": {
+    "Malang → Juanda":600000,"Juanda → Malang":600000,
+    "Malang → SBY Kota":600000,"SBY Kota → Malang":600000,
+    "Malang → SBY Utara / SBY Barat / Perak":650000,"SBY Utara / SBY Barat / Perak → Malang":650000,
+    "Batu → Juanda":650000,"Juanda → Batu":650000,
+    "Batu → SBY Kota":650000,"SBY Kota → Batu":650000,
+    "Batu → SBY Utara / SBY Barat / Perak":700000,"SBY Utara / SBY Barat / Perak → Batu":700000,
+    type:"mobil", max_penumpang:5
+  },
+  "Carter": {
+    // Hari H Lebaran: Luar Kota 900k, Malang-Batu 800k
+    "Malang → Juanda":900000,"Juanda → Malang":900000,
+    "Malang → SBY Kota":900000,"SBY Kota → Malang":900000,
+    "Malang → SBY Utara / SBY Barat / Perak":900000,"SBY Utara / SBY Barat / Perak → Malang":900000,
+    "Batu → Juanda":900000,"Juanda → Batu":900000,
+    "Batu → SBY Kota":900000,"SBY Kota → Batu":900000,
+    "Batu → SBY Utara / SBY Barat / Perak":900000,"SBY Utara / SBY Barat / Perak → Batu":900000,
+    type:"mobil", max_penumpang:5
+  },
+  "Kirim Paket": {
+    "Malang → Juanda":200000,"Juanda → Malang":200000,
+    "Malang → SBY Kota":215000,"SBY Kota → Malang":215000,
+    "Malang → SBY Utara / SBY Barat / Perak":230000,"SBY Utara / SBY Barat / Perak → Malang":230000,
+    "Batu → Juanda":230000,"Juanda → Batu":230000,
+    "Batu → SBY Kota":250000,"SBY Kota → Batu":250000,
+    "Batu → SBY Utara / SBY Barat / Perak":250000,"SBY Utara / SBY Barat / Perak → Batu":250000,
+    "Malang (Dau) → Juanda":200000,"Juanda → Malang (Dau)":200000,
+    "Malang (Wagir) → Juanda":200000,"Juanda → Malang (Wagir)":200000,
+    "Malang (Kebunagung) → Juanda":200000,"Juanda → Malang (Kebunagung)":200000,
+    "Malang (Kedungkandang) → Juanda":200000,"Juanda → Malang (Kedungkandang)":200000,
+    type:"per_item", max_penumpang:1
+  }
+};
+
+// ── Pilih tier berdasarkan tanggal ────────────────
+function getActiveHargaData() {
+  var tgl = document.getElementById("tanggalKeberangkatan")
+              ? document.getElementById("tanggalKeberangkatan").value : "";
+  var tier = getTierByDate(tgl);
+  if (tier === "lebaran")     return hargaLebaran;
+  if (tier === "highseason")  return hargaHighSeason;
+  return hargaNormal;
+}
+
+// ── Proxy: semua kode lain pakai hargaData seperti biasa ──
+var hargaData = new Proxy({}, {
+  get: function(_, prop) {
+    return getActiveHargaData()[prop];
+  },
+  ownKeys: function() { return Object.keys(hargaNormal); },
+  getOwnPropertyDescriptor: function(_, prop) {
+    if (prop in hargaNormal) return { enumerable:true, configurable:true };
+  }
+});
+
+// ── Helper: badge info harga yang aktif ───────────
+function getPriceBadge() {
+  var tgl  = document.getElementById("tanggalKeberangkatan")
+               ? document.getElementById("tanggalKeberangkatan").value : "";
+  var tier = getTierByDate(tgl);
+  if (tier === "lebaran")    return { label:"🌙 Harga Hari H Lebaran (19-21 Mar)", color:"#c0392b", bg:"#fff0f0" };
+  if (tier === "highseason") return { label:"📅 Harga High Season (12-31 Mar)", color:"#e67e22", bg:"#fff8f0" };
+  return null;
+}
 // ─────────────────────────────────────────────────
 // STATE UPLOAD FOTO
 // ─────────────────────────────────────────────────
@@ -773,6 +896,7 @@ function calculatePrice() {
   var r = document.getElementById("rutePerjalanan").value;
   var p = parseInt(document.getElementById("jumlahPenumpang").value) || 1;
   var d = document.getElementById("priceDisplay");
+  var tgl = document.getElementById("tanggalKeberangkatan").value;
   if (!l || !r) { d.classList.add("hidden"); return; }
   var sd = hargaData[l]; if (!sd) return;
   var b  = sd[r] || 0;
@@ -796,8 +920,12 @@ function calculatePrice() {
     document.getElementById("pricePerPerson").textContent = "@" + fmt(b) + " × " + p + " penumpang";
   }
   var pn = document.getElementById("paymentNote");
-  pn.classList.remove("hidden");
+   pn.classList.remove("hidden");
   pn.innerHTML = "<strong>Transfer BCA:</strong> Silakan transfer sesuai total di atas ke rekening yang tercantum, lalu upload bukti transfernya.";
+  var badge = getPriceBadge();
+  if (badge) {
+    pn.innerHTML += "<br><span style='display:inline-block;margin-top:6px;padding:4px 10px;border-radius:6px;font-weight:700;font-size:0.82rem;background:" + badge.bg + ";color:" + badge.color + ";'>" + badge.label + "</span>";
+  }
 }
 
 function toggleBandaraFields() {
