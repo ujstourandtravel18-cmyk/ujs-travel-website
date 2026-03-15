@@ -27,16 +27,11 @@
         .reveal.active { opacity:1; }
         .fade-bottom { transform:translateY(50px); }
         .fade-bottom.active { transform:translateY(0); }
-
-        /* ===== SATU POPUP SYSTEM ===== */
         #popup-overlay {
             position:fixed; inset:0; z-index:9999;
-            background:rgba(0,0,0,0.6);
-            backdrop-filter:blur(4px);
-            display:flex; align-items:center; justify-content:center;
-            padding:1rem;
-            opacity:0; pointer-events:none;
-            transition:opacity 0.35s ease;
+            background:rgba(0,0,0,0.6); backdrop-filter:blur(4px);
+            display:flex; align-items:center; justify-content:center; padding:1rem;
+            opacity:0; pointer-events:none; transition:opacity 0.35s ease;
         }
         #popup-overlay.open { opacity:1; pointer-events:all; }
         #popup-card {
@@ -44,14 +39,12 @@
             max-width:580px; width:100%; max-height:90vh; overflow-y:auto;
             transform:scale(0.92) translateY(24px);
             transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
-            box-shadow:0 30px 80px -10px rgba(48,84,146,0.4);
-            position:relative;
+            box-shadow:0 30px 80px -10px rgba(48,84,146,0.4); position:relative;
         }
         #popup-overlay.open #popup-card { transform:scale(1) translateY(0); }
         #popup-card::-webkit-scrollbar { width:6px; }
         #popup-card::-webkit-scrollbar-track { background:#f1f5f9; }
         #popup-card::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:3px; }
-
         .hero-bg { background:linear-gradient(135deg,#1e3a6e 0%,#305492 50%,#2563eb 100%); }
         .blog-card { transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s ease; }
         .blog-card:hover { transform:translateY(-8px); box-shadow:0 20px 50px -10px rgba(48,84,146,0.25); }
@@ -153,7 +146,7 @@
     </div>
 </div>
 
-<!-- ARTIKEL -->
+<!-- ARTIKEL — dirender otomatis dari array ARTIKEL di bawah -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="mb-8 reveal fade-bottom">
         <h2 class="text-xl font-bold text-travellora-dark flex items-center gap-2">
@@ -161,40 +154,7 @@
             Artikel Pilihan
         </h2>
     </div>
-
-    <!-- Featured Card -->
-    <div class="blog-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 mb-10 reveal fade-bottom" data-cat="wisata-kota">
-        <div class="grid grid-cols-1 lg:grid-cols-2">
-            <div class="h-72 lg:h-auto overflow-hidden relative">
-                <img src="img/pembukaanalun.png" alt="Alun-Alun Merdeka Malang"
-                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                     onerror="this.parentElement.style.background='linear-gradient(135deg,#305492,#1e3a6e)';this.style.display='none'"/>
-                <div class="absolute top-4 left-4"><span class="tag-badge bg-travellora-blue text-white">Wisata Kota</span></div>
-                <div class="absolute top-4 right-4"><span class="bg-white text-travellora-blue text-xs font-bold px-3 py-1 rounded-full shadow">⭐ Featured</span></div>
-            </div>
-            <div class="p-8 flex flex-col justify-center">
-                <div class="flex items-center gap-3 text-xs text-travellora-gray mb-3">
-                    <span>📅 28 Januari 2026</span><span>·</span><span>⏱ 5 menit baca</span>
-                </div>
-                <h3 class="text-2xl font-bold text-travellora-dark leading-tight mb-3">
-                    Revitalisasi Alun-Alun Merdeka Malang: Semakin Mbois tapi Tetap Pertahankan Nilai Sejarah
-                </h3>
-                <p class="text-travellora-gray leading-relaxed mb-6">
-                    Setelah 105 hari revitalisasi, Alun-Alun Merdeka Kota Malang resmi dibuka kembali. Dry fountain baru jadi daya tarik utama yang langsung viral di media sosial. Apa saja yang berubah?
-                </p>
-                <div class="flex items-center gap-4">
-                    <a href="artikel-alun-alun-malang.html" class="inline-flex items-center gap-2 bg-travellora-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-700 transition-colors">
-                        Baca Artikel
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                    </a>
-                    <button onclick="openPopup('alun-alun')" class="inline-flex items-center gap-2 text-travellora-blue font-semibold text-sm hover:underline">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                        Preview
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="featured-card" class="mb-10"></div>
 
     <div class="mb-8 reveal fade-bottom">
         <h2 class="text-xl font-bold text-travellora-dark flex items-center gap-2">
@@ -202,64 +162,7 @@
             Artikel Terbaru
         </h2>
     </div>
-
-    <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-        <!-- ARTIKEL 2 -->
-        <article class="blog-card bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden border border-gray-100 reveal fade-bottom" data-cat="tips">
-            <div class="h-48 overflow-hidden relative">
-                <img src="img/travel-tips.jpg" alt="5 Travel Tips"
-                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                     onerror="this.parentElement.style.background='linear-gradient(135deg,#f59e0b,#d97706)';this.style.display='none'"/>
-                <div class="absolute top-3 left-3"><span class="tag-badge bg-yellow-500 text-white">Tips Perjalanan</span></div>
-                <div class="absolute top-3 right-3"><span class="bg-white text-travellora-gray text-xs font-bold px-2 py-1 rounded-full">7 Mar 2026</span></div>
-            </div>
-            <div class="p-5">
-                <h3 class="text-base font-bold text-travellora-dark leading-snug mb-2 hover:text-travellora-blue transition-colors">
-                    Sering Kamu Sepelekan, Ini 5 Travel Tips yang Harus Kamu Lakukan Sebelum Bepergian!
-                </h3>
-                <p class="text-travellora-gray text-sm leading-relaxed mb-4">
-                    Ada hal-hal penting yang sering terlupakan para traveler. Yuk simak 5 tips perjalanan yang wajib kamu ketahui!
-                </p>
-                <div class="flex items-center justify-between">
-                    <span class="text-xs text-travellora-gray flex items-center gap-1">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        5 menit baca
-                    </span>
-                    <div class="flex items-center gap-2">
-                        <button onclick="openPopup('travel-tips')" class="text-travellora-gray hover:text-travellora-blue transition-colors" title="Preview">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                        </button>
-                        <a href="artikel-travel-tips.html" class="inline-flex items-center gap-1 text-travellora-blue font-semibold text-sm hover:underline">
-                            Baca <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <!-- PLACEHOLDER 3 -->
-        <article class="blog-card bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 overflow-hidden reveal fade-bottom" data-cat="coming-soon" style="min-height:300px;">
-            <div class="flex flex-col items-center justify-center h-full p-8 text-center min-h-[300px]">
-                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                    <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
-                </div>
-                <p class="text-travellora-gray font-semibold mb-1">Artikel Berikutnya</p>
-                <p class="text-gray-400 text-sm">Segera hadir...</p>
-            </div>
-        </article>
-
-        <!-- PLACEHOLDER 4 -->
-        <article class="blog-card bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 overflow-hidden reveal fade-bottom" data-cat="coming-soon" style="min-height:300px;">
-            <div class="flex flex-col items-center justify-center h-full p-8 text-center min-h-[300px]">
-                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                    <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
-                </div>
-                <p class="text-travellora-gray font-semibold mb-1">Artikel Berikutnya</p>
-                <p class="text-gray-400 text-sm">Segera hadir...</p>
-            </div>
-        </article>
-    </div>
+    <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
 </section>
 
 <!-- CTA -->
@@ -292,37 +195,21 @@
     </a>
 </div>
 
-<!-- =============================================
-     SATU-SATUNYA POPUP SYSTEM
-     Dipakai oleh: tombol Preview + auto-open random
-============================================= -->
+<!-- POPUP -->
 <div id="popup-overlay" onclick="closePopupOutside(event)">
     <div id="popup-card">
-        <!-- Header gambar -->
         <div class="relative h-56 overflow-hidden rounded-t-2xl bg-gradient-to-br from-travellora-blue to-blue-600">
-            <img id="popup-img" src="" alt="" class="w-full h-full object-cover opacity-80"
-                 onerror="this.style.display='none'"/>
+            <img id="popup-img" src="" alt="" class="w-full h-full object-cover opacity-80" onerror="this.style.display='none'"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
-            <!-- Badge -->
-            <div class="absolute top-3 left-3">
-                <span class="bg-white/20 backdrop-blur-sm border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    📖 Artikel Terbaru
-                </span>
-            </div>
-            <!-- Tombol close -->
-            <button onclick="closePopup()"
-                    class="absolute top-3 right-3 w-9 h-9 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/40 transition-colors border border-white/30">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
+            <div class="absolute top-3 left-3"><span class="bg-white/20 backdrop-blur-sm border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full">📖 Artikel Terbaru</span></div>
+            <button onclick="closePopup()" class="absolute top-3 right-3 w-9 h-9 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/40 transition-colors border border-white/30">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
-            <!-- Kategori + Judul -->
             <div class="absolute bottom-4 left-4 right-4">
                 <span id="popup-cat" class="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2"></span>
                 <h3 id="popup-title" class="text-lg font-bold text-white leading-snug"></h3>
             </div>
         </div>
-        <!-- Body -->
         <div class="p-6">
             <div class="flex items-center gap-4 text-xs text-travellora-gray mb-4 flex-wrap">
                 <span id="popup-date" class="flex items-center gap-1"></span>
@@ -332,35 +219,24 @@
             <p id="popup-desc" class="text-travellora-gray leading-relaxed mb-4 text-sm"></p>
             <div id="popup-highlights" class="bg-blue-50 rounded-xl p-4 mb-5"></div>
             <div class="flex gap-3">
-                <a id="popup-link" href="#"
-                   class="flex-1 inline-flex items-center justify-center gap-2 bg-travellora-blue text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-colors text-sm">
+                <a id="popup-link" href="#" class="flex-1 inline-flex items-center justify-center gap-2 bg-travellora-blue text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-colors text-sm">
                     Baca Artikel Lengkap
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </a>
-                <!-- Ganti artikel -->
-                <button onclick="nextPopup()" title="Artikel lain"
-                        class="px-4 border-2 border-travellora-blue text-travellora-blue rounded-xl hover:bg-blue-50 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                    </svg>
+                <button onclick="nextPopup()" title="Artikel lain" class="px-4 border-2 border-travellora-blue text-travellora-blue rounded-xl hover:bg-blue-50 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 </button>
             </div>
             <p class="text-center mt-3">
-                <button onclick="closePopup()"
-                        class="text-xs text-gray-400 hover:text-gray-600 underline bg-transparent border-none cursor-pointer">
-                    Lanjut baca blog →
-                </button>
+                <button onclick="closePopup()" class="text-xs text-gray-400 hover:text-gray-600 underline bg-transparent border-none cursor-pointer">Lanjut baca blog →</button>
             </p>
         </div>
     </div>
 </div>
 
-<!-- Floating Blog Button (muncul setelah popup ditutup) -->
 <div id="blog-float-btn" style="position:fixed;bottom:90px;left:20px;z-index:40;display:none;">
-    <a href="blog.html"
-       style="align-items:center;gap:8px;background:#305492;color:white;padding:10px 16px;border-radius:9999px;box-shadow:0 8px 25px rgba(48,84,146,0.4);text-decoration:none;font-weight:700;font-size:0.82rem;"
-       onmouseover="this.style.transform='scale(1.05)'"
-       onmouseout="this.style.transform='scale(1)'">
+    <a href="blog.html" style="align-items:center;gap:8px;background:#305492;color:white;padding:10px 16px;border-radius:9999px;box-shadow:0 8px 25px rgba(48,84,146,0.4);text-decoration:none;font-weight:700;font-size:0.82rem;"
+       onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         <svg width="15" height="15" style="display:inline;vertical-align:middle;margin-right:5px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
         </svg>
@@ -370,111 +246,175 @@
 
 <script>
 // =============================================
-// DATA ARTIKEL — satu sumber kebenaran
-// Tambah artikel baru cukup di sini
+// DATA ARTIKEL
+// Admin panel otomatis inject artikel baru di sini
 // =============================================
 const ARTIKEL = [
     {
-      slug: null,
-      title: "Artikel COba coba",
-      category: "wisata-kota",
-      date: "2026-03-15T07:36:04.143Z",
-      readTime: "5 menit baca",
-      thumbnail: "img/blog-artikel-coba-coba-mmrfxgz3.png",
-      description: '',
-      featured: true,
-      url: "artikel-artikel-coba-coba-mmrfxgz3.html"
-    },
-    {
-        key: 'alun-alun',
+        slug: null,
         title: 'Revitalisasi Alun-Alun Merdeka Malang: Semakin Mbois tapi Tetap Pertahankan Nilai Sejarah',
-        category: 'Wisata Kota',
-        date: '28 Januari 2026',
+        category: 'wisata-kota',
+        date: '2026-01-28',
         readTime: '5 menit baca',
-        img: 'img/pembukaanalun.png',
-        desc: 'Setelah 105 hari revitalisasi, Alun-Alun Merdeka Kota Malang resmi dibuka kembali. Dry fountain baru menjadi daya tarik utama yang langsung viral di berbagai platform media sosial.',
-        highlights: [
-            'Dry fountain interaktif pertama di Malang',
-            'Taman hijau yang diperluas dan diperindah',
-            'Spot foto Instagramable baru',
-            'Tetap mempertahankan pohon-pohon bersejarah'
-        ],
+        thumbnail: 'img/pembukaanalun.png',
+        description: 'Setelah 105 hari revitalisasi, Alun-Alun Merdeka Kota Malang resmi dibuka kembali. Dry fountain baru menjadi daya tarik utama yang langsung viral di berbagai platform media sosial.',
+        featured: true,
+        highlights: ['Dry fountain interaktif pertama di Malang','Taman hijau yang diperluas dan diperindah','Spot foto Instagramable baru','Tetap mempertahankan pohon-pohon bersejarah'],
         url: 'artikel-alun-alun-malang.html'
     },
     {
-        key: 'travel-tips',
+        slug: null,
         title: 'Sering Kamu Sepelekan, Ini 5 Travel Tips yang Harus Kamu Lakukan Sebelum Bepergian!',
-        category: 'Tips Perjalanan',
-        date: '7 Maret 2026',
+        category: 'tips',
+        date: '2026-03-07',
         readTime: '5 menit baca',
-        img: 'img/travel-tips.png',
-        desc: 'Ada hal-hal penting yang sering terlupakan para traveler. Dari menyiapkan itinerary sampai memahami etika lokal — semua dibahas lengkap di sini.',
-        highlights: [
-            'Cara membuat itinerary yang efisien',
-            'Tips kelola keuangan saat traveling',
-            'Dokumentasi keamanan yang perlu disiapkan',
-            'Memilih transportasi yang terpercaya'
-        ],
+        thumbnail: 'img/travel-tips.png',
+        description: 'Ada hal-hal penting yang sering terlupakan para traveler. Dari menyiapkan itinerary sampai memahami etika lokal — semua dibahas lengkap di sini.',
+        featured: false,
+        highlights: ['Cara membuat itinerary yang efisien','Tips kelola keuangan saat traveling','Dokumentasi keamanan yang perlu disiapkan','Memilih transportasi yang terpercaya'],
         url: 'artikel-travel-tips.html'
     }
 ];
 
-let _idx = 0;
-
 // =============================================
-// RENDER ISI POPUP
+// HELPER
 // =============================================
-function _renderPopup(a) {
-    document.getElementById('popup-img').src     = a.img;
-    document.getElementById('popup-cat').textContent   = a.category;
-    document.getElementById('popup-title').textContent = a.title;
-    document.getElementById('popup-link').href          = a.url;
+const CAT_LABEL = {'wisata-kota':'Wisata Kota','tips':'Tips Perjalanan','kuliner':'Kuliner','destinasi':'Destinasi'};
+const CAT_COLOR = {'wisata-kota':'bg-travellora-blue text-white','tips':'bg-yellow-500 text-white','kuliner':'bg-orange-500 text-white','destinasi':'bg-green-600 text-white'};
 
-    document.getElementById('popup-date').innerHTML =
-        `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-         </svg> ${a.date}`;
-
-    document.getElementById('popup-time').innerHTML =
-        `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-         </svg> ${a.readTime}`;
-
-    document.getElementById('popup-desc').textContent = a.desc;
-
-    document.getElementById('popup-highlights').innerHTML =
-        `<p class="text-xs font-bold text-travellora-blue uppercase tracking-wider mb-3">Yang Akan Kamu Pelajari:</p>
-         <ul class="space-y-2">
-           ${a.highlights.map(h =>
-             `<li class="flex items-start gap-2 text-sm text-travellora-dark">
-                <svg class="w-4 h-4 text-travellora-blue mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>${h}
-              </li>`
-           ).join('')}
-         </ul>`;
+function formatDate(d) {
+    if (!d) return '';
+    if (isNaN(Date.parse(d))) return d;
+    return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
 }
 
 // =============================================
-// BUKA POPUP — by key string atau index number
+// RENDER
 // =============================================
-function openPopup(keyOrIdx) {
-    if (typeof keyOrIdx === 'string') {
-        _idx = ARTIKEL.findIndex(a => a.key === keyOrIdx);
-        if (_idx === -1) return;
-    } else {
-        _idx = keyOrIdx;
-    }
+function renderFeatured(a, idx) {
+    const cl = CAT_LABEL[a.category]||a.category;
+    const cc = CAT_COLOR[a.category]||'bg-travellora-blue text-white';
+    return `<div class="blog-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 reveal fade-bottom">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+            <div class="h-72 lg:h-auto overflow-hidden relative">
+                <img src="${a.thumbnail||''}" alt="${a.title}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.parentElement.style.background='linear-gradient(135deg,#305492,#1e3a6e)';this.style.display='none'"/>
+                <div class="absolute top-4 left-4"><span class="tag-badge ${cc}">${cl}</span></div>
+                <div class="absolute top-4 right-4"><span class="bg-white text-travellora-blue text-xs font-bold px-3 py-1 rounded-full shadow">⭐ Featured</span></div>
+            </div>
+            <div class="p-8 flex flex-col justify-center">
+                <div class="flex items-center gap-3 text-xs text-travellora-gray mb-3">
+                    <span>📅 ${formatDate(a.date)}</span><span>·</span><span>⏱ ${a.readTime||'5 menit baca'}</span>
+                </div>
+                <h3 class="text-2xl font-bold text-travellora-dark leading-tight mb-3">${a.title}</h3>
+                <p class="text-travellora-gray leading-relaxed mb-6">${a.description||''}</p>
+                <div class="flex items-center gap-4">
+                    <a href="${a.url}" class="inline-flex items-center gap-2 bg-travellora-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-700 transition-colors">
+                        Baca Artikel <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                    <button onclick="openPopup(${idx})" class="inline-flex items-center gap-2 text-travellora-blue font-semibold text-sm hover:underline">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        Preview
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
+
+function renderCard(a, idx) {
+    const cl = CAT_LABEL[a.category]||a.category;
+    const cc = CAT_COLOR[a.category]||'bg-travellora-blue text-white';
+    return `<article class="blog-card bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden border border-gray-100 reveal fade-bottom" data-cat="${a.category}">
+        <div class="h-48 overflow-hidden relative">
+            <img src="${a.thumbnail||''}" alt="${a.title}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.parentElement.style.background='linear-gradient(135deg,#305492,#1e3a6e)';this.style.display='none'"/>
+            <div class="absolute top-3 left-3"><span class="tag-badge ${cc}">${cl}</span></div>
+            <div class="absolute top-3 right-3"><span class="bg-white text-travellora-gray text-xs font-bold px-2 py-1 rounded-full">${formatDate(a.date)}</span></div>
+        </div>
+        <div class="p-5">
+            <h3 class="text-base font-bold text-travellora-dark leading-snug mb-2 hover:text-travellora-blue transition-colors">${a.title}</h3>
+            <p class="text-travellora-gray text-sm leading-relaxed mb-4">${a.description||''}</p>
+            <div class="flex items-center justify-between">
+                <span class="text-xs text-travellora-gray flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    ${a.readTime||'5 menit baca'}
+                </span>
+                <div class="flex items-center gap-2">
+                    <button onclick="openPopup(${idx})" class="text-travellora-gray hover:text-travellora-blue transition-colors" title="Preview">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </button>
+                    <a href="${a.url}" class="inline-flex items-center gap-1 text-travellora-blue font-semibold text-sm hover:underline">
+                        Baca <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </article>`;
+}
+
+function renderPlaceholder() {
+    return `<article class="blog-card bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 overflow-hidden reveal fade-bottom" style="min-height:300px;">
+        <div class="flex flex-col items-center justify-center h-full p-8 text-center min-h-[300px]">
+            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
+            </div>
+            <p class="text-travellora-gray font-semibold mb-1">Artikel Berikutnya</p>
+            <p class="text-gray-400 text-sm">Segera hadir...</p>
+        </div>
+    </article>`;
+}
+
+function renderAll(cat) {
+    cat = cat || 'semua';
+    const filtered = cat === 'semua' ? ARTIKEL : ARTIKEL.filter(a => a.category === cat);
+    const featured = filtered.find(a => a.featured) || filtered[0];
+    const rest = filtered.filter(a => a !== featured);
+
+    document.getElementById('featured-card').innerHTML = featured ? renderFeatured(featured, ARTIKEL.indexOf(featured)) : '';
+
+    let gridHTML = rest.map(a => renderCard(a, ARTIKEL.indexOf(a))).join('');
+    const needed = Math.max(0, 2 - rest.length);
+    for (let i = 0; i < needed; i++) gridHTML += renderPlaceholder();
+    document.getElementById('articles-grid').innerHTML = gridHTML;
+
+    document.querySelectorAll('.reveal').forEach(el =>
+        new IntersectionObserver(([e]) => { if (e.isIntersecting) e.target.classList.add('active'); }, { threshold: 0.12 }).observe(el)
+    );
+}
+
+// =============================================
+// FILTER
+// =============================================
+function filterCat(cat) {
+    document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.cat === cat));
+    renderAll(cat);
+}
+
+// =============================================
+// POPUP
+// =============================================
+let _idx = 0;
+
+function _renderPopup(a) {
+    document.getElementById('popup-img').src = a.thumbnail||'';
+    document.getElementById('popup-cat').textContent = CAT_LABEL[a.category]||a.category;
+    document.getElementById('popup-title').textContent = a.title;
+    document.getElementById('popup-link').href = a.url;
+    document.getElementById('popup-date').innerHTML = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> ${formatDate(a.date)}`;
+    document.getElementById('popup-time').innerHTML = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ${a.readTime||'5 menit baca'}`;
+    document.getElementById('popup-desc').textContent = a.description||'';
+    const hl = a.highlights||[];
+    document.getElementById('popup-highlights').innerHTML = hl.length ? `
+        <p class="text-xs font-bold text-travellora-blue uppercase tracking-wider mb-3">Yang Akan Kamu Pelajari:</p>
+        <ul class="space-y-2">${hl.map(h=>`<li class="flex items-start gap-2 text-sm text-travellora-dark"><svg class="w-4 h-4 text-travellora-blue mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>${h}</li>`).join('')}</ul>` : '';
+}
+
+function openPopup(idx) {
+    _idx = typeof idx === 'number' ? idx : 0;
     _renderPopup(ARTIKEL[_idx]);
     document.getElementById('popup-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
 }
 
-// =============================================
-// TUTUP POPUP
-// =============================================
 function closePopup() {
     document.getElementById('popup-overlay').classList.remove('open');
     document.body.style.overflow = '';
@@ -485,55 +425,22 @@ function closePopupOutside(e) {
     if (e.target === document.getElementById('popup-overlay')) closePopup();
 }
 
-// =============================================
-// GANTI ARTIKEL (tombol refresh di popup)
-// =============================================
 function nextPopup() {
     _idx = (_idx + 1) % ARTIKEL.length;
     _renderPopup(ARTIKEL[_idx]);
 }
 
-// =============================================
-// FILTER KATEGORI
-// =============================================
-function filterCat(cat) {
-    document.querySelectorAll('.cat-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.cat === cat);
-    });
-    document.querySelectorAll('#articles-grid article').forEach(card => {
-        const c = card.dataset.cat;
-        card.style.display = (cat === 'semua' || c === cat || c === 'coming-soon') ? '' : 'none';
-    });
-}
-
-// =============================================
-// AUTO-OPEN RANDOM — SEKALI, setelah 4 detik
-// =============================================
-setTimeout(() => {
-    openPopup(Math.floor(Math.random() * ARTIKEL.length));
-}, 4000);
-
-// =============================================
-// KEYBOARD ESC
-// =============================================
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
 
-// =============================================
-// MOBILE MENU
-// =============================================
 function toggleMobileMenu() {
     document.getElementById('mobile-menu').classList.toggle('hidden');
 }
 
 // =============================================
-// REVEAL SCROLL OBSERVER
+// INIT
 // =============================================
-document.querySelectorAll('.reveal').forEach(el =>
-    new IntersectionObserver(
-        ([e]) => { if (e.isIntersecting) e.target.classList.add('active'); },
-        { threshold: 0.12 }
-    ).observe(el)
-);
+renderAll('semua');
+setTimeout(() => openPopup(Math.floor(Math.random() * ARTIKEL.length)), 4000);
 </script>
 
 </body>
