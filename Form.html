@@ -980,15 +980,44 @@ function autoFillAlamatTujuan() {
 }
 
 function updateJamKeberangkatanOptions() {
+  // ─────────────────────────────────────────────────
+// JAM KEBERANGKATAN
+// ─────────────────────────────────────────────────
+var JAM_DARI_MALANG_BATU = [
+  "01.00", "03.00", "05.00", "07.00",
+  "09.00", "11.00", "13.00", "15.00"
+];
+
+function isDariMalangBatu(rute) {
+  // Rute DARI Malang/Batu = yang berangkat dari sana
+  return rute.startsWith("Malang") || rute.startsWith("Batu");
+}
+
+function updateJamKeberangkatanOptions() {
   var r   = document.getElementById("rutePerjalanan").value;
   var sel = document.getElementById("jamKeberangkatan");
+  var wrap = document.getElementById("jamKeberangkatan").closest("div");
+
   sel.innerHTML = "<option value=''>Pilih Jam Keberangkatan</option>";
-  if (!r || !jadwalData[r]) return;
-  jadwalData[r].forEach(function(j) {
-    var o = document.createElement("option");
-    o.value = j; o.textContent = j;
-    sel.appendChild(o);
-  });
+
+  if (!r) return;
+
+  if (isDariMalangBatu(r)) {
+    // Dari Malang/Batu → tampilkan jam ganjil 01.00-15.00
+    sel.required = true;
+    wrap.style.display = "";
+    JAM_DARI_MALANG_BATU.forEach(function(j) {
+      var o = document.createElement("option");
+      o.value = j; o.textContent = j + " WIB";
+      sel.appendChild(o);
+    });
+  } else {
+    // Menuju Malang/Batu (dari Juanda/SBY) → tidak perlu pilih jam
+    sel.required = false;
+    sel.innerHTML = "<option value='Menyesuaikan kedatangan'>Menyesuaikan kedatangan ✓</option>";
+    sel.value = "Menyesuaikan kedatangan";
+  }
+}
 }
 
 function updateRouteOptions() {
