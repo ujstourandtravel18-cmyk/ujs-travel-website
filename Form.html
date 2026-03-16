@@ -978,9 +978,7 @@ function autoFillAlamatTujuan() {
     el.placeholder = "Detail alamat tujuan";
   }
 }
-
-function updateJamKeberangkatanOptions() {
-  // ─────────────────────────────────────────────────
+// ─────────────────────────────────────────────────
 // JAM KEBERANGKATAN
 // ─────────────────────────────────────────────────
 var JAM_DARI_MALANG_BATU = [
@@ -989,37 +987,64 @@ var JAM_DARI_MALANG_BATU = [
 ];
 
 function isDariMalangBatu(rute) {
-  // Rute DARI Malang/Batu = yang berangkat dari sana
   return rute.startsWith("Malang") || rute.startsWith("Batu");
 }
 
 function updateJamKeberangkatanOptions() {
   var r   = document.getElementById("rutePerjalanan").value;
   var sel = document.getElementById("jamKeberangkatan");
-  var wrap = document.getElementById("jamKeberangkatan").closest("div");
 
   sel.innerHTML = "<option value=''>Pilih Jam Keberangkatan</option>";
 
   if (!r) return;
 
   if (isDariMalangBatu(r)) {
-    // Dari Malang/Batu → tampilkan jam ganjil 01.00-15.00
     sel.required = true;
-    wrap.style.display = "";
     JAM_DARI_MALANG_BATU.forEach(function(j) {
       var o = document.createElement("option");
       o.value = j; o.textContent = j + " WIB";
       sel.appendChild(o);
     });
   } else {
-    // Menuju Malang/Batu (dari Juanda/SBY) → tidak perlu pilih jam
     sel.required = false;
     sel.innerHTML = "<option value='Menyesuaikan kedatangan'>Menyesuaikan kedatangan ✓</option>";
     sel.value = "Menyesuaikan kedatangan";
   }
 }
-}
 
+function updateRouteOptions() {
+  var l   = document.getElementById("jenisLayanan").value;
+  var sel = document.getElementById("rutePerjalanan");
+  sel.innerHTML = "<option value=''>Pilih Rute Perjalanan</option>";
+  if (!l) return;
+  var rM = "<optgroup label='Rute Malang'>" +
+    "<option value='Malang → Juanda'>Malang → Juanda</option>" +
+    "<option value='Juanda → Malang'>Juanda → Malang</option>" +
+    "<option value='Malang → SBY Kota'>Malang → SBY Kota</option>" +
+    "<option value='SBY Kota → Malang'>SBY Kota → Malang</option>" +
+    "<option value='Malang → SBY Utara / SBY Barat / Perak'>Malang → SBY Utara/SBY Barat/Perak</option>" +
+    "<option value='SBY Utara / SBY Barat / Perak → Malang'>SBY Utara/SBY Barat/Perak → Malang</option></optgroup>";
+  var rB = "<optgroup label='Rute Batu'>" +
+    "<option value='Batu → Juanda'>Batu → Juanda</option>" +
+    "<option value='Juanda → Batu'>Juanda → Batu</option>" +
+    "<option value='Batu → SBY Kota'>Batu → SBY Kota</option>" +
+    "<option value='SBY Kota → Batu'>SBY Kota → Batu</option>" +
+    "<option value='Batu → SBY Utara / SBY Barat / Perak'>Batu → SBY Utara/SBY Barat/Perak</option>" +
+    "<option value='SBY Utara / SBY Barat / Perak → Batu'>SBY Utara/SBY Barat/Perak → Batu</option></optgroup>";
+  var rK = "<optgroup label='Daerah Khusus Malang'>" +
+    "<option value='Malang (Dau) → Juanda'>Malang (Dau) → Juanda</option>" +
+    "<option value='Juanda → Malang (Dau)'>Juanda → Malang (Dau)</option>" +
+    "<option value='Malang (Wagir) → Juanda'>Malang (Wagir) → Juanda</option>" +
+    "<option value='Juanda → Malang (Wagir)'>Juanda → Malang (Wagir)</option>" +
+    "<option value='Malang (Kebunagung) → Juanda'>Malang (Kebunagung) → Juanda</option>" +
+    "<option value='Juanda → Malang (Kebunagung)'>Juanda → Malang (Kebunagung)</option>" +
+    "<option value='Malang (Kedungkandang) → Juanda'>Malang (Kedungkandang) → Juanda</option>" +
+    "<option value='Juanda → Malang (Kedungkandang)'>Juanda → Malang (Kedungkandang)</option></optgroup>";
+  sel.innerHTML += (l === "Travel Drop" || l === "Carter") ? rM + rB : rM + rB + rK;
+  calculatePrice();
+  updateJamKeberangkatanOptions();
+  autoFillAlamatTujuan();
+}
 function updateRouteOptions() {
   var l   = document.getElementById("jenisLayanan").value;
   var sel = document.getElementById("rutePerjalanan");
