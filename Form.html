@@ -40,7 +40,6 @@
     }
     @keyframes fadeIn { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
     #priceDisplay { animation:fadeIn 0.5s ease-in-out; border:2px solid #305492; }
-
     .upload-area {
       border:2px dashed #305492; border-radius:12px; padding:28px;
       text-align:center; cursor:pointer; transition:all 0.3s ease; background:#f8faff;
@@ -48,7 +47,7 @@
     .upload-area:hover { background:#eef3ff; border-color:#1e3a6e; }
     .upload-area.drag-over { background:#dce8ff; border-color:#1e3a6e; transform:scale(1.01); }
     .preview-img { max-height:200px; border-radius:8px; margin:12px auto 0; display:block; border:2px solid #e5e7eb; }
-#loadingOverlay {
+    #loadingOverlay {
       display:none; position:fixed; inset:0; background:rgba(0,0,0,0.82);
       z-index:9999; flex-direction:column; align-items:center; justify-content:center; gap:16px;
       padding:2rem;
@@ -79,9 +78,6 @@
 </head>
 <body class="font-sans bg-gray-50">
 
-<!-- ═══════════════════════════════════════════════
-     LOADING OVERLAY
-═══════════════════════════════════════════════ -->
 <div id="loadingOverlay">
   <div class="spinner"></div>
   <div class="text-center">
@@ -91,9 +87,7 @@
   <div id="loadingProgress"><div id="loadingProgressBar"></div></div>
   <p class="text-blue-200 text-xs text-center max-w-xs">Mohon tunggu, jangan tutup halaman ini</p>
 </div>
-<!-- ═══════════════════════════════════════════════
-     NAVBAR
-═══════════════════════════════════════════════ -->
+
 <nav class="bg-white shadow-sm sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
@@ -161,12 +155,8 @@
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════════
-     MAIN CONTENT
-═══════════════════════════════════════════════ -->
 <div class="py-10">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
     <div class="text-center mb-10 reveal fade-bottom">
       <div class="flex justify-center mb-4">
         <img src="img/logo.png" alt="Logo UJS Travel" class="w-20 h-20 object-contain" />
@@ -346,7 +336,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
               </svg>
               <p class="font-semibold text-travellora-blue mb-1">Klik atau drag &amp; drop foto di sini</p>
-              <p class="text-sm text-gray-500">Format JPG, PNG, JPEG — Maks. 5MB</p>
+              <p class="text-sm text-gray-500">Format JPG, PNG, JPEG — Maks. 10MB</p>
             </div>
             <img id="previewImg" class="preview-img hidden" alt="Preview bukti transfer" />
             <p id="uploadedFileName" class="text-sm text-green-600 font-medium mt-2 hidden"></p>
@@ -402,7 +392,7 @@
         <div class="text-center">
           <button type="submit" id="submitBtn"
             class="bg-travellora-blue hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-lg transition-colors duration-300 text-lg w-full md:w-auto">
-            <span class="flex items-center justify-center" id="submitBtnContent">
+            <span class="flex items-center justify-center">
               <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
               </svg>
@@ -427,9 +417,6 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════════════ -->
 <footer class="bg-gradient-to-r from-travellora-blue to-blue-700 text-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -493,7 +480,6 @@
   </div>
 </footer>
 
-<!-- Floating WA -->
 <div class="fixed bottom-6 right-6 z-50">
   <a href="https://wa.me/6282316290290" target="_blank"
     class="bg-green-500 hover:bg-green-600 text-white px-5 py-4 rounded-full shadow-xl flex items-center space-x-3 hover:scale-105 transition-all">
@@ -502,604 +488,265 @@
   </a>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     JAVASCRIPT
-═══════════════════════════════════════════════ -->
 <script>
-// ─────────────────────────────────────────────────
-// KONFIGURASI — Ganti hanya baris ini jika URL berubah
-// ─────────────────────────────────────────────────
 var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxRrzIj-zb0ubdql2hNs_RSa7yh_grSAOjxtnDPWQFRsUmjzuw65NXsmU-8AzduUvdX/exec";
 var WA_NUMBER = "6282316290290";
-// ─────────────────────────────────────────────────
-// DATA HARGA — 3 Tier:
-//   1. NORMAL        : di luar periode Lebaran
-//   2. HIGH SEASON   : 12-31 Maret 2026 (kecuali 19,20,21)
-//   3. HARI H LEBARAN: 19, 20, 21 Maret 2026
-// ─────────────────────────────────────────────────
 
-// Periode
-var HS_START  = "2026-03-12"; // High Season mulai
-var HS_END    = "2026-03-31"; // High Season selesai
-var LBR_START = "2026-03-19"; // Hari H Lebaran mulai
-var LBR_END   = "2026-03-21"; // Hari H Lebaran selesai
+// ── HARGA ──────────────────────────────────────────
+var HS_START="2026-03-12",HS_END="2026-03-31",LBR_START="2026-03-19",LBR_END="2026-03-21";
+function getTierByDate(d){if(!d)return"normal";if(d>=LBR_START&&d<=LBR_END)return"lebaran";if(d>=HS_START&&d<=HS_END)return"highseason";return"normal";}
 
-function getTierByDate(dateStr) {
-  if (!dateStr) return "normal";
-  if (dateStr >= LBR_START && dateStr <= LBR_END) return "lebaran";
-  if (dateStr >= HS_START  && dateStr <= HS_END)  return "highseason";
-  return "normal";
-}
-
-// ── TIER 1: Harga NORMAL ──────────────────────────
-var hargaNormal = {
-  "Travel Reguler": {
-    "Malang → Juanda":150000,"Juanda → Malang":150000,
-    "Malang → SBY Kota":165000,"SBY Kota → Malang":165000,
-    "Malang → SBY Utara / SBY Barat / Perak":180000,"SBY Utara / SBY Barat / Perak → Malang":180000,
-    "Batu → Juanda":170000,"Juanda → Batu":170000,
-    "Batu → SBY Kota":180000,"SBY Kota → Batu":180000,
-    "Batu → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Batu":200000,
-    "Malang (Dau) → Juanda":160000,"Juanda → Malang (Dau)":160000,
-    "Malang (Wagir) → Juanda":160000,"Juanda → Malang (Wagir)":160000,
-    "Malang (Kebunagung) → Juanda":160000,"Juanda → Malang (Kebunagung)":160000,
-    "Malang (Kedungkandang) → Juanda":160000,"Juanda → Malang (Kedungkandang)":160000,
-    type:"per_orang", max_penumpang:10
-  },
-  "Travel Drop": {
-    "Malang → Juanda":500000,"Juanda → Malang":500000,
-    "Malang → SBY Kota":500000,"SBY Kota → Malang":500000,
-    "Malang → SBY Utara / SBY Barat / Perak":550000,"SBY Utara / SBY Barat / Perak → Malang":550000,
-    "Batu → Juanda":550000,"Juanda → Batu":550000,
-    "Batu → SBY Kota":550000,"SBY Kota → Batu":550000,
-    "Batu → SBY Utara / SBY Barat / Perak":600000,"SBY Utara / SBY Barat / Perak → Batu":600000,
-    type:"mobil", max_penumpang:5
-  },
-  "Carter": {
-    "Malang → Juanda":500000,"Juanda → Malang":500000,
-    "Malang → SBY Kota":500000,"SBY Kota → Malang":500000,
-    "Malang → SBY Utara / SBY Barat / Perak":550000,"SBY Utara / SBY Barat / Perak → Malang":550000,
-    "Batu → Juanda":550000,"Juanda → Batu":550000,
-    "Batu → SBY Kota":550000,"SBY Kota → Batu":550000,
-    "Batu → SBY Utara / SBY Barat / Perak":600000,"SBY Utara / SBY Barat / Perak → Batu":600000,
-    type:"mobil", max_penumpang:5
-  },
-  "Kirim Paket": {
-    "Malang → Juanda":150000,"Juanda → Malang":150000,
-    "Malang → SBY Kota":165000,"SBY Kota → Malang":165000,
-    "Malang → SBY Utara / SBY Barat / Perak":180000,"SBY Utara / SBY Barat / Perak → Malang":180000,
-    "Batu → Juanda":170000,"Juanda → Batu":170000,
-    "Batu → SBY Kota":180000,"SBY Kota → Batu":180000,
-    "Batu → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Batu":200000,
-    "Malang (Dau) → Juanda":160000,"Juanda → Malang (Dau)":160000,
-    "Malang (Wagir) → Juanda":160000,"Juanda → Malang (Wagir)":160000,
-    "Malang (Kebunagung) → Juanda":160000,"Juanda → Malang (Kebunagung)":160000,
-    "Malang (Kedungkandang) → Juanda":160000,"Juanda → Malang (Kedungkandang)":160000,
-    type:"per_item", max_penumpang:1
-  }
+var hargaNormal={
+  "Travel Reguler":{"Malang → Juanda":150000,"Juanda → Malang":150000,"Malang → SBY Kota":165000,"SBY Kota → Malang":165000,"Malang → SBY Utara / SBY Barat / Perak":180000,"SBY Utara / SBY Barat / Perak → Malang":180000,"Batu → Juanda":170000,"Juanda → Batu":170000,"Batu → SBY Kota":180000,"SBY Kota → Batu":180000,"Batu → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Batu":200000,"Malang (Dau) → Juanda":160000,"Juanda → Malang (Dau)":160000,"Malang (Wagir) → Juanda":160000,"Juanda → Malang (Wagir)":160000,"Malang (Kebunagung) → Juanda":160000,"Juanda → Malang (Kebunagung)":160000,"Malang (Kedungkandang) → Juanda":160000,"Juanda → Malang (Kedungkandang)":160000,type:"per_orang",max_penumpang:10},
+  "Travel Drop":{"Malang → Juanda":500000,"Juanda → Malang":500000,"Malang → SBY Kota":500000,"SBY Kota → Malang":500000,"Malang → SBY Utara / SBY Barat / Perak":550000,"SBY Utara / SBY Barat / Perak → Malang":550000,"Batu → Juanda":550000,"Juanda → Batu":550000,"Batu → SBY Kota":550000,"SBY Kota → Batu":550000,"Batu → SBY Utara / SBY Barat / Perak":600000,"SBY Utara / SBY Barat / Perak → Batu":600000,type:"mobil",max_penumpang:5},
+  "Carter":{"Malang → Juanda":500000,"Juanda → Malang":500000,"Malang → SBY Kota":500000,"SBY Kota → Malang":500000,"Malang → SBY Utara / SBY Barat / Perak":550000,"SBY Utara / SBY Barat / Perak → Malang":550000,"Batu → Juanda":550000,"Juanda → Batu":550000,"Batu → SBY Kota":550000,"SBY Kota → Batu":550000,"Batu → SBY Utara / SBY Barat / Perak":600000,"SBY Utara / SBY Barat / Perak → Batu":600000,type:"mobil",max_penumpang:5},
+  "Kirim Paket":{"Malang → Juanda":150000,"Juanda → Malang":150000,"Malang → SBY Kota":165000,"SBY Kota → Malang":165000,"Malang → SBY Utara / SBY Barat / Perak":180000,"SBY Utara / SBY Barat / Perak → Malang":180000,"Batu → Juanda":170000,"Juanda → Batu":170000,"Batu → SBY Kota":180000,"SBY Kota → Batu":180000,"Batu → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Batu":200000,"Malang (Dau) → Juanda":160000,"Juanda → Malang (Dau)":160000,"Malang (Wagir) → Juanda":160000,"Juanda → Malang (Wagir)":160000,"Malang (Kebunagung) → Juanda":160000,"Juanda → Malang (Kebunagung)":160000,"Malang (Kedungkandang) → Juanda":160000,"Juanda → Malang (Kedungkandang)":160000,type:"per_item",max_penumpang:1}
+};
+var hargaHighSeason={
+  "Travel Reguler":{"Malang → Juanda":180000,"Juanda → Malang":180000,"Malang → SBY Kota":195000,"SBY Kota → Malang":195000,"Malang → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Malang":200000,"Batu → Juanda":200000,"Juanda → Batu":200000,"Batu → SBY Kota":200000,"SBY Kota → Batu":200000,"Batu → SBY Utara / SBY Barat / Perak":220000,"SBY Utara / SBY Barat / Perak → Batu":220000,"Malang (Dau) → Juanda":180000,"Juanda → Malang (Dau)":180000,"Malang (Wagir) → Juanda":180000,"Juanda → Malang (Wagir)":180000,"Malang (Kebunagung) → Juanda":180000,"Juanda → Malang (Kebunagung)":180000,"Malang (Kedungkandang) → Juanda":180000,"Juanda → Malang (Kedungkandang)":180000,type:"per_orang",max_penumpang:10},
+  "Travel Drop":{"Malang → Juanda":600000,"Juanda → Malang":600000,"Malang → SBY Kota":600000,"SBY Kota → Malang":600000,"Malang → SBY Utara / SBY Barat / Perak":650000,"SBY Utara / SBY Barat / Perak → Malang":650000,"Batu → Juanda":650000,"Juanda → Batu":650000,"Batu → SBY Kota":650000,"SBY Kota → Batu":650000,"Batu → SBY Utara / SBY Barat / Perak":700000,"SBY Utara / SBY Barat / Perak → Batu":700000,type:"mobil",max_penumpang:5},
+  "Carter":{"Malang → Juanda":800000,"Juanda → Malang":800000,"Malang → SBY Kota":800000,"SBY Kota → Malang":800000,"Malang → SBY Utara / SBY Barat / Perak":800000,"SBY Utara / SBY Barat / Perak → Malang":800000,"Batu → Juanda":800000,"Juanda → Batu":800000,"Batu → SBY Kota":800000,"SBY Kota → Batu":800000,"Batu → SBY Utara / SBY Barat / Perak":800000,"SBY Utara / SBY Barat / Perak → Batu":800000,type:"mobil",max_penumpang:5},
+  "Kirim Paket":{"Malang → Juanda":180000,"Juanda → Malang":180000,"Malang → SBY Kota":195000,"SBY Kota → Malang":195000,"Malang → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Malang":200000,"Batu → Juanda":200000,"Juanda → Batu":200000,"Batu → SBY Kota":200000,"SBY Kota → Batu":200000,"Batu → SBY Utara / SBY Barat / Perak":220000,"SBY Utara / SBY Barat / Perak → Batu":220000,"Malang (Dau) → Juanda":180000,"Juanda → Malang (Dau)":180000,"Malang (Wagir) → Juanda":180000,"Juanda → Malang (Wagir)":180000,"Malang (Kebunagung) → Juanda":180000,"Juanda → Malang (Kebunagung)":180000,"Malang (Kedungkandang) → Juanda":180000,"Juanda → Malang (Kedungkandang)":180000,type:"per_item",max_penumpang:1}
+};
+var hargaLebaran={
+  "Travel Reguler":{"Malang → Juanda":200000,"Juanda → Malang":200000,"Malang → SBY Kota":215000,"SBY Kota → Malang":215000,"Malang → SBY Utara / SBY Barat / Perak":230000,"SBY Utara / SBY Barat / Perak → Malang":230000,"Batu → Juanda":230000,"Juanda → Batu":230000,"Batu → SBY Kota":250000,"SBY Kota → Batu":250000,"Batu → SBY Utara / SBY Barat / Perak":250000,"SBY Utara / SBY Barat / Perak → Batu":250000,"Malang (Dau) → Juanda":200000,"Juanda → Malang (Dau)":200000,"Malang (Wagir) → Juanda":200000,"Juanda → Malang (Wagir)":200000,"Malang (Kebunagung) → Juanda":200000,"Juanda → Malang (Kebunagung)":200000,"Malang (Kedungkandang) → Juanda":200000,"Juanda → Malang (Kedungkandang)":200000,type:"per_orang",max_penumpang:10},
+  "Travel Drop":{"Malang → Juanda":600000,"Juanda → Malang":600000,"Malang → SBY Kota":600000,"SBY Kota → Malang":600000,"Malang → SBY Utara / SBY Barat / Perak":650000,"SBY Utara / SBY Barat / Perak → Malang":650000,"Batu → Juanda":650000,"Juanda → Batu":650000,"Batu → SBY Kota":650000,"SBY Kota → Batu":650000,"Batu → SBY Utara / SBY Barat / Perak":700000,"SBY Utara / SBY Barat / Perak → Batu":700000,type:"mobil",max_penumpang:5},
+  "Carter":{"Malang → Juanda":900000,"Juanda → Malang":900000,"Malang → SBY Kota":900000,"SBY Kota → Malang":900000,"Malang → SBY Utara / SBY Barat / Perak":900000,"SBY Utara / SBY Barat / Perak → Malang":900000,"Batu → Juanda":900000,"Juanda → Batu":900000,"Batu → SBY Kota":900000,"SBY Kota → Batu":900000,"Batu → SBY Utara / SBY Barat / Perak":900000,"SBY Utara / SBY Barat / Perak → Batu":900000,type:"mobil",max_penumpang:5},
+  "Kirim Paket":{"Malang → Juanda":200000,"Juanda → Malang":200000,"Malang → SBY Kota":215000,"SBY Kota → Malang":215000,"Malang → SBY Utara / SBY Barat / Perak":230000,"SBY Utara / SBY Barat / Perak → Malang":230000,"Batu → Juanda":230000,"Juanda → Batu":230000,"Batu → SBY Kota":250000,"SBY Kota → Batu":250000,"Batu → SBY Utara / SBY Barat / Perak":250000,"SBY Utara / SBY Barat / Perak → Batu":250000,"Malang (Dau) → Juanda":200000,"Juanda → Malang (Dau)":200000,"Malang (Wagir) → Juanda":200000,"Juanda → Malang (Wagir)":200000,"Malang (Kebunagung) → Juanda":200000,"Juanda → Malang (Kebunagung)":200000,"Malang (Kedungkandang) → Juanda":200000,"Juanda → Malang (Kedungkandang)":200000,type:"per_item",max_penumpang:1}
 };
 
-// ── TIER 2: HIGH SEASON (12-31 Maret, kecuali 19-21) ──
-var hargaHighSeason = {
-  "Travel Reguler": {
-    "Malang → Juanda":180000,"Juanda → Malang":180000,
-    "Malang → SBY Kota":195000,"SBY Kota → Malang":195000,
-    "Malang → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Malang":200000,
-    "Batu → Juanda":200000,"Juanda → Batu":200000,
-    "Batu → SBY Kota":200000,"SBY Kota → Batu":200000,
-    "Batu → SBY Utara / SBY Barat / Perak":220000,"SBY Utara / SBY Barat / Perak → Batu":220000,
-    "Malang (Dau) → Juanda":180000,"Juanda → Malang (Dau)":180000,
-    "Malang (Wagir) → Juanda":180000,"Juanda → Malang (Wagir)":180000,
-    "Malang (Kebunagung) → Juanda":180000,"Juanda → Malang (Kebunagung)":180000,
-    "Malang (Kedungkandang) → Juanda":180000,"Juanda → Malang (Kedungkandang)":180000,
-    type:"per_orang", max_penumpang:10
-  },
-  "Travel Drop": {
-    "Malang → Juanda":600000,"Juanda → Malang":600000,
-    "Malang → SBY Kota":600000,"SBY Kota → Malang":600000,
-    "Malang → SBY Utara / SBY Barat / Perak":650000,"SBY Utara / SBY Barat / Perak → Malang":650000,
-    "Batu → Juanda":650000,"Juanda → Batu":650000,
-    "Batu → SBY Kota":650000,"SBY Kota → Batu":650000,
-    "Batu → SBY Utara / SBY Barat / Perak":700000,"SBY Utara / SBY Barat / Perak → Batu":700000,
-    type:"mobil", max_penumpang:5
-  },
-  "Carter": {
-    // High Season: Luar Kota/Pantai 800k, Malang-Batu 700k
-    // Mapping ke rute yang ada di form:
-    "Malang → Juanda":800000,"Juanda → Malang":800000,
-    "Malang → SBY Kota":800000,"SBY Kota → Malang":800000,
-    "Malang → SBY Utara / SBY Barat / Perak":800000,"SBY Utara / SBY Barat / Perak → Malang":800000,
-    "Batu → Juanda":800000,"Juanda → Batu":800000,
-    "Batu → SBY Kota":800000,"SBY Kota → Batu":800000,
-    "Batu → SBY Utara / SBY Barat / Perak":800000,"SBY Utara / SBY Barat / Perak → Batu":800000,
-    type:"mobil", max_penumpang:5
-  },
-  "Kirim Paket": {
-    "Malang → Juanda":180000,"Juanda → Malang":180000,
-    "Malang → SBY Kota":195000,"SBY Kota → Malang":195000,
-    "Malang → SBY Utara / SBY Barat / Perak":200000,"SBY Utara / SBY Barat / Perak → Malang":200000,
-    "Batu → Juanda":200000,"Juanda → Batu":200000,
-    "Batu → SBY Kota":200000,"SBY Kota → Batu":200000,
-    "Batu → SBY Utara / SBY Barat / Perak":220000,"SBY Utara / SBY Barat / Perak → Batu":220000,
-    "Malang (Dau) → Juanda":180000,"Juanda → Malang (Dau)":180000,
-    "Malang (Wagir) → Juanda":180000,"Juanda → Malang (Wagir)":180000,
-    "Malang (Kebunagung) → Juanda":180000,"Juanda → Malang (Kebunagung)":180000,
-    "Malang (Kedungkandang) → Juanda":180000,"Juanda → Malang (Kedungkandang)":180000,
-    type:"per_item", max_penumpang:1
-  }
-};
+function getActiveHargaData(){var t=document.getElementById("tanggalKeberangkatan")?document.getElementById("tanggalKeberangkatan").value:"";var tier=getTierByDate(t);if(tier==="lebaran")return hargaLebaran;if(tier==="highseason")return hargaHighSeason;return hargaNormal;}
+var hargaData=new Proxy({},{get:function(_,p){return getActiveHargaData()[p];},ownKeys:function(){return Object.keys(hargaNormal);},getOwnPropertyDescriptor:function(_,p){if(p in hargaNormal)return{enumerable:true,configurable:true};}});
+function getPriceBadge(){var t=document.getElementById("tanggalKeberangkatan")?document.getElementById("tanggalKeberangkatan").value:"";var tier=getTierByDate(t);if(tier==="lebaran")return{label:"🌙 Harga Hari H Lebaran (19-21 Mar)",color:"#c0392b",bg:"#fff0f0"};if(tier==="highseason")return{label:"📅 Harga High Season (12-31 Mar)",color:"#e67e22",bg:"#fff8f0"};return null;}
 
-// ── TIER 3: HARI H LEBARAN (19, 20, 21 Maret) ─────
-var hargaLebaran = {
-  "Travel Reguler": {
-    "Malang → Juanda":200000,"Juanda → Malang":200000,
-    "Malang → SBY Kota":215000,"SBY Kota → Malang":215000,
-    "Malang → SBY Utara / SBY Barat / Perak":230000,"SBY Utara / SBY Barat / Perak → Malang":230000,
-    "Batu → Juanda":230000,"Juanda → Batu":230000,
-    "Batu → SBY Kota":250000,"SBY Kota → Batu":250000,
-    "Batu → SBY Utara / SBY Barat / Perak":250000,"SBY Utara / SBY Barat / Perak → Batu":250000,
-    "Malang (Dau) → Juanda":200000,"Juanda → Malang (Dau)":200000,
-    "Malang (Wagir) → Juanda":200000,"Juanda → Malang (Wagir)":200000,
-    "Malang (Kebunagung) → Juanda":200000,"Juanda → Malang (Kebunagung)":200000,
-    "Malang (Kedungkandang) → Juanda":200000,"Juanda → Malang (Kedungkandang)":200000,
-    type:"per_orang", max_penumpang:10
-  },
-  "Travel Drop": {
-    "Malang → Juanda":600000,"Juanda → Malang":600000,
-    "Malang → SBY Kota":600000,"SBY Kota → Malang":600000,
-    "Malang → SBY Utara / SBY Barat / Perak":650000,"SBY Utara / SBY Barat / Perak → Malang":650000,
-    "Batu → Juanda":650000,"Juanda → Batu":650000,
-    "Batu → SBY Kota":650000,"SBY Kota → Batu":650000,
-    "Batu → SBY Utara / SBY Barat / Perak":700000,"SBY Utara / SBY Barat / Perak → Batu":700000,
-    type:"mobil", max_penumpang:5
-  },
-  "Carter": {
-    // Hari H Lebaran: Luar Kota 900k, Malang-Batu 800k
-    "Malang → Juanda":900000,"Juanda → Malang":900000,
-    "Malang → SBY Kota":900000,"SBY Kota → Malang":900000,
-    "Malang → SBY Utara / SBY Barat / Perak":900000,"SBY Utara / SBY Barat / Perak → Malang":900000,
-    "Batu → Juanda":900000,"Juanda → Batu":900000,
-    "Batu → SBY Kota":900000,"SBY Kota → Batu":900000,
-    "Batu → SBY Utara / SBY Barat / Perak":900000,"SBY Utara / SBY Barat / Perak → Batu":900000,
-    type:"mobil", max_penumpang:5
-  },
-  "Kirim Paket": {
-    "Malang → Juanda":200000,"Juanda → Malang":200000,
-    "Malang → SBY Kota":215000,"SBY Kota → Malang":215000,
-    "Malang → SBY Utara / SBY Barat / Perak":230000,"SBY Utara / SBY Barat / Perak → Malang":230000,
-    "Batu → Juanda":230000,"Juanda → Batu":230000,
-    "Batu → SBY Kota":250000,"SBY Kota → Batu":250000,
-    "Batu → SBY Utara / SBY Barat / Perak":250000,"SBY Utara / SBY Barat / Perak → Batu":250000,
-    "Malang (Dau) → Juanda":200000,"Juanda → Malang (Dau)":200000,
-    "Malang (Wagir) → Juanda":200000,"Juanda → Malang (Wagir)":200000,
-    "Malang (Kebunagung) → Juanda":200000,"Juanda → Malang (Kebunagung)":200000,
-    "Malang (Kedungkandang) → Juanda":200000,"Juanda → Malang (Kedungkandang)":200000,
-    type:"per_item", max_penumpang:1
-  }
-};
-
-// ── Pilih tier berdasarkan tanggal ────────────────
-function getActiveHargaData() {
-  var tgl = document.getElementById("tanggalKeberangkatan")
-              ? document.getElementById("tanggalKeberangkatan").value : "";
-  var tier = getTierByDate(tgl);
-  if (tier === "lebaran")     return hargaLebaran;
-  if (tier === "highseason")  return hargaHighSeason;
-  return hargaNormal;
-}
-
-// ── Proxy: semua kode lain pakai hargaData seperti biasa ──
-var hargaData = new Proxy({}, {
-  get: function(_, prop) {
-    return getActiveHargaData()[prop];
-  },
-  ownKeys: function() { return Object.keys(hargaNormal); },
-  getOwnPropertyDescriptor: function(_, prop) {
-    if (prop in hargaNormal) return { enumerable:true, configurable:true };
-  }
-});
-
-// ── Helper: badge info harga yang aktif ───────────
-function getPriceBadge() {
-  var tgl  = document.getElementById("tanggalKeberangkatan")
-               ? document.getElementById("tanggalKeberangkatan").value : "";
-  var tier = getTierByDate(tgl);
-  if (tier === "lebaran")    return { label:"🌙 Harga Hari H Lebaran (19-21 Mar)", color:"#c0392b", bg:"#fff0f0" };
-  if (tier === "highseason") return { label:"📅 Harga High Season (12-31 Mar)", color:"#e67e22", bg:"#fff8f0" };
-  return null;
-}
-// ─────────────────────────────────────────────────
-// STATE UPLOAD FOTO
-// ─────────────────────────────────────────────────
-var selectedFileBase64 = null;
-var selectedFileMime   = null;
-
-function handleFileSelect(e) { if (e.target.files[0]) processFile(e.target.files[0]); }
-function handleDragOver(e)   { e.preventDefault(); document.getElementById("uploadArea").classList.add("drag-over"); }
-function handleDragLeave()   { document.getElementById("uploadArea").classList.remove("drag-over"); }
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById("uploadArea").classList.remove("drag-over");
-  var f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith("image/")) {
-    document.getElementById("buktiTransfer").files = e.dataTransfer.files;
-    processFile(f);
-  }
-}
-
-function processFile(file) {
-  if (file.size > 10 * 1024 * 1024) { alert("Ukuran file terlalu besar. Maksimal 10MB."); return; }
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    var img = new Image();
-    img.onload = function() {
-      var MAX = 800;
-      var w = img.width, h = img.height;
-      if (w > MAX || h > MAX) {
-        if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
-        else       { w = Math.round(w * MAX / h); h = MAX; }
-      }
-      var canvas = document.createElement("canvas");
-      canvas.width = w; canvas.height = h;
-      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-      var compressed = canvas.toDataURL("image/jpeg", 0.72);
-      selectedFileBase64 = compressed.split(",")[1];
-      selectedFileMime   = "image/jpeg";
-      document.getElementById("previewImg").src = compressed;
+// ── UPLOAD FOTO ────────────────────────────────────
+var selectedFileBase64=null,selectedFileMime=null;
+function handleFileSelect(e){if(e.target.files[0])processFile(e.target.files[0]);}
+function handleDragOver(e){e.preventDefault();document.getElementById("uploadArea").classList.add("drag-over");}
+function handleDragLeave(){document.getElementById("uploadArea").classList.remove("drag-over");}
+function handleDrop(e){e.preventDefault();document.getElementById("uploadArea").classList.remove("drag-over");var f=e.dataTransfer.files[0];if(f&&f.type.startsWith("image/")){document.getElementById("buktiTransfer").files=e.dataTransfer.files;processFile(f);}}
+function processFile(file){
+  if(file.size>10*1024*1024){alert("Ukuran file terlalu besar. Maksimal 10MB.");return;}
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      var MAX=800,w=img.width,h=img.height;
+      if(w>MAX||h>MAX){if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;}}
+      var canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;
+      canvas.getContext("2d").drawImage(img,0,0,w,h);
+      var compressed=canvas.toDataURL("image/jpeg",0.72);
+      selectedFileBase64=compressed.split(",")[1];selectedFileMime="image/jpeg";
+      document.getElementById("previewImg").src=compressed;
       document.getElementById("previewImg").classList.remove("hidden");
       document.getElementById("uploadPlaceholder").classList.add("hidden");
-      var origKB = Math.round(file.size / 1024);
-      var compKB = Math.round(compressed.length * 0.75 / 1024);
-      var nm = document.getElementById("uploadedFileName");
-      nm.textContent = "✅ Foto siap (" + origKB + "KB → " + compKB + "KB terkompresi)";
+      var origKB=Math.round(file.size/1024),compKB=Math.round(compressed.length*0.75/1024);
+      var nm=document.getElementById("uploadedFileName");
+      nm.textContent="✅ Foto siap ("+origKB+"KB → "+compKB+"KB terkompresi)";
       nm.classList.remove("hidden");
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
+    };img.src=e.target.result;
+  };reader.readAsDataURL(file);
 }
 
-function setProgress(pct, msg) {
-  document.getElementById("loadingProgressBar").style.width = pct + "%";
-  document.getElementById("loadingStep").textContent = msg;
+// ── PROGRESS ───────────────────────────────────────
+function setProgress(pct,msg){
+  document.getElementById("loadingProgressBar").style.width=pct+"%";
+  document.getElementById("loadingStep").textContent=msg;
 }
 
-function submitBooking(event) {
+// ── SUBMIT — FIX: upload dulu, baru buka WA ────────
+function submitBooking(event){
   event.preventDefault();
+  if(!document.getElementById("persetujuan").checked){alert("Harap setujui syarat dan ketentuan terlebih dahulu.");return;}
+  if(!selectedFileBase64){alert("Harap upload bukti transfer terlebih dahulu.");return;}
 
-  if (!document.getElementById("persetujuan").checked) {
-    alert("Harap setujui syarat dan ketentuan terlebih dahulu.");
-    return;
-  }
-  if (!selectedFileBase64) {
-    alert("Harap upload bukti transfer terlebih dahulu.");
-    return;
-  }
-
-  var fd = {
-    jenisLayanan:         document.getElementById("jenisLayanan").value,
-    rutePerjalanan:       document.getElementById("rutePerjalanan").value,
-    tanggalKeberangkatan: document.getElementById("tanggalKeberangkatan").value,
-    jamKeberangkatan:     document.getElementById("jamKeberangkatan").value,
-    namaLengkap:          document.getElementById("namaLengkap").value,
-    nomorWhatsApp:        document.getElementById("nomorWhatsApp").value,
-    alamatPenjemputan:    document.getElementById("alamatPenjemputan").value,
-    alamatTujuan:         document.getElementById("alamatTujuan").value,
-    jumlahPenumpang:      document.getElementById("jumlahPenumpang").value,
-    barangBawaan:         document.getElementById("barangBawaan").value || "-",
-    maskapai:             document.getElementById("maskapai").value || "-",
-    kodePenerbangan:      document.getElementById("kodePenerbangan").value || "-",
-    jamPenerbangan:       document.getElementById("jamPenerbangan").value || "-",
-    rencanaPerjalanan:    document.getElementById("rencanaPerjalanan").value || "-",
-    fotoBase64:           selectedFileBase64,
-    fotoMimeType:         selectedFileMime
+  var fd={
+    jenisLayanan:document.getElementById("jenisLayanan").value,
+    rutePerjalanan:document.getElementById("rutePerjalanan").value,
+    tanggalKeberangkatan:document.getElementById("tanggalKeberangkatan").value,
+    jamKeberangkatan:document.getElementById("jamKeberangkatan").value,
+    namaLengkap:document.getElementById("namaLengkap").value,
+    nomorWhatsApp:document.getElementById("nomorWhatsApp").value,
+    alamatPenjemputan:document.getElementById("alamatPenjemputan").value,
+    alamatTujuan:document.getElementById("alamatTujuan").value,
+    jumlahPenumpang:document.getElementById("jumlahPenumpang").value,
+    barangBawaan:document.getElementById("barangBawaan").value||"-",
+    maskapai:document.getElementById("maskapai").value||"-",
+    kodePenerbangan:document.getElementById("kodePenerbangan").value||"-",
+    jamPenerbangan:document.getElementById("jamPenerbangan").value||"-",
+    rencanaPerjalanan:document.getElementById("rencanaPerjalanan").value||"-",
+    fotoBase64:selectedFileBase64,fotoMimeType:selectedFileMime
   };
 
-  var sd    = hargaData[fd.jenisLayanan];
-  var base  = sd ? (sd[fd.rutePerjalanan] || 0) : 0;
-  var tipe  = sd ? (sd.type || "per_orang") : "per_orang";
-  var maks  = sd ? (sd.max_penumpang || 10) : 10;
-  var total = tipe === "per_orang" ? base * parseInt(fd.jumlahPenumpang) : base;
-  fd.totalHarga = "Rp " + total.toLocaleString("id-ID");
+  var sd=hargaData[fd.jenisLayanan];
+  var base=sd?(sd[fd.rutePerjalanan]||0):0;
+  var tipe=sd?(sd.type||"per_orang"):"per_orang";
+  var maks=sd?(sd.max_penumpang||10):10;
+  var total=tipe==="per_orang"?base*parseInt(fd.jumlahPenumpang):base;
+  fd.totalHarga="Rp "+total.toLocaleString("id-ID");
 
-  var labelJam = fd.rutePerjalanan.includes("→ Juanda") ? "Jam Take Off" : "Jam Landing";
-  var tgl = new Date(fd.tanggalKeberangkatan).toLocaleDateString("id-ID", {
-    weekday:"long", year:"numeric", month:"long", day:"numeric"
-  });
+  var labelJam=fd.rutePerjalanan.includes("→ Juanda")?"Jam Take Off":"Jam Landing";
+  var tgl=new Date(fd.tanggalKeberangkatan).toLocaleDateString("id-ID",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
 
-  var waTab = window.open("about:blank", "_blank");
-  if (!waTab) {
-    alert("Browser memblokir popup. Izinkan popup untuk website ini dan coba lagi.");
-    return;
-  }
-
+  // Tampilkan loading dulu — JANGAN buka WA dulu
   document.getElementById("loadingOverlay").classList.add("show");
-  document.getElementById("submitBtn").disabled = true;
-  setProgress(10, "Menyiapkan data...");
+  document.getElementById("submitBtn").disabled=true;
+  setProgress(10,"Menyiapkan data...");
 
-  function buildWAUrl(fotoLink) {
-    var m = "*FORM BOOKING UJS TRAVEL*%0A%0A";
-    m += "*Jenis Layanan:* " + fd.jenisLayanan + "%0A";
-    m += "*Rute:* " + fd.rutePerjalanan + "%0A";
-    m += "*Tanggal:* " + tgl + "%0A";
-    m += "*Jam:* " + fd.jamKeberangkatan + "%0A";
-    m += "%0A*DATA PENUMPANG*%0A";
-    m += "Nama: " + fd.namaLengkap + "%0A";
-    m += "WA: " + fd.nomorWhatsApp + "%0A";
-    m += "Penjemputan: " + fd.alamatPenjemputan + "%0A";
-    m += "Tujuan: " + fd.alamatTujuan + "%0A";
-    m += "Jumlah: " + fd.jumlahPenumpang + " orang%0A";
-    m += "%0A*TOTAL: " + fd.totalHarga + "*%0A";
-    if (tipe === "mobil") { m += "(1 mobil, maks " + maks + " penumpang)%0A"; }
-    m += "Bayar via: Transfer BCA 8162066586 (Chairani Najmi)%0A";
-    m += "%0A📎 *Bukti Transfer:*%0A";
-    if (fotoLink && fotoLink !== "-") {
-      m += encodeURIComponent(fotoLink) + "%0A";
-    } else {
-      m += "_(Foto sudah tersimpan di Google Drive admin)_%0A";
+  function buildWAUrl(fotoLink){
+    var m="*FORM BOOKING UJS TRAVEL*%0A%0A";
+    m+="*Jenis Layanan:* "+fd.jenisLayanan+"%0A";
+    m+="*Rute:* "+fd.rutePerjalanan+"%0A";
+    m+="*Tanggal:* "+tgl+"%0A";
+    m+="*Jam:* "+fd.jamKeberangkatan+"%0A";
+    m+="%0A*DATA PENUMPANG*%0A";
+    m+="Nama: "+fd.namaLengkap+"%0A";
+    m+="WA: "+fd.nomorWhatsApp+"%0A";
+    m+="Penjemputan: "+fd.alamatPenjemputan+"%0A";
+    m+="Tujuan: "+fd.alamatTujuan+"%0A";
+    m+="Jumlah: "+fd.jumlahPenumpang+" orang%0A";
+    m+="%0A*TOTAL: "+fd.totalHarga+"*%0A";
+    if(tipe==="mobil"){m+="(1 mobil, maks "+maks+" penumpang)%0A";}
+    m+="Bayar via: Transfer BCA 8162066586 (Chairani Najmi)%0A";
+    m+="%0A📎 *Bukti Transfer:*%0A";
+    if(fotoLink&&fotoLink!=="-"){m+=encodeURIComponent(fotoLink)+"%0A";}
+    else{m+="_(Foto sudah tersimpan di Google Drive admin)_%0A";}
+    if(fd.maskapai!=="-"||fd.kodePenerbangan!=="-"||fd.jamPenerbangan!=="-"){
+      m+="%0A*Data Penerbangan:*%0A";
+      if(fd.maskapai!=="-")m+="Maskapai: "+fd.maskapai+"%0A";
+      if(fd.kodePenerbangan!=="-")m+="Kode: "+fd.kodePenerbangan+"%0A";
+      if(fd.jamPenerbangan!=="-")m+=labelJam+": "+fd.jamPenerbangan+"%0A";
     }
-    if (fd.maskapai !== "-" || fd.kodePenerbangan !== "-" || fd.jamPenerbangan !== "-") {
-      m += "%0A*Data Penerbangan:*%0A";
-      if (fd.maskapai !== "-")        m += "Maskapai: " + fd.maskapai + "%0A";
-      if (fd.kodePenerbangan !== "-") m += "Kode: " + fd.kodePenerbangan + "%0A";
-      if (fd.jamPenerbangan !== "-")  m += labelJam + ": " + fd.jamPenerbangan + "%0A";
-    }
-    if (fd.rencanaPerjalanan !== "-") m += "%0A*Rencana Carter:* " + fd.rencanaPerjalanan + "%0A";
-    m += "%0ABarang: " + fd.barangBawaan + "%0A";
-    m += "%0A_via website UJS Travel_";
-    return "https://wa.me/" + WA_NUMBER + "?text=" + m;
+    if(fd.rencanaPerjalanan!=="-")m+="%0A*Rencana Carter:* "+fd.rencanaPerjalanan+"%0A";
+    m+="%0ABarang: "+fd.barangBawaan+"%0A";
+    m+="%0A_via website UJS Travel_";
+    return"https://wa.me/"+WA_NUMBER+"?text="+m;
   }
 
-  var sudahSelesai = false;
-  var timeout = setTimeout(function() { selesai("-"); }, 12000);
+  // ── Setelah upload selesai/timeout, baru buka WA ──
+  var sudahSelesai=false;
+  var timeout=setTimeout(function(){selesai("-");},12000);
 
-  function selesai(fotoUrl) {
-    if (sudahSelesai) return;
-    sudahSelesai = true;
+  function selesai(fotoUrl){
+    if(sudahSelesai)return;
+    sudahSelesai=true;
     clearTimeout(timeout);
-    setProgress(100, "Selesai! Membuka WhatsApp...");
-    setTimeout(function() {
+    setProgress(100,"Selesai! Membuka WhatsApp...");
+    setTimeout(function(){
       document.getElementById("loadingOverlay").classList.remove("show");
-      document.getElementById("submitBtn").disabled = false;
-      waTab.location.href = buildWAUrl(fotoUrl);
-    }, 500);
+      document.getElementById("submitBtn").disabled=false;
+      // Buka WA SETELAH loading — tidak ada blank tab
+      window.location.href=buildWAUrl(fotoUrl);
+    },600);
   }
 
-  setProgress(30, "Mengunggah bukti transfer...");
+  setProgress(30,"Mengunggah bukti transfer...");
+  var controller=new AbortController();
+  setTimeout(function(){controller.abort();},11000);
 
-  var controller = new AbortController();
-  setTimeout(function() { controller.abort(); }, 11000);
-
-  fetch(APPS_SCRIPT_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(fd),
-    signal: controller.signal
+  fetch(APPS_SCRIPT_URL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(fd),
+    signal:controller.signal
   })
-  .then(function(res) {
-    setProgress(80, "Menyimpan data...");
-    return res.json();
-  })
-  .then(function(result) {
-    var fotoUrl = (result && result.status === "success" && result.fotoUrl) ? result.fotoUrl : "-";
+  .then(function(res){setProgress(80,"Menyimpan data...");return res.json();})
+  .then(function(result){
+    var fotoUrl=(result&&result.status==="success"&&result.fotoUrl)?result.fotoUrl:"-";
     selesai(fotoUrl);
   })
-  .catch(function() {
-    setProgress(60, "Menyimpan ke server cadangan...");
-    fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(fd)
-    })
-    .then(function() { selesai("-"); })
-    .catch(function() { selesai("-"); });
+  .catch(function(){
+    setProgress(60,"Menyimpan ke server cadangan...");
+    fetch(APPS_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(fd)})
+    .then(function(){selesai("-");})
+    .catch(function(){selesai("-");});
   });
 }
-// ─────────────────────────────────────────────────
-// UI HELPERS
-// ─────────────────────────────────────────────────
-function toggleCarterFields() {
-  document.getElementById("carterFields").classList.toggle("hidden",
-    document.getElementById("jenisLayanan").value !== "Carter");
-}
 
-function toggleMaxPenumpang() {
-  var v = document.getElementById("jenisLayanan").value;
-  var i = document.getElementById("jumlahPenumpang");
-  var n = document.getElementById("penumpangNote");
-  if (v && hargaData[v]) {
-    var mx = hargaData[v].max_penumpang || 10;
-    i.max = mx;
-    if (hargaData[v].type === "mobil")      { n.textContent = "Maksimal " + mx + " penumpang (harga per mobil)"; }
-    else if (hargaData[v].type === "per_item") { n.textContent = "Jumlah paket yang dikirim"; }
-    else                                       { n.textContent = "Maksimal " + mx + " penumpang"; }
-    if (parseInt(i.value) > mx) i.value = mx;
+// ── UI HELPERS ─────────────────────────────────────
+function toggleCarterFields(){document.getElementById("carterFields").classList.toggle("hidden",document.getElementById("jenisLayanan").value!=="Carter");}
+function toggleMaxPenumpang(){
+  var v=document.getElementById("jenisLayanan").value;
+  var i=document.getElementById("jumlahPenumpang");
+  var n=document.getElementById("penumpangNote");
+  if(v&&hargaData[v]){
+    var mx=hargaData[v].max_penumpang||10;i.max=mx;
+    if(hargaData[v].type==="mobil"){n.textContent="Maksimal "+mx+" penumpang (harga per mobil)";}
+    else if(hargaData[v].type==="per_item"){n.textContent="Jumlah paket yang dikirim";}
+    else{n.textContent="Maksimal "+mx+" penumpang";}
+    if(parseInt(i.value)>mx)i.value=mx;
   }
 }
-
-function calculatePrice() {
-  var l = document.getElementById("jenisLayanan").value;
-  var r = document.getElementById("rutePerjalanan").value;
-  var p = parseInt(document.getElementById("jumlahPenumpang").value) || 1;
-  var d = document.getElementById("priceDisplay");
-  var tgl = document.getElementById("tanggalKeberangkatan").value;
-  if (!l || !r) { d.classList.add("hidden"); return; }
-  var sd = hargaData[l]; if (!sd) return;
-  var b  = sd[r] || 0;
-  var t  = sd.type || "per_orang";
-  var fmt = function(v) { return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",minimumFractionDigits:0}).format(v); };
+function calculatePrice(){
+  var l=document.getElementById("jenisLayanan").value;
+  var r=document.getElementById("rutePerjalanan").value;
+  var p=parseInt(document.getElementById("jumlahPenumpang").value)||1;
+  var d=document.getElementById("priceDisplay");
+  if(!l||!r){d.classList.add("hidden");return;}
+  var sd=hargaData[l];if(!sd)return;
+  var b=sd[r]||0,t=sd.type||"per_orang";
+  var fmt=function(v){return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",minimumFractionDigits:0}).format(v);};
   d.classList.remove("hidden");
-  if (t === "mobil") {
-    document.getElementById("totalPrice").textContent = fmt(b);
-    document.getElementById("priceTitle").textContent = "Harga Mobil";
-    document.getElementById("priceDescription").textContent = l + " – " + r;
-    document.getElementById("pricePerPerson").textContent = "1 mobil, maks " + sd.max_penumpang + " penumpang";
-  } else if (t === "per_item") {
-    document.getElementById("totalPrice").textContent = fmt(b);
-    document.getElementById("priceTitle").textContent = "Harga Paket";
-    document.getElementById("priceDescription").textContent = l + " – " + r;
-    document.getElementById("pricePerPerson").textContent = "Per paket";
-  } else {
-    document.getElementById("totalPrice").textContent = fmt(b * p);
-    document.getElementById("priceTitle").textContent = "Total Harga";
-    document.getElementById("priceDescription").textContent = l + " – " + r;
-    document.getElementById("pricePerPerson").textContent = "@" + fmt(b) + " × " + p + " penumpang";
-  }
-  var pn = document.getElementById("paymentNote");
-   pn.classList.remove("hidden");
-  pn.innerHTML = "<strong>Transfer BCA:</strong> Silakan transfer sesuai total di atas ke rekening yang tercantum, lalu upload bukti transfernya.";
-  var badge = getPriceBadge();
-  if (badge) {
-    pn.innerHTML += "<br><span style='display:inline-block;margin-top:6px;padding:4px 10px;border-radius:6px;font-weight:700;font-size:0.82rem;background:" + badge.bg + ";color:" + badge.color + ";'>" + badge.label + "</span>";
-  }
+  if(t==="mobil"){document.getElementById("totalPrice").textContent=fmt(b);document.getElementById("priceTitle").textContent="Harga Mobil";document.getElementById("priceDescription").textContent=l+" – "+r;document.getElementById("pricePerPerson").textContent="1 mobil, maks "+sd.max_penumpang+" penumpang";}
+  else if(t==="per_item"){document.getElementById("totalPrice").textContent=fmt(b);document.getElementById("priceTitle").textContent="Harga Paket";document.getElementById("priceDescription").textContent=l+" – "+r;document.getElementById("pricePerPerson").textContent="Per paket";}
+  else{document.getElementById("totalPrice").textContent=fmt(b*p);document.getElementById("priceTitle").textContent="Total Harga";document.getElementById("priceDescription").textContent=l+" – "+r;document.getElementById("pricePerPerson").textContent="@"+fmt(b)+" × "+p+" penumpang";}
+  var pn=document.getElementById("paymentNote");pn.classList.remove("hidden");
+  pn.innerHTML="<strong>Transfer BCA:</strong> Silakan transfer sesuai total di atas ke rekening yang tercantum, lalu upload bukti transfernya.";
+  var badge=getPriceBadge();
+  if(badge){pn.innerHTML+="<br><span style='display:inline-block;margin-top:6px;padding:4px 10px;border-radius:6px;font-weight:700;font-size:0.82rem;background:"+badge.bg+";color:"+badge.color+";'>"+badge.label+"</span>";}
+}
+function toggleBandaraFields(){
+  var r=document.getElementById("rutePerjalanan").value;
+  document.getElementById("bandaraFields").classList.toggle("hidden",!r.includes("Juanda"));
+  document.getElementById("jamPenerbanganLabel").textContent=r.includes("→ Juanda")?"Jam Take Off Pesawat":"Jam Landing Pesawat";
+}
+function autoFillAlamatTujuan(){
+  var r=document.getElementById("rutePerjalanan").value;
+  var el=document.getElementById("alamatTujuan");
+  if(r.includes("→ Juanda")){el.value="Bandara Internasional Juanda, Surabaya";el.readOnly=true;el.style.backgroundColor="#f0f9ff";el.style.cursor="not-allowed";}
+  else{el.value="";el.readOnly=false;el.style.backgroundColor="";el.style.cursor="";el.placeholder="Detail alamat tujuan";}
 }
 
-function toggleBandaraFields() {
-  var r = document.getElementById("rutePerjalanan").value;
-  document.getElementById("bandaraFields").classList.toggle("hidden", !r.includes("Juanda"));
-  document.getElementById("jamPenerbanganLabel").textContent =
-    r.includes("→ Juanda") ? "Jam Take Off Pesawat" : "Jam Landing Pesawat";
-}
-
-function autoFillAlamatTujuan() {
-  var r  = document.getElementById("rutePerjalanan").value;
-  var el = document.getElementById("alamatTujuan");
-  if (r.includes("→ Juanda")) {
-    el.value = "Bandara Internasional Juanda, Surabaya";
-    el.readOnly = true;
-    el.style.backgroundColor = "#f0f9ff";
-    el.style.cursor = "not-allowed";
-  } else {
-    el.value = "";
-    el.readOnly = false;
-    el.style.backgroundColor = "";
-    el.style.cursor = "";
-    el.placeholder = "Detail alamat tujuan";
-  }
-}
-// ─────────────────────────────────────────────────
-// JAM KEBERANGKATAN
-// ─────────────────────────────────────────────────
-var JAM_DARI_MALANG_BATU = [
-  "01.00", "03.00", "05.00", "07.00",
-  "09.00", "11.00", "13.00", "15.00"
-];
-
-function isDariMalangBatu(rute) {
-  return rute.startsWith("Malang") || rute.startsWith("Batu");
-}
-
-function updateJamKeberangkatanOptions() {
-  var r   = document.getElementById("rutePerjalanan").value;
-  var sel = document.getElementById("jamKeberangkatan");
-
-  sel.innerHTML = "<option value=''>Pilih Jam Keberangkatan</option>";
-
-  if (!r) return;
-
-  if (isDariMalangBatu(r)) {
-    sel.required = true;
-    JAM_DARI_MALANG_BATU.forEach(function(j) {
-      var o = document.createElement("option");
-      o.value = j; o.textContent = j + " WIB";
-      sel.appendChild(o);
-    });
-  } else {
-    sel.required = false;
-    sel.innerHTML = "<option value='Menyesuaikan kedatangan'>Menyesuaikan kedatangan ✓</option>";
-    sel.value = "Menyesuaikan kedatangan";
+// ── JAM KEBERANGKATAN ──────────────────────────────
+var JAM_DARI_MALANG_BATU=["01.00","03.00","05.00","07.00","09.00","11.00","13.00","15.00"];
+function isDariMalangBatu(r){return r.startsWith("Malang")||r.startsWith("Batu");}
+function updateJamKeberangkatanOptions(){
+  var r=document.getElementById("rutePerjalanan").value;
+  var sel=document.getElementById("jamKeberangkatan");
+  sel.innerHTML="<option value=''>Pilih Jam Keberangkatan</option>";
+  if(!r)return;
+  if(isDariMalangBatu(r)){
+    sel.required=true;
+    JAM_DARI_MALANG_BATU.forEach(function(j){var o=document.createElement("option");o.value=j;o.textContent=j+" WIB";sel.appendChild(o);});
+  }else{
+    sel.required=false;
+    sel.innerHTML="<option value='Menyesuaikan kedatangan'>Menyesuaikan kedatangan ✓</option>";
+    sel.value="Menyesuaikan kedatangan";
   }
 }
 
-function updateRouteOptions() {
-  var l   = document.getElementById("jenisLayanan").value;
-  var sel = document.getElementById("rutePerjalanan");
-  sel.innerHTML = "<option value=''>Pilih Rute Perjalanan</option>";
-  if (!l) return;
-  var rM = "<optgroup label='Rute Malang'>" +
-    "<option value='Malang → Juanda'>Malang → Juanda</option>" +
-    "<option value='Juanda → Malang'>Juanda → Malang</option>" +
-    "<option value='Malang → SBY Kota'>Malang → SBY Kota</option>" +
-    "<option value='SBY Kota → Malang'>SBY Kota → Malang</option>" +
-    "<option value='Malang → SBY Utara / SBY Barat / Perak'>Malang → SBY Utara/SBY Barat/Perak</option>" +
-    "<option value='SBY Utara / SBY Barat / Perak → Malang'>SBY Utara/SBY Barat/Perak → Malang</option></optgroup>";
-  var rB = "<optgroup label='Rute Batu'>" +
-    "<option value='Batu → Juanda'>Batu → Juanda</option>" +
-    "<option value='Juanda → Batu'>Juanda → Batu</option>" +
-    "<option value='Batu → SBY Kota'>Batu → SBY Kota</option>" +
-    "<option value='SBY Kota → Batu'>SBY Kota → Batu</option>" +
-    "<option value='Batu → SBY Utara / SBY Barat / Perak'>Batu → SBY Utara/SBY Barat/Perak</option>" +
-    "<option value='SBY Utara / SBY Barat / Perak → Batu'>SBY Utara/SBY Barat/Perak → Batu</option></optgroup>";
-  var rK = "<optgroup label='Daerah Khusus Malang'>" +
-    "<option value='Malang (Dau) → Juanda'>Malang (Dau) → Juanda</option>" +
-    "<option value='Juanda → Malang (Dau)'>Juanda → Malang (Dau)</option>" +
-    "<option value='Malang (Wagir) → Juanda'>Malang (Wagir) → Juanda</option>" +
-    "<option value='Juanda → Malang (Wagir)'>Juanda → Malang (Wagir)</option>" +
-    "<option value='Malang (Kebunagung) → Juanda'>Malang (Kebunagung) → Juanda</option>" +
-    "<option value='Juanda → Malang (Kebunagung)'>Juanda → Malang (Kebunagung)</option>" +
-    "<option value='Malang (Kedungkandang) → Juanda'>Malang (Kedungkandang) → Juanda</option>" +
-    "<option value='Juanda → Malang (Kedungkandang)'>Juanda → Malang (Kedungkandang)</option></optgroup>";
-  sel.innerHTML += (l === "Travel Drop" || l === "Carter") ? rM + rB : rM + rB + rK;
-  calculatePrice();
-  updateJamKeberangkatanOptions();
-  autoFillAlamatTujuan();
-}
-function updateRouteOptions() {
-  var l   = document.getElementById("jenisLayanan").value;
-  var sel = document.getElementById("rutePerjalanan");
-  sel.innerHTML = "<option value=''>Pilih Rute Perjalanan</option>";
-  if (!l) return;
-  var rM = "<optgroup label='Rute Malang'>" +
-    "<option value='Malang → Juanda'>Malang → Juanda</option>" +
-    "<option value='Juanda → Malang'>Juanda → Malang</option>" +
-    "<option value='Malang → SBY Kota'>Malang → SBY Kota</option>" +
-    "<option value='SBY Kota → Malang'>SBY Kota → Malang</option>" +
-    "<option value='Malang → SBY Utara / SBY Barat / Perak'>Malang → SBY Utara/SBY Barat/Perak</option>" +
-    "<option value='SBY Utara / SBY Barat / Perak → Malang'>SBY Utara/SBY Barat/Perak → Malang</option></optgroup>";
-  var rB = "<optgroup label='Rute Batu'>" +
-    "<option value='Batu → Juanda'>Batu → Juanda</option>" +
-    "<option value='Juanda → Batu'>Juanda → Batu</option>" +
-    "<option value='Batu → SBY Kota'>Batu → SBY Kota</option>" +
-    "<option value='SBY Kota → Batu'>SBY Kota → Batu</option>" +
-    "<option value='Batu → SBY Utara / SBY Barat / Perak'>Batu → SBY Utara/SBY Barat/Perak</option>" +
-    "<option value='SBY Utara / SBY Barat / Perak → Batu'>SBY Utara/SBY Barat/Perak → Batu</option></optgroup>";
-  var rK = "<optgroup label='Daerah Khusus Malang'>" +
-    "<option value='Malang (Dau) → Juanda'>Malang (Dau) → Juanda</option>" +
-    "<option value='Juanda → Malang (Dau)'>Juanda → Malang (Dau)</option>" +
-    "<option value='Malang (Wagir) → Juanda'>Malang (Wagir) → Juanda</option>" +
-    "<option value='Juanda → Malang (Wagir)'>Juanda → Malang (Wagir)</option>" +
-    "<option value='Malang (Kebunagung) → Juanda'>Malang (Kebunagung) → Juanda</option>" +
-    "<option value='Juanda → Malang (Kebunagung)'>Juanda → Malang (Kebunagung)</option>" +
-    "<option value='Malang (Kedungkandang) → Juanda'>Malang (Kedungkandang) → Juanda</option>" +
-    "<option value='Juanda → Malang (Kedungkandang)'>Juanda → Malang (Kedungkandang)</option></optgroup>";
-  sel.innerHTML += (l === "Travel Drop" || l === "Carter") ? rM + rB : rM + rB + rK;
-  calculatePrice();
-  updateJamKeberangkatanOptions();
-  autoFillAlamatTujuan();
+// ── RUTE OPTIONS ───────────────────────────────────
+function updateRouteOptions(){
+  var l=document.getElementById("jenisLayanan").value;
+  var sel=document.getElementById("rutePerjalanan");
+  sel.innerHTML="<option value=''>Pilih Rute Perjalanan</option>";
+  if(!l)return;
+  var rM="<optgroup label='Rute Malang'><option value='Malang → Juanda'>Malang → Juanda</option><option value='Juanda → Malang'>Juanda → Malang</option><option value='Malang → SBY Kota'>Malang → SBY Kota</option><option value='SBY Kota → Malang'>SBY Kota → Malang</option><option value='Malang → SBY Utara / SBY Barat / Perak'>Malang → SBY Utara/SBY Barat/Perak</option><option value='SBY Utara / SBY Barat / Perak → Malang'>SBY Utara/SBY Barat/Perak → Malang</option></optgroup>";
+  var rB="<optgroup label='Rute Batu'><option value='Batu → Juanda'>Batu → Juanda</option><option value='Juanda → Batu'>Juanda → Batu</option><option value='Batu → SBY Kota'>Batu → SBY Kota</option><option value='SBY Kota → Batu'>SBY Kota → Batu</option><option value='Batu → SBY Utara / SBY Barat / Perak'>Batu → SBY Utara/SBY Barat/Perak</option><option value='SBY Utara / SBY Barat / Perak → Batu'>SBY Utara/SBY Barat/Perak → Batu</option></optgroup>";
+  var rK="<optgroup label='Daerah Khusus Malang'><option value='Malang (Dau) → Juanda'>Malang (Dau) → Juanda</option><option value='Juanda → Malang (Dau)'>Juanda → Malang (Dau)</option><option value='Malang (Wagir) → Juanda'>Malang (Wagir) → Juanda</option><option value='Juanda → Malang (Wagir)'>Juanda → Malang (Wagir)</option><option value='Malang (Kebunagung) → Juanda'>Malang (Kebunagung) → Juanda</option><option value='Juanda → Malang (Kebunagung)'>Juanda → Malang (Kebunagung)</option><option value='Malang (Kedungkandang) → Juanda'>Malang (Kedungkandang) → Juanda</option><option value='Juanda → Malang (Kedungkandang)'>Juanda → Malang (Kedungkandang)</option></optgroup>";
+  sel.innerHTML+=(l==="Travel Drop"||l==="Carter")?rM+rB:rM+rB+rK;
+  calculatePrice();updateJamKeberangkatanOptions();autoFillAlamatTujuan();
 }
 
-function toggleMobileMenu()    { document.getElementById("mobile-menu").classList.toggle("hidden"); }
-function toggleMobileLayanan() {
-  document.getElementById("mobile-layanan-menu").classList.toggle("hidden");
-  document.getElementById("mobile-layanan-icon").classList.toggle("rotate-180");
-}
+function toggleMobileMenu(){document.getElementById("mobile-menu").classList.toggle("hidden");}
+function toggleMobileLayanan(){document.getElementById("mobile-layanan-menu").classList.toggle("hidden");document.getElementById("mobile-layanan-icon").classList.toggle("rotate-180");}
 
-// ─────────────────────────────────────────────────
-// INISIALISASI
-// ─────────────────────────────────────────────────
-document.getElementById("tanggalKeberangkatan").min = new Date().toISOString().split("T")[0];
-document.getElementById("jumlahPenumpang").addEventListener("input", calculatePrice);
-toggleCarterFields();
-toggleBandaraFields();
-toggleMaxPenumpang();
-calculatePrice();
-
-// Reveal animations
-document.querySelectorAll(".reveal").forEach(function(el) {
-  new IntersectionObserver(function(entries) {
-    entries.forEach(function(x) { if (x.isIntersecting) x.target.classList.add("active"); });
-  }, { threshold: 0.15 }).observe(el);
+// ── INIT ───────────────────────────────────────────
+document.getElementById("tanggalKeberangkatan").min=new Date().toISOString().split("T")[0];
+document.getElementById("jumlahPenumpang").addEventListener("input",calculatePrice);
+toggleCarterFields();toggleBandaraFields();toggleMaxPenumpang();calculatePrice();
+document.querySelectorAll(".reveal").forEach(function(el){
+  new IntersectionObserver(function(entries){entries.forEach(function(x){if(x.isIntersecting)x.target.classList.add("active");});},{threshold:0.15}).observe(el);
 });
 </script>
 </body>
