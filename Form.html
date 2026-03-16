@@ -48,20 +48,33 @@
     .upload-area:hover { background:#eef3ff; border-color:#1e3a6e; }
     .upload-area.drag-over { background:#dce8ff; border-color:#1e3a6e; transform:scale(1.01); }
     .preview-img { max-height:200px; border-radius:8px; margin:12px auto 0; display:block; border:2px solid #e5e7eb; }
-
-    #loadingOverlay {
-      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75);
-      z-index:9999; flex-direction:column; align-items:center; justify-content:center; gap:20px;
+#loadingOverlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.82);
+      z-index:9999; flex-direction:column; align-items:center; justify-content:center; gap:16px;
+      padding:2rem;
     }
     #loadingOverlay.show { display:flex; }
     .spinner {
-      width:60px; height:60px;
+      width:56px; height:56px;
       border:5px solid rgba(255,255,255,0.2);
       border-top-color:#ffffff;
       border-radius:50%;
-      animation:spin 0.9s linear infinite;
+      animation:spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform:rotate(360deg); } }
+    #loadingStep {
+      font-size:0.85rem; color:rgba(255,255,255,0.7);
+      background:rgba(255,255,255,0.1); padding:6px 16px;
+      border-radius:9999px; min-width:220px; text-align:center;
+    }
+    #loadingProgress {
+      width:220px; height:6px; background:rgba(255,255,255,0.2);
+      border-radius:9999px; overflow:hidden;
+    }
+    #loadingProgressBar {
+      height:100%; width:0%; background:#60a5fa;
+      border-radius:9999px; transition:width 0.4s ease;
+    }
   </style>
 </head>
 <body class="font-sans bg-gray-50">
@@ -71,12 +84,13 @@
 ═══════════════════════════════════════════════ -->
 <div id="loadingOverlay">
   <div class="spinner"></div>
-  <div class="text-center px-8">
-    <p class="text-white font-bold text-xl mb-2">Mengupload Bukti Transfer...</p>
-    <p class="text-blue-200 text-sm">Mohon tunggu, jangan tutup halaman ini</p>
+  <div class="text-center">
+    <p class="text-white font-bold text-lg mb-1">Memproses Booking...</p>
+    <p id="loadingStep">Menyiapkan data...</p>
   </div>
+  <div id="loadingProgress"><div id="loadingProgressBar"></div></div>
+  <p class="text-blue-200 text-xs text-center max-w-xs">Mohon tunggu, jangan tutup halaman ini</p>
 </div>
-
 <!-- ═══════════════════════════════════════════════
      NAVBAR
 ═══════════════════════════════════════════════ -->
@@ -712,38 +726,44 @@ function handleDrop(e) {
     processFile(f);
   }
 }
+
 function processFile(file) {
-  if (file.size > 5 * 1024 * 1024) { alert("Ukuran file terlalu besar. Maksimal 5MB."); return; }
+  if (file.size > 10 * 1024 * 1024) { alert("Ukuran file terlalu besar. Maksimal 10MB."); return; }
   var reader = new FileReader();
   reader.onload = function(e) {
-    selectedFileBase64 = e.target.result.split(",")[1];
-    selectedFileMime   = file.type;
-    document.getElementById("previewImg").src = e.target.result;
-    document.getElementById("previewImg").classList.remove("hidden");
-    document.getElementById("uploadPlaceholder").classList.add("hidden");
-    var nm = document.getElementById("uploadedFileName");
-    nm.textContent = "✅ " + file.name + " (" + (file.size/1024).toFixed(0) + " KB)";
-    nm.classList.remove("hidden");
+    var img = new Image();
+    img.onload = function() {
+      var MAX = 800;
+      var w = img.width, h = img.height;
+      if (w > MAX || h > MAX) {
+        if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+        else       { w = Math.round(w * MAX / h); h = MAX; }
+      }
+      var canvas = document.createElement("canvas");
+      canvas.width = w; canvas.height = h;
+      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      var compressed = canvas.toDataURL("image/jpeg", 0.72);
+      selectedFileBase64 = compressed.split(",")[1];
+      selectedFileMime   = "image/jpeg";
+      document.getElementById("previewImg").src = compressed;
+      document.getElementById("previewImg").classList.remove("hidden");
+      document.getElementById("uploadPlaceholder").classList.add("hidden");
+      var origKB = Math.round(file.size / 1024);
+      var compKB = Math.round(compressed.length * 0.75 / 1024);
+      var nm = document.getElementById("uploadedFileName");
+      nm.textContent = "✅ Foto siap (" + origKB + "KB → " + compKB + "KB terkompresi)";
+      nm.classList.remove("hidden");
+    };
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
 
-// ─────────────────────────────────────────────────
-// SUBMIT UTAMA
-// Strategi: buka tab WA blank dulu (dalam konteks klik),
-// upload fetch dengan mode no-cors ke Apps Script,
-// setelah selesai (sukses/gagal) arahkan tab WA ke URL yang benar.
-//
-// Mengapa no-cors?
-// Apps Script doPost mengembalikan JSON tapi tidak punya
-// header Access-Control-Allow-Origin → browser blokir response.
-// Dengan no-cors kita TETAP bisa MENGIRIM data (opaque request),
-// tapi tidak bisa baca response-nya.
-// Solusi: kita pakai dua langkah fetch:
-//   1. fetch no-cors → data terkirim ke Apps Script (foto masuk Drive & Sheets)
-//   2. Setelah fetch selesai, buka WA (kita tidak perlu URL foto di pesan WA
-//      karena admin bisa lihat langsung di Google Sheets)
-// ─────────────────────────────────────────────────
+function setProgress(pct, msg) {
+  document.getElementById("loadingProgressBar").style.width = pct + "%";
+  document.getElementById("loadingStep").textContent = msg;
+}
+
 function submitBooking(event) {
   event.preventDefault();
 
@@ -756,7 +776,6 @@ function submitBooking(event) {
     return;
   }
 
-  // Kumpulkan data form
   var fd = {
     jenisLayanan:         document.getElementById("jenisLayanan").value,
     rutePerjalanan:       document.getElementById("rutePerjalanan").value,
@@ -776,7 +795,6 @@ function submitBooking(event) {
     fotoMimeType:         selectedFileMime
   };
 
-  // Hitung total harga
   var sd    = hargaData[fd.jenisLayanan];
   var base  = sd ? (sd[fd.rutePerjalanan] || 0) : 0;
   var tipe  = sd ? (sd.type || "per_orang") : "per_orang";
@@ -784,26 +802,21 @@ function submitBooking(event) {
   var total = tipe === "per_orang" ? base * parseInt(fd.jumlahPenumpang) : base;
   fd.totalHarga = "Rp " + total.toLocaleString("id-ID");
 
-  // Tentukan label jam penerbangan
   var labelJam = fd.rutePerjalanan.includes("→ Juanda") ? "Jam Take Off" : "Jam Landing";
-
-  // Format tanggal
   var tgl = new Date(fd.tanggalKeberangkatan).toLocaleDateString("id-ID", {
     weekday:"long", year:"numeric", month:"long", day:"numeric"
   });
 
-  // ── Buka tab WA SEKARANG (harus sinkron dalam handler klik) ──
   var waTab = window.open("about:blank", "_blank");
   if (!waTab) {
     alert("Browser memblokir popup. Izinkan popup untuk website ini dan coba lagi.");
     return;
   }
 
-  // Tampilkan loading
   document.getElementById("loadingOverlay").classList.add("show");
   document.getElementById("submitBtn").disabled = true;
+  setProgress(10, "Menyiapkan data...");
 
-  // ── Bangun pesan WA ──
   function buildWAUrl(fotoLink) {
     var m = "*FORM BOOKING UJS TRAVEL*%0A%0A";
     m += "*Jenis Layanan:* " + fd.jenisLayanan + "%0A";
@@ -823,60 +836,66 @@ function submitBooking(event) {
     if (fotoLink && fotoLink !== "-") {
       m += encodeURIComponent(fotoLink) + "%0A";
     } else {
-      m += "_(Sedang diproses, foto sudah masuk Google Drive admin)_%0A";
+      m += "_(Foto sudah tersimpan di Google Drive admin)_%0A";
     }
     if (fd.maskapai !== "-" || fd.kodePenerbangan !== "-" || fd.jamPenerbangan !== "-") {
       m += "%0A*Data Penerbangan:*%0A";
-      if (fd.maskapai !== "-")        { m += "Maskapai: " + fd.maskapai + "%0A"; }
-      if (fd.kodePenerbangan !== "-") { m += "Kode: " + fd.kodePenerbangan + "%0A"; }
-      if (fd.jamPenerbangan !== "-")  { m += labelJam + ": " + fd.jamPenerbangan + "%0A"; }
+      if (fd.maskapai !== "-")        m += "Maskapai: " + fd.maskapai + "%0A";
+      if (fd.kodePenerbangan !== "-") m += "Kode: " + fd.kodePenerbangan + "%0A";
+      if (fd.jamPenerbangan !== "-")  m += labelJam + ": " + fd.jamPenerbangan + "%0A";
     }
-    if (fd.rencanaPerjalanan !== "-") { m += "%0A*Rencana Carter:* " + fd.rencanaPerjalanan + "%0A"; }
+    if (fd.rencanaPerjalanan !== "-") m += "%0A*Rencana Carter:* " + fd.rencanaPerjalanan + "%0A";
     m += "%0ABarang: " + fd.barangBawaan + "%0A";
     m += "%0A_via website UJS Travel_";
     return "https://wa.me/" + WA_NUMBER + "?text=" + m;
   }
 
-  // ── FETCH ke Apps Script ──
-  // Kita coba dua cara: pertama dengan mode normal, fallback ke no-cors
+  var sudahSelesai = false;
+  var timeout = setTimeout(function() { selesai("-"); }, 12000);
+
+  function selesai(fotoUrl) {
+    if (sudahSelesai) return;
+    sudahSelesai = true;
+    clearTimeout(timeout);
+    setProgress(100, "Selesai! Membuka WhatsApp...");
+    setTimeout(function() {
+      document.getElementById("loadingOverlay").classList.remove("show");
+      document.getElementById("submitBtn").disabled = false;
+      waTab.location.href = buildWAUrl(fotoUrl);
+    }, 500);
+  }
+
+  setProgress(30, "Mengunggah bukti transfer...");
+
+  var controller = new AbortController();
+  setTimeout(function() { controller.abort(); }, 11000);
+
   fetch(APPS_SCRIPT_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(fd)
+    body: JSON.stringify(fd),
+    signal: controller.signal
   })
   .then(function(res) {
-    // Jika response bisa dibaca (tidak blocked)
+    setProgress(80, "Menyimpan data...");
     return res.json();
   })
   .then(function(result) {
     var fotoUrl = (result && result.status === "success" && result.fotoUrl) ? result.fotoUrl : "-";
-    waTab.location.href = buildWAUrl(fotoUrl);
+    selesai(fotoUrl);
   })
-  .catch(function(errJson) {
-    // CORS block membuat .json() gagal — tapi data sudah terkirim ke Apps Script
-    // Kirim ulang dengan no-cors agar data benar-benar masuk, lalu buka WA
-    console.warn("Fetch biasa gagal (kemungkinan CORS), coba no-cors:", errJson);
+  .catch(function() {
+    setProgress(60, "Menyimpan ke server cadangan...");
     fetch(APPS_SCRIPT_URL, {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(fd)
     })
-    .then(function() {
-      // Data sudah terkirim, foto masuk Drive, tapi kita tidak bisa baca fotoUrl
-      waTab.location.href = buildWAUrl("-");
-    })
-    .catch(function(err2) {
-      console.error("no-cors juga gagal:", err2);
-      waTab.location.href = buildWAUrl("-");
-    });
-  })
-  .finally(function() {
-    document.getElementById("loadingOverlay").classList.remove("show");
-    document.getElementById("submitBtn").disabled = false;
+    .then(function() { selesai("-"); })
+    .catch(function() { selesai("-"); });
   });
 }
-
 // ─────────────────────────────────────────────────
 // UI HELPERS
 // ─────────────────────────────────────────────────
