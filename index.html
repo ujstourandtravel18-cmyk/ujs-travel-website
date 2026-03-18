@@ -1504,9 +1504,8 @@
   </section>
  <!-- Section Harga Lebaran / High Season (Compact Version) -->
 <!-- ============================================================
-     SECTION HARGA SPESIAL LEBARAN — SLIDER 2 FLYER
-     Letakkan MENGGANTIKAN section "Section Harga Lebaran / High Season" 
-     yang sudah ada di index.html
+     SECTION HARGA SPESIAL LEBARAN — 3 TAB
+     GANTI section "Section Harga Lebaran / High Season" di index.html
      ============================================================ -->
 
 <section class="py-12 bg-white">
@@ -1528,31 +1527,58 @@
       </p>
     </div>
 
-    <!-- SLIDER WRAPPER -->
     <div class="max-w-2xl mx-auto reveal fade-bottom">
 
       <!-- TAB BUTTONS -->
-      <div class="flex gap-2 mb-4 justify-center">
-        <button
-          onclick="showFlyer(0)"
-          id="tab-0"
-          class="flyer-tab px-4 py-2 rounded-full text-sm font-bold border-2 transition-all duration-200"
-          style="background:#305492;color:white;border-color:#305492;">
-          🚗 Travel
+      <div class="flex gap-2 mb-5 justify-center flex-wrap">
+        <button onclick="showFlyer(0)" id="ftab-0"
+          class="px-4 py-2 rounded-full text-xs font-bold border-2 transition-all duration-200">
+          🚗 Travel High Season
         </button>
-        <button
-          onclick="showFlyer(1)"
-          id="tab-1"
-          class="flyer-tab px-4 py-2 rounded-full text-sm font-bold border-2 transition-all duration-200"
-          style="background:white;color:#305492;border-color:#305492;">
+        <button onclick="showFlyer(1)" id="ftab-1"
+          class="px-4 py-2 rounded-full text-xs font-bold border-2 transition-all duration-200">
+          🌙 Travel Lebaran
+        </button>
+        <button onclick="showFlyer(2)" id="ftab-2"
+          class="px-4 py-2 rounded-full text-xs font-bold border-2 transition-all duration-200">
           📦 Kirim Paket
         </button>
       </div>
 
-      <!-- FLYER 1 — Travel -->
-      <div id="flyer-0" class="flyer-panel">
+      <!-- PANEL 0 — Travel High Season (12-31 Maret, kecuali 19,20,21) -->
+      <div id="fpanel-0" class="flyer-panel-hs">
+        <div class="relative bg-white rounded-xl shadow-lg overflow-hidden border border-blue-100">
+          <div class="absolute top-3 left-3 z-10 flex gap-2">
+            <span class="bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow">
+              📅 High Season
+            </span>
+            <span class="bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow">
+              12-31 Mar
+            </span>
+          </div>
+          <img src="img/flyerhighseason.jpeg"
+            alt="Pricelist Travel High Season UJS Travel"
+            class="w-full max-h-[480px] object-contain block" />
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-t border-blue-100 px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div>
+              <p class="font-semibold text-travellora-dark text-xs">📅 Berlaku 12-31 Maret 2026 (kecuali 19, 20, 21)</p>
+              <p class="text-travellora-gray text-[11px] mt-1">Harga dapat berubah sewaktu-waktu. Hubungi admin untuk konfirmasi.</p>
+            </div>
+            <a href="https://wa.me/6282316290290?text=Permisi%20kak%2C%20mau%20tanya%20harga%20travel%20High%20Season%20Maret%202026%20%F0%9F%98%8A"
+              target="_blank"
+              class="flex-shrink-0 inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold text-xs px-4 py-2 rounded-lg transition duration-300 shadow">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+              </svg>
+              Tanya & Booking
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 1 — Travel Hari H Lebaran (19, 20, 21 Maret) -->
+      <div id="fpanel-1" class="flyer-panel-hs hidden">
         <div class="relative bg-white rounded-xl shadow-lg overflow-hidden border border-red-100">
-          <!-- Badges -->
           <div class="absolute top-3 left-3 z-10 flex gap-2">
             <span class="bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow">
               🌙 Hari H Lebaran
@@ -1561,28 +1587,19 @@
               19-21 Mar
             </span>
           </div>
-
-          <img
-            src="img/flyerlebarantravel.jpeg"
+          <img src="img/flyerlebarantravel.jpeg"
             alt="Pricelist Travel Lebaran UJS Travel"
-            class="w-full max-h-[480px] object-contain block"
-          />
-
-          <!-- Footer -->
+            class="w-full max-h-[480px] object-contain block" />
           <div class="bg-gradient-to-r from-red-50 to-orange-50 border-t border-red-100 px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div>
-              <p class="font-semibold text-travellora-dark text-xs">
-                📅 Berlaku 19, 20, 21 Maret 2026
-              </p>
-              <p class="text-travellora-gray text-[11px] mt-1">
-                Reguler & Drop. Hubungi admin untuk konfirmasi.
-              </p>
+              <p class="font-semibold text-travellora-dark text-xs">📅 Berlaku 19, 20, 21 Maret 2026</p>
+              <p class="text-travellora-gray text-[11px] mt-1">Reguler & Drop. Hubungi admin untuk konfirmasi.</p>
             </div>
             <a href="https://wa.me/6282316290290?text=Permisi%20kak%2C%20mau%20tanya%20harga%20travel%20Lebaran%2019-21%20Maret%202026%20%F0%9F%98%8A"
               target="_blank"
               class="flex-shrink-0 inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold text-xs px-4 py-2 rounded-lg transition duration-300 shadow">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
               </svg>
               Tanya & Booking
             </a>
@@ -1590,40 +1607,30 @@
         </div>
       </div>
 
-      <!-- FLYER 2 — Kirim Paket -->
-      <div id="flyer-1" class="flyer-panel hidden">
+      <!-- PANEL 2 — Kirim Paket High Season -->
+      <div id="fpanel-2" class="flyer-panel-hs hidden">
         <div class="relative bg-white rounded-xl shadow-lg overflow-hidden border border-yellow-100">
-          <!-- Badges -->
           <div class="absolute top-3 left-3 z-10 flex gap-2">
-            <span class="bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow">
-              🌙 Lebaran
-            </span>
             <span class="bg-yellow-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow">
+              📦 Kirim Paket
+            </span>
+            <span class="bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow">
               High Season
             </span>
           </div>
-
-          <img
-            src="img/flyerhighseason.jpeg"
+          <img src="img/flyerpakethighseason.jpeg"
             alt="Pricelist Kirim Paket Lebaran UJS Travel"
-            class="w-full max-h-[480px] object-contain block"
-          />
-
-          <!-- Footer -->
+            class="w-full max-h-[480px] object-contain block" />
           <div class="bg-gradient-to-r from-yellow-50 to-orange-50 border-t border-yellow-100 px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div>
-              <p class="font-semibold text-travellora-dark text-xs">
-                📅 Berlaku 12-31 Maret 2026
-              </p>
-              <p class="text-travellora-gray text-[11px] mt-1">
-                Harga kirim paket. Hubungi admin untuk konfirmasi.
-              </p>
+              <p class="font-semibold text-travellora-dark text-xs">📅 Berlaku 12-31 Maret 2026</p>
+              <p class="text-travellora-gray text-[11px] mt-1">Dokumen, kardus kecil/sedang/besar. Satu hari sampai!</p>
             </div>
             <a href="https://wa.me/6282316290290?text=Permisi%20kak%2C%20mau%20tanya%20harga%20kirim%20paket%20Lebaran%202026%20%F0%9F%98%8A"
               target="_blank"
               class="flex-shrink-0 inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold text-xs px-4 py-2 rounded-lg transition duration-300 shadow">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
               </svg>
               Tanya & Booking
             </a>
@@ -1647,28 +1654,40 @@
         </div>
       </div>
 
-    </div><!-- end max-w-2xl -->
-  </div><!-- end max-w-6xl -->
+    </div>
+  </div>
 </section>
 
 <script>
+// Warna aktif per tab
+var flyerTabColors = ['#305492', '#dc2626', '#d97706'];
+
 function showFlyer(n) {
-  // Sembunyikan semua panel
-  document.querySelectorAll('.flyer-panel').forEach(function(el) {
-    el.classList.add('hidden');
-  });
-  // Reset semua tab
-  document.querySelectorAll('.flyer-tab').forEach(function(btn) {
-    btn.style.background = 'white';
-    btn.style.color = '#305492';
-  });
-  // Tampilkan panel yang dipilih
-  document.getElementById('flyer-' + n).classList.remove('hidden');
-  // Aktifkan tab yang dipilih
-  var activeTab = document.getElementById('tab-' + n);
-  activeTab.style.background = '#305492';
-  activeTab.style.color = 'white';
+  var total = 3;
+  for (var i = 0; i < total; i++) {
+    var panel = document.getElementById('fpanel-' + i);
+    var tab   = document.getElementById('ftab-' + i);
+    if (panel) panel.classList.add('hidden');
+    if (tab) {
+      tab.style.background   = 'white';
+      tab.style.color        = flyerTabColors[i];
+      tab.style.borderColor  = flyerTabColors[i];
+    }
+  }
+  var activePanel = document.getElementById('fpanel-' + n);
+  var activeTab   = document.getElementById('ftab-' + n);
+  if (activePanel) activePanel.classList.remove('hidden');
+  if (activeTab) {
+    activeTab.style.background  = flyerTabColors[n];
+    activeTab.style.color       = 'white';
+    activeTab.style.borderColor = flyerTabColors[n];
+  }
 }
+
+// Init saat halaman load
+document.addEventListener('DOMContentLoaded', function() { showFlyer(0); });
+// Fallback jika DOMContentLoaded sudah lewat
+if (document.readyState !== 'loading') { showFlyer(0); }
 </script>
 
   <section id="jadwal" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
