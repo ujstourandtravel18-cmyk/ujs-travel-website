@@ -274,6 +274,8 @@
     .btn-amber:hover { background: #b45309; }
     .btn-danger { background: var(--red); color: white; }
     .btn-danger:hover { background: #b91c1c; }
+    .btn-purple { background: var(--purple); color: white; }
+    .btn-purple:hover { background: #6d28d9; }
     .btn-outline {
       background: transparent;
       border: 2px solid var(--border);
@@ -309,12 +311,6 @@
       font-size: 0.75rem; font-weight: 700;
       font-family: 'JetBrains Mono', monospace;
     }
-    .rute-mlg-jnd { background: #fee2e2; color: #991b1b; }
-    .rute-jnd-mlg { background: #dbeafe; color: #1e40af; }
-    .rute-mlg-sby { background: #fef3c7; color: #92400e; }
-    .rute-sby-mlg { background: #d1fae5; color: #065f46; }
-    .rute-btu     { background: #ede9fe; color: #5b21b6; }
-    .rute-prk     { background: #fce7f3; color: #9d174d; }
 
     /* ── JADWAL BUILDER ── */
     .driver-slot {
@@ -333,16 +329,6 @@
       padding-bottom: 14px;
       border-bottom: 1px dashed var(--border);
     }
-    .driver-info { display: flex; align-items: center; gap: 10px; }
-    .driver-avatar {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: var(--blue-lt);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; color: var(--blue); font-size: 1rem;
-    }
-    .driver-name { font-weight: 700; font-size: 0.95rem; }
-    .driver-car  { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
 
     .customer-item {
       background: #f8fafc;
@@ -381,13 +367,6 @@
       max-height: 520px;
       overflow-y: auto;
     }
-    .jadwal-preview .jd-title { color: #93c5fd; font-size: 0.9rem; font-weight: 600; }
-    .jadwal-preview .jd-driver { color: #fbbf24; }
-    .jadwal-preview .jd-b { color: #86efac; }
-    .jadwal-preview .jd-p { color: #67e8f9; }
-    .jadwal-preview .jd-drop { color: #fdba74; }
-    .jadwal-preview .jd-unscheduled { color: #f87171; }
-    .jadwal-preview .jd-customer { color: #e2e8f0; margin-left: 8px; }
 
     /* ── TOAST ── */
     #toast {
@@ -462,7 +441,165 @@
     }
     .tab.active { background: white; color: var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
 
-    /* scrollbar */
+    /* ── SMART PARSER ── */
+    .parser-wrap {
+      background: linear-gradient(135deg, #0f2350 0%, #1a4fa0 100%);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .parser-wrap::before {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+      top: -100px; right: -80px;
+    }
+    .parser-title {
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .parser-sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .parser-textarea {
+      width: 100%;
+      min-height: 140px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      color: white;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      resize: vertical;
+      transition: border-color 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+    .parser-textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .parser-textarea:focus { outline: none; border-color: rgba(255,255,255,0.5); }
+    .parser-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .btn-ai {
+      background: #f59e0b;
+      color: #1a1a1a;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-ai:hover { background: #d97706; transform: translateY(-1px); }
+    .btn-ai:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-ghost {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.18); color: white; }
+    .parse-status {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .parse-status.show { display: flex; }
+    .parse-status.ok   { background: rgba(22,163,74,0.25); color: #86efac; }
+    .parse-status.err  { background: rgba(220,38,38,0.25); color: #fca5a5; }
+    .parse-status.loading { background: rgba(245,158,11,0.2); color: #fde68a; }
+
+    /* AI spinner */
+    .ai-spin {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(26,26,26,0.3);
+      border-top-color: #1a1a1a;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Parsed result highlight */
+    .parsed-highlight {
+      border: 2px solid #f59e0b !important;
+      background: #fffbeb !important;
+    }
+
+    /* ── MODE TOGGLE ── */
+    .mode-toggle {
+      display: flex;
+      gap: 0;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .mode-btn {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: white;
+      color: var(--muted);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .mode-btn.active {
+      background: var(--blue-mid);
+      color: white;
+    }
+    .mode-btn:first-child { border-right: 1px solid var(--border); }
+
+    .scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
@@ -495,16 +632,6 @@
       color: var(--blue);
       margin-bottom: 16px;
     }
-
-    .pill-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-    .pill {
-      padding: 4px 12px; border-radius: 999px;
-      font-size: 0.75rem; font-weight: 600;
-      cursor: pointer; border: 2px solid var(--border);
-      background: white; color: var(--muted);
-      transition: all 0.15s;
-    }
-    .pill.selected { border-color: var(--blue-mid); background: var(--blue-lt); color: var(--blue); }
 
     .filter-bar {
       display: flex; gap: 10px; flex-wrap: wrap;
@@ -561,24 +688,24 @@
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section">Menu Utama</div>
-      <div class="nav-item active" onclick="showPage('dashboard')">
+      <div class="nav-item active" onclick="showPage('dashboard', this)">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
         Dashboard
       </div>
-      <div class="nav-item" onclick="showPage('formInput')">
+      <div class="nav-item" onclick="showPage('formInput', this)">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
         Input Reservasi
       </div>
-      <div class="nav-item" onclick="showPage('dataCustomer')">
+      <div class="nav-item" onclick="showPage('dataCustomer', this)">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         Data Customer
       </div>
       <div class="nav-section">Penjadwalan</div>
-      <div class="nav-item" onclick="showPage('jadwalBuilder')">
+      <div class="nav-item" onclick="showPage('jadwalBuilder', this)">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
         Buat Jadwal Harian
       </div>
-      <div class="nav-item" onclick="showPage('manajemenDriver')">
+      <div class="nav-item" onclick="showPage('manajemenDriver', this)">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
         Manajemen Driver
       </div>
@@ -603,7 +730,7 @@
           Refresh
         </button>
       </div>
-      <div class="stats-grid" id="statsGrid">
+      <div class="stats-grid">
         <div class="stat-card"><div class="stat-icon" style="background:#dbeafe"><svg style="color:#1d4ed8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><div class="stat-val" id="statTotal">—</div><div class="stat-lbl">Total Customer Hari Ini</div></div>
         <div class="stat-card"><div class="stat-icon" style="background:#dcfce7"><svg style="color:#15803d" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div class="stat-val" id="statBerangkat">—</div><div class="stat-lbl">Keberangkatan (Malang→)</div></div>
         <div class="stat-card"><div class="stat-icon" style="background:#fef3c7"><svg style="color:#d97706" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg></div><div class="stat-val" id="statJemput">—</div><div class="stat-lbl">Penjemputan (→Malang)</div></div>
@@ -629,112 +756,156 @@
       <div class="topbar">
         <div>
           <div class="page-title">Input Reservasi</div>
-          <div class="page-sub">Masukkan data customer baru</div>
+          <div class="page-sub">Paste teks form atau isi manual</div>
         </div>
       </div>
 
-      <div class="tabs">
-        <div class="tab active" onclick="switchFormTab('malang')">🚗 Malang / Batu → Juanda / SBY</div>
-        <div class="tab" onclick="switchFormTab('juanda')">✈️ Juanda / SBY → Malang / Batu</div>
+      <!-- MODE TOGGLE -->
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="modeSmartBtn" onclick="switchMode('smart')">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Smart Paste (AI)
+        </button>
+        <button class="mode-btn" id="modeManualBtn" onclick="switchMode('manual')">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          Input Manual
+        </button>
       </div>
 
-      <div class="card">
-        <form id="reservasiForm" onsubmit="submitReservasi(event)">
-          <!-- Baris 1: Rute & Keterangan -->
+      <!-- ══ SMART PASTE MODE ══ -->
+      <div id="modeSmart">
+        <div class="parser-wrap">
+          <div class="parser-title">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Smart Parser — Paste Form WhatsApp
+          </div>
+          <div class="parser-sub">Copy teks form reservasi dari WhatsApp / chat, paste di bawah, klik Parsing Otomatis</div>
+          <textarea
+            class="parser-textarea"
+            id="pasteArea"
+            placeholder="Contoh:
+Form Reservasi UJS Travel Juanda - Malang (Reguler)
+Travel tgl : 06 April 2026
+Nama : Wulan
+maskapai : Lion Air
+Kode Pesawat : JT791
+Jam landing : 9:45 am
+Tujuan : Malang, jln Amaryllis town house
+No telp : 081554245768
+Jumlah penumpang : 1
+
+— atau —
+
+Form Reservasi UJS Travel Batu - Juanda
+Travel tgl : 6 April 2026
+Nama : Riski Agung Prasetyo
+Alamat : pakan ngantang
+No telp : 085135675960
+Pesawat jam : 13:00
+Maskapai : Lion Air
+Jumlah penumpang : 1"></textarea>
+
+          <div class="parser-actions">
+            <button class="btn-ai" id="parseBtnAI" onclick="doParseAI()">
+              <span id="parseSpinnerEl" style="display:none"><span class="ai-spin"></span></span>
+              <svg id="parseBoltIcon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              Parsing Otomatis
+            </button>
+            <button class="btn-ghost" onclick="document.getElementById('pasteArea').value=''">Bersihkan</button>
+            <button class="btn-ghost" onclick="pasteContohJuanda()">Contoh Juanda→Malang</button>
+            <button class="btn-ghost" onclick="pasteContohBatu()">Contoh Batu→Juanda</button>
+          </div>
+
+          <div class="parse-status" id="parseStatusEl"></div>
+        </div>
+
+        <!-- Hasil parsing yang sudah diisi -->
+        <div class="card" id="parsedResultCard" style="display:none">
+          <div class="card-title" style="color: var(--amber)">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Hasil Parsing — Cek & Koreksi Sebelum Simpan
+          </div>
+
           <div class="form-grid">
             <div class="field">
-              <label>Rute Perjalanan *</label>
-              <select id="f_rute" required onchange="onRuteChange()">
-                <option value="">Pilih Rute</option>
-              </select>
+              <label>Tanggal Travel</label>
+              <input type="date" id="p_tanggal" />
             </div>
             <div class="field">
-              <label>Keterangan *</label>
-              <select id="f_keterangan" required>
+              <label>Rute Perjalanan</label>
+              <select id="p_rute">
+                <option value="JND-MLG">JND-MLG (Juanda → Malang)</option>
+                <option value="JND-BATU">JND-BATU (Juanda → Batu)</option>
+                <option value="MLG-JND">MLG-JND (Malang → Juanda)</option>
+                <option value="BATU-JND">BATU-JND (Batu → Juanda)</option>
+                <option value="MLG-SBY">MLG-SBY (Malang → Surabaya)</option>
+                <option value="SBY-MLG">SBY-MLG (Surabaya → Malang)</option>
+                <option value="MLG-PRK">MLG-PRK (Malang → Perak)</option>
+                <option value="PRK-MLG">PRK-MLG (Perak → Malang)</option>
+                <option value="BATU-SBY">BATU-SBY (Batu → Surabaya)</option>
+                <option value="SBY-BATU">SBY-BATU (Surabaya → Batu)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid" style="margin-top:16px">
+            <div class="field">
+              <label>Nama Penumpang</label>
+              <input type="text" id="p_nama" />
+            </div>
+            <div class="field">
+              <label>No. Telepon / WA</label>
+              <input type="tel" id="p_telp" />
+            </div>
+          </div>
+
+          <div class="form-grid col3" style="margin-top:16px">
+            <div class="field">
+              <label>Maskapai</label>
+              <input type="text" id="p_maskapai" />
+            </div>
+            <div class="field">
+              <label>Kode Pesawat</label>
+              <input type="text" id="p_kode" />
+            </div>
+            <div class="field">
+              <label>Jam (Landing / Angkatan)</label>
+              <input type="text" id="p_jam" placeholder="09.45 atau 13.00" />
+            </div>
+          </div>
+
+          <div class="form-grid" style="margin-top:16px">
+            <div class="field">
+              <label>Alamat Penjemputan</label>
+              <textarea id="p_penjemputan"></textarea>
+            </div>
+            <div class="field">
+              <label>Alamat Tujuan</label>
+              <textarea id="p_tujuan"></textarea>
+            </div>
+          </div>
+
+          <div class="form-grid col3" style="margin-top:16px">
+            <div class="field">
+              <label>Jumlah Penumpang</label>
+              <input type="number" id="p_jumlah" min="1" max="10" value="1" />
+            </div>
+            <div class="field">
+              <label>Keterangan</label>
+              <select id="p_ket">
                 <option value="Reguler">Reguler</option>
                 <option value="Drop">Drop</option>
                 <option value="Paket">Kirim Paket</option>
               </select>
             </div>
-          </div>
-
-          <!-- Baris 2: Tanggal & Jam -->
-          <div class="form-grid" style="margin-top:16px">
-            <div class="field">
-              <label>Tanggal Travel *</label>
-              <input type="date" id="f_tanggal" required />
-            </div>
-            <div class="field" id="f_jamAngkatanField">
-              <label>Jam Angkatan *</label>
-              <select id="f_jamAngkatan">
-                <option value="">Pilih Jam</option>
-                <option value="01.00">01.00</option>
-                <option value="03.00">03.00</option>
-                <option value="05.00">05.00</option>
-                <option value="07.00">07.00</option>
-                <option value="09.00">09.00</option>
-                <option value="11.00">11.00</option>
-                <option value="13.00">13.00</option>
-                <option value="15.00">15.00</option>
-                <option value="17.00">17.00</option>
-              </select>
-            </div>
-            <div class="field" id="f_jamLandingField" style="display:none">
-              <label>Jam Landing / Take Off *</label>
-              <input type="text" id="f_jamLanding" placeholder="Contoh: 09:45" />
-            </div>
-          </div>
-
-          <!-- Baris 3: Nama & HP -->
-          <div class="form-grid" style="margin-top:16px">
-            <div class="field">
-              <label>Nama Penumpang *</label>
-              <input type="text" id="f_nama" required placeholder="Nama lengkap" />
-            </div>
-            <div class="field">
-              <label>No. Telepon / WA *</label>
-              <input type="tel" id="f_telp" required placeholder="08xxx" />
-            </div>
-          </div>
-
-          <!-- Baris 4: Maskapai & Kode (kondisional) -->
-          <div class="form-grid" id="f_bandara" style="margin-top:16px; display:none">
-            <div class="field">
-              <label>Maskapai</label>
-              <input type="text" id="f_maskapai" placeholder="Lion Air, Garuda, dll" />
-            </div>
-            <div class="field">
-              <label>Kode Pesawat</label>
-              <input type="text" id="f_kodepesawat" placeholder="Contoh: JT791" />
-            </div>
-          </div>
-
-          <!-- Baris 5: Alamat -->
-          <div class="form-grid" style="margin-top:16px">
-            <div class="field">
-              <label>Alamat Penjemputan *</label>
-              <textarea id="f_penjemputan" required placeholder="Alamat detail penjemputan"></textarea>
-            </div>
-            <div class="field">
-              <label>Alamat Tujuan *</label>
-              <textarea id="f_tujuan" required placeholder="Alamat tujuan"></textarea>
-            </div>
-          </div>
-
-          <!-- Baris 6: Jumlah & Catatan -->
-          <div class="form-grid" style="margin-top:16px">
-            <div class="field">
-              <label>Jumlah Penumpang *</label>
-              <input type="number" id="f_jumlah" required min="1" max="10" value="1" />
-            </div>
             <div class="field">
               <label>Catatan</label>
-              <input type="text" id="f_catatan" placeholder="Catatan tambahan (opsional)" />
+              <input type="text" id="p_catatan" />
             </div>
           </div>
 
           <div class="divider"></div>
-          <!-- Ketentuan -->
+
           <div style="background:#fef9ec; border:1px solid #fde68a; border-radius:10px; padding:14px 18px; margin-bottom:16px; font-size:0.82rem; color:#78350f;">
             <strong>Ketentuan Reservasi:</strong>
             <ol style="margin-top:6px; padding-left:18px; line-height:1.8">
@@ -746,13 +917,131 @@
           </div>
 
           <div style="display:flex; gap:12px; justify-content:flex-end">
-            <button type="button" class="btn btn-outline" onclick="resetForm()">Reset</button>
-            <button type="submit" class="btn btn-primary btn-lg" id="submitFormBtn">
+            <button class="btn btn-outline" onclick="resetParsed()">Batal</button>
+            <button class="btn btn-success btn-lg" onclick="submitParsed()">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              Simpan Reservasi
+              Simpan ke Sheets
             </button>
           </div>
-        </form>
+        </div>
+      </div>
+
+      <!-- ══ MANUAL MODE ══ -->
+      <div id="modeManual" style="display:none">
+        <div class="tabs">
+          <div class="tab active" onclick="switchFormTab('malang')">🚗 Malang / Batu → Juanda / SBY</div>
+          <div class="tab" onclick="switchFormTab('juanda')">✈️ Juanda / SBY → Malang / Batu</div>
+        </div>
+
+        <div class="card">
+          <form id="reservasiForm" onsubmit="submitReservasi(event)">
+            <div class="form-grid">
+              <div class="field">
+                <label>Rute Perjalanan *</label>
+                <select id="f_rute" required onchange="onRuteChange()">
+                  <option value="">Pilih Rute</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Keterangan *</label>
+                <select id="f_keterangan" required>
+                  <option value="Reguler">Reguler</option>
+                  <option value="Drop">Drop</option>
+                  <option value="Paket">Kirim Paket</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid" style="margin-top:16px">
+              <div class="field">
+                <label>Tanggal Travel *</label>
+                <input type="date" id="f_tanggal" required />
+              </div>
+              <div class="field" id="f_jamAngkatanField">
+                <label>Jam Angkatan *</label>
+                <select id="f_jamAngkatan">
+                  <option value="">Pilih Jam</option>
+                  <option value="01.00">01.00</option>
+                  <option value="03.00">03.00</option>
+                  <option value="05.00">05.00</option>
+                  <option value="07.00">07.00</option>
+                  <option value="09.00">09.00</option>
+                  <option value="11.00">11.00</option>
+                  <option value="13.00">13.00</option>
+                  <option value="15.00">15.00</option>
+                  <option value="17.00">17.00</option>
+                </select>
+              </div>
+              <div class="field" id="f_jamLandingField" style="display:none">
+                <label>Jam Landing / Take Off *</label>
+                <input type="text" id="f_jamLanding" placeholder="Contoh: 09:45" />
+              </div>
+            </div>
+
+            <div class="form-grid" style="margin-top:16px">
+              <div class="field">
+                <label>Nama Penumpang *</label>
+                <input type="text" id="f_nama" required placeholder="Nama lengkap" />
+              </div>
+              <div class="field">
+                <label>No. Telepon / WA *</label>
+                <input type="tel" id="f_telp" required placeholder="08xxx" />
+              </div>
+            </div>
+
+            <div class="form-grid" id="f_bandara" style="margin-top:16px; display:none">
+              <div class="field">
+                <label>Maskapai</label>
+                <input type="text" id="f_maskapai" placeholder="Lion Air, Garuda, dll" />
+              </div>
+              <div class="field">
+                <label>Kode Pesawat</label>
+                <input type="text" id="f_kodepesawat" placeholder="Contoh: JT791" />
+              </div>
+            </div>
+
+            <div class="form-grid" style="margin-top:16px">
+              <div class="field">
+                <label>Alamat Penjemputan *</label>
+                <textarea id="f_penjemputan" required placeholder="Alamat detail penjemputan"></textarea>
+              </div>
+              <div class="field">
+                <label>Alamat Tujuan *</label>
+                <textarea id="f_tujuan" required placeholder="Alamat tujuan"></textarea>
+              </div>
+            </div>
+
+            <div class="form-grid" style="margin-top:16px">
+              <div class="field">
+                <label>Jumlah Penumpang *</label>
+                <input type="number" id="f_jumlah" required min="1" max="10" value="1" />
+              </div>
+              <div class="field">
+                <label>Catatan</label>
+                <input type="text" id="f_catatan" placeholder="Catatan tambahan (opsional)" />
+              </div>
+            </div>
+
+            <div class="divider"></div>
+            <div style="background:#fef9ec; border:1px solid #fde68a; border-radius:10px; padding:14px 18px; margin-bottom:16px; font-size:0.82rem; color:#78350f;">
+              <strong>Ketentuan Reservasi:</strong>
+              <ol style="margin-top:6px; padding-left:18px; line-height:1.8">
+                <li>Pembatalan kurang dari 6 jam kena charge full.</li>
+                <li>Maksimal bagasi 1 koper dan 1 tas ransel.</li>
+                <li>Tidak membawa hewan peliharaan.</li>
+                <li>Tidak membawa durian.</li>
+              </ol>
+            </div>
+
+            <div style="display:flex; gap:12px; justify-content:flex-end">
+              <button type="button" class="btn btn-outline" onclick="resetForm()">Reset</button>
+              <button type="submit" class="btn btn-primary btn-lg" id="submitFormBtn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Simpan Reservasi
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -828,7 +1117,6 @@
       </div>
 
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; align-items:start">
-        <!-- Kiri: Builder -->
         <div>
           <div class="card">
             <div class="card-title">
@@ -841,9 +1129,7 @@
               <input type="date" id="j_tanggal" onchange="onJadwalTanggalChange()" />
             </div>
 
-            <div id="driverSlots">
-              <!-- Slot driver akan di-render di sini -->
-            </div>
+            <div id="driverSlots"></div>
 
             <button class="btn btn-outline" onclick="addDriverSlot()" style="width:100%; margin-top:8px">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
@@ -851,7 +1137,6 @@
             </button>
           </div>
 
-          <!-- Belum Terkondisikan -->
           <div class="card">
             <div class="card-title" style="color: var(--red)">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
@@ -863,7 +1148,6 @@
           </div>
         </div>
 
-        <!-- Kanan: Preview -->
         <div style="position:sticky; top:20px">
           <div class="card">
             <div class="card-title">
@@ -913,8 +1197,7 @@
                 <th>Aksi</th>
               </tr>
             </thead>
-            <tbody id="driverTableBody">
-            </tbody>
+            <tbody id="driverTableBody"></tbody>
           </table>
         </div>
       </div>
@@ -923,7 +1206,7 @@
   </main>
 </div>
 
-<!-- ════════ MODAL DRIVER ════════ -->
+<!-- MODAL DRIVER -->
 <div class="modal-overlay" id="driverModal">
   <div class="modal">
     <div class="modal-title">
@@ -981,8 +1264,8 @@
 var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwuukajpB8eFlgim2I7DSjuKi2mC0LC1kIqiQ1Y1G9r0W8a9RZ-gWSKkyhvecbIWae3/exec";
 var SPREADSHEET_ID  = "138LVfjvNgrqRoFOIZjf42QlDDAbLojGbQ7ys8LpXdbQ";
 var SHEET_GID       = "0";
+var ANTHROPIC_API   = "https://api.anthropic.com/v1/messages";
 
-// Credentials (frontend-only, untuk demo — ganti hash di produksi)
 var CREDENTIALS = { admin: "ujstravel2026" };
 
 // ── DATA DRIVER (localStorage) ──
@@ -993,19 +1276,15 @@ function getDrivers() {
 }
 function defaultDrivers() {
   return [
-    { id:1, nama:"FADHIL",  kendaraan:"Sienta", plat:"PLAT HITAM", keterangan:"Plat Hitam", status:"Aktif" },
-    { id:2, nama:"ANDY",    kendaraan:"Avanza", plat:"1745",       keterangan:"",           status:"Aktif" },
-    { id:3, nama:"DILAN",   kendaraan:"Avanza", plat:"1406",       keterangan:"",           status:"Aktif" },
+    { id:1, nama:"FADHIL", kendaraan:"Sienta", plat:"PLAT HITAM", keterangan:"Plat Hitam", status:"Aktif" },
+    { id:2, nama:"ANDY",   kendaraan:"Avanza", plat:"1745",       keterangan:"",           status:"Aktif" },
+    { id:3, nama:"DILAN",  kendaraan:"Avanza", plat:"1406",       keterangan:"",           status:"Aktif" },
   ];
 }
 function saveDrivers(data) { localStorage.setItem(driversKey, JSON.stringify(data)); }
 
-// ── CUSTOMER DATA (cache) ──
 var allCustomers = [];
-
-// ── JADWAL STATE ──
-var jadwalSlots = []; // [{driverId, jam, customers:[{...}]}]
-var editingDriverIdx = null;
+var jadwalSlots  = [];
 
 // ══════════════════════════════════════════
 //  LOGIN
@@ -1028,7 +1307,6 @@ function doLogout() {
   sessionStorage.removeItem("ujs_auth");
   location.reload();
 }
-// Auto login check
 if (sessionStorage.getItem("ujs_auth")) {
   document.getElementById("loginScreen").style.display = "none";
   document.getElementById("app").style.display = "block";
@@ -1039,17 +1317,12 @@ if (sessionStorage.getItem("ujs_auth")) {
 //  INIT
 // ══════════════════════════════════════════
 function initApp() {
-  // Set today
   var today = new Date().toISOString().split("T")[0];
-  document.getElementById("f_tanggal").value = today;
-  document.getElementById("j_tanggal").value = today;
+  document.getElementById("f_tanggal").value   = today;
+  document.getElementById("j_tanggal").value   = today;
   document.getElementById("filterTanggal").value = today;
-
-  // Set date display
   var opts = { weekday:"long", year:"numeric", month:"long", day:"numeric" };
-  document.getElementById("dashDate").textContent =
-    new Date().toLocaleDateString("id-ID", opts);
-
+  document.getElementById("dashDate").textContent = new Date().toLocaleDateString("id-ID", opts);
   updateFormRuteOptions("malang");
   renderDriverTable();
   refreshDashboard();
@@ -1058,18 +1331,215 @@ function initApp() {
 // ══════════════════════════════════════════
 //  NAVIGATION
 // ══════════════════════════════════════════
-function showPage(id) {
+function showPage(id, el) {
   document.querySelectorAll(".page").forEach(function(p){ p.classList.remove("active"); });
   document.querySelectorAll(".nav-item").forEach(function(n){ n.classList.remove("active"); });
   document.getElementById("page-"+id).classList.add("active");
-  event.currentTarget.classList.add("active");
+  if (el) el.classList.add("active");
   if (id === "dataCustomer") loadCustomerData();
-  if (id === "jadwalBuilder") { onJadwalTanggalChange(); }
+  if (id === "jadwalBuilder") onJadwalTanggalChange();
   if (id === "dashboard") refreshDashboard();
 }
 
 // ══════════════════════════════════════════
-//  GOOGLE SHEETS READ (via CSV export)
+//  MODE TOGGLE (Smart / Manual)
+// ══════════════════════════════════════════
+function switchMode(mode) {
+  var isSmart = mode === "smart";
+  document.getElementById("modeSmart").style.display  = isSmart ? "block" : "none";
+  document.getElementById("modeManual").style.display = isSmart ? "none"  : "block";
+  document.getElementById("modeSmartBtn").classList.toggle("active",  isSmart);
+  document.getElementById("modeManualBtn").classList.toggle("active", !isSmart);
+}
+
+// ══════════════════════════════════════════
+//  SMART PARSER — CONTOH
+// ══════════════════════════════════════════
+function pasteContohJuanda() {
+  document.getElementById("pasteArea").value =
+`Form Reservasi UJS Travel Juanda - Malang (Reguler)
+Travel tgl : 06 April 2026
+Nama : Wulan
+maskapai : Lion Air
+Kode Pesawat : JT791
+Jam landing : 9:45 am
+Tujuan : Malang, jln Amaryllis town house
+No telp : 081554245768
+Jumlah penumpang : 1`;
+}
+
+function pasteContohBatu() {
+  document.getElementById("pasteArea").value =
+`Form Reservasi UJS Travel Batu - Juanda (Reguler)
+Travel tgl : 6 April 2026
+Nama : Riski Agung Prasetyo
+Alamat : pakan ngantang
+No telp : 085135675960
+Pesawat jam : 13:00
+Maskapai : Lion Air
+Jumlah penumpang : 1`;
+}
+
+// ══════════════════════════════════════════
+//  SMART PARSER — AI PARSE
+// ══════════════════════════════════════════
+async function doParseAI() {
+  var txt = document.getElementById("pasteArea").value.trim();
+  if (!txt) { showParseStatus("Paste teks form dulu!", "err"); return; }
+
+  var btn  = document.getElementById("parseBtnAI");
+  var spin = document.getElementById("parseSpinnerEl");
+  var bolt = document.getElementById("parseBoltIcon");
+  btn.disabled = true;
+  spin.style.display = "inline-flex";
+  bolt.style.display = "none";
+  showParseStatus("AI sedang memproses teks...", "loading");
+  document.getElementById("parsedResultCard").style.display = "none";
+
+  var prompt = `Ekstrak data reservasi travel dari teks berikut. Kembalikan HANYA JSON valid tanpa penjelasan dan tanpa markdown backtick.
+
+Format JSON:
+{
+  "tanggal": "YYYY-MM-DD",
+  "rute": "pilih salah satu: JND-MLG, JND-BATU, MLG-JND, BATU-JND, MLG-SBY, SBY-MLG, MLG-PRK, PRK-MLG, BATU-SBY, SBY-BATU",
+  "nama": "nama penumpang",
+  "telp": "nomor telepon",
+  "maskapai": "nama maskapai atau kosong string",
+  "kode": "kode pesawat atau kosong string",
+  "jam": "jam landing atau angkatan format HH.MM",
+  "penjemputan": "alamat penjemputan atau kosong",
+  "tujuan": "alamat tujuan",
+  "jumlah": 1,
+  "ket": "Reguler atau Drop atau Paket",
+  "catatan": "catatan tambahan atau kosong"
+}
+
+Aturan penentuan rute:
+- Jika ada kata Juanda/Bandara dan tujuan adalah Malang = JND-MLG
+- Jika ada kata Juanda/Bandara dan tujuan adalah Batu = JND-BATU
+- Jika dari Malang menuju Juanda/Bandara = MLG-JND
+- Jika dari Batu menuju Juanda/Bandara = BATU-JND
+- Jika ada kata "landing" = arah dari Juanda ke Malang/Batu
+- Jika ada kata "pesawat jam" atau "angkatan" = arah ke Juanda
+- Konversi tanggal ke YYYY-MM-DD, contoh "6 April 2026" = "2026-04-06"
+- Format jam: gunakan titik bukan titik dua, contoh "9:45" = "09.45", "13:00" = "13.00"
+
+Teks:
+${txt}`;
+
+  try {
+    var res = await fetch(ANTHROPIC_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    var data = await res.json();
+    var raw  = (data.content && data.content[0] && data.content[0].text) || "";
+    raw = raw.replace(/```json|```/g, "").trim();
+    var parsed = JSON.parse(raw);
+    fillParsedForm(parsed);
+    showParseStatus("Parsing berhasil! Cek data di bawah sebelum menyimpan.", "ok");
+    document.getElementById("parsedResultCard").style.display = "block";
+    document.getElementById("parsedResultCard").scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch(e) {
+    showParseStatus("Gagal parsing: " + e.message + ". Coba input manual.", "err");
+  }
+
+  btn.disabled = false;
+  spin.style.display = "none";
+  bolt.style.display = "inline";
+}
+
+function showParseStatus(msg, type) {
+  var el = document.getElementById("parseStatusEl");
+  el.className = "parse-status show " + type;
+  el.textContent = msg;
+}
+
+function fillParsedForm(d) {
+  if (d.tanggal) document.getElementById("p_tanggal").value    = d.tanggal;
+  if (d.rute)    document.getElementById("p_rute").value       = d.rute;
+  if (d.nama)    document.getElementById("p_nama").value       = d.nama;
+  if (d.telp)    document.getElementById("p_telp").value       = d.telp;
+  if (d.maskapai)document.getElementById("p_maskapai").value   = d.maskapai;
+  if (d.kode)    document.getElementById("p_kode").value       = d.kode;
+  if (d.jam)     document.getElementById("p_jam").value        = d.jam;
+  if (d.penjemputan) document.getElementById("p_penjemputan").value = d.penjemputan;
+  if (d.tujuan)  document.getElementById("p_tujuan").value     = d.tujuan;
+  if (d.jumlah)  document.getElementById("p_jumlah").value     = d.jumlah;
+  if (d.ket)     document.getElementById("p_ket").value        = d.ket;
+  if (d.catatan) document.getElementById("p_catatan").value    = d.catatan;
+  // Highlight semua field yg terisi
+  ["p_tanggal","p_rute","p_nama","p_telp","p_maskapai","p_kode","p_jam",
+   "p_penjemputan","p_tujuan","p_jumlah","p_ket","p_catatan"].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.value) {
+      el.classList.add("parsed-highlight");
+      setTimeout(function(){ el.classList.remove("parsed-highlight"); }, 3000);
+    }
+  });
+}
+
+function submitParsed() {
+  var nama = document.getElementById("p_nama").value.trim();
+  var rute = document.getElementById("p_rute").value;
+  var tgl  = document.getElementById("p_tanggal").value;
+  if (!nama || !rute || !tgl) {
+    showToast("Nama, rute, dan tanggal wajib diisi!", "error"); return;
+  }
+
+  var tglStr = new Date(tgl).toLocaleDateString("id-ID");
+  var maskapai = document.getElementById("p_maskapai").value.trim();
+  var kode     = document.getElementById("p_kode").value.trim();
+  var maskapaiKode = [maskapai, kode].filter(Boolean).join(" / ") || "-";
+
+  var rowData = {
+    action: "appendReservasi",
+    data: [
+      tglStr,
+      rute,
+      nama,
+      document.getElementById("p_jam").value,
+      maskapaiKode,
+      document.getElementById("p_tujuan").value,
+      document.getElementById("p_penjemputan").value,
+      document.getElementById("p_telp").value,
+      document.getElementById("p_ket").value,
+      document.getElementById("p_jumlah").value,
+      document.getElementById("p_catatan").value,
+      "FALSE"
+    ]
+  };
+
+  sendToSheet(rowData, function(err) {
+    if (err) {
+      showToast("Gagal menyimpan. Coba lagi.", "error");
+    } else {
+      showToast("Reservasi " + nama + " berhasil disimpan ke Sheets!", "success");
+      resetParsed();
+      allCustomers = [];
+    }
+  });
+}
+
+function resetParsed() {
+  document.getElementById("parsedResultCard").style.display = "none";
+  document.getElementById("parseStatusEl").className = "parse-status";
+  document.getElementById("pasteArea").value = "";
+  ["p_tanggal","p_rute","p_nama","p_telp","p_maskapai","p_kode","p_jam",
+   "p_penjemputan","p_tujuan","p_jumlah","p_ket","p_catatan"].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = el.tagName === "SELECT" ? el.options[0].value : "";
+  });
+  document.getElementById("p_jumlah").value = "1";
+}
+
+// ══════════════════════════════════════════
+//  GOOGLE SHEETS READ
 // ══════════════════════════════════════════
 function fetchSheetData(callback) {
   var csvUrl = "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID +
@@ -1077,24 +1547,15 @@ function fetchSheetData(callback) {
   showLoading(true);
   fetch(csvUrl)
     .then(function(r){ return r.text(); })
-    .then(function(csv){
-      showLoading(false);
-      var rows = parseCSV(csv);
-      callback(null, rows);
-    })
-    .catch(function(e){
-      showLoading(false);
-      callback(e, null);
-    });
+    .then(function(csv){ showLoading(false); callback(null, parseCSV(csv)); })
+    .catch(function(e){ showLoading(false); callback(e, null); });
 }
 
 function parseCSV(text) {
-  var lines = text.split("\n");
-  var result = [];
+  var lines = text.split("\n"), result = [];
   for (var i = 1; i < lines.length; i++) {
     if (!lines[i].trim()) continue;
-    var cols = splitCSVLine(lines[i]);
-    result.push(cols);
+    result.push(splitCSVLine(lines[i]));
   }
   return result;
 }
@@ -1112,7 +1573,7 @@ function splitCSVLine(line) {
 }
 
 // ══════════════════════════════════════════
-//  GOOGLE SHEETS WRITE (via Apps Script)
+//  GOOGLE SHEETS WRITE
 // ══════════════════════════════════════════
 function sendToSheet(data, callback) {
   showLoading(true);
@@ -1124,7 +1585,6 @@ function sendToSheet(data, callback) {
   .then(function(r){ return r.json(); })
   .then(function(res){ showLoading(false); callback(null, res); })
   .catch(function(){
-    // Fallback no-cors
     fetch(APPS_SCRIPT_URL, {
       method:"POST", mode:"no-cors",
       headers:{"Content-Type":"application/json"},
@@ -1140,39 +1600,23 @@ function sendToSheet(data, callback) {
 // ══════════════════════════════════════════
 function refreshDashboard() {
   fetchSheetData(function(err, rows) {
-    if (err || !rows) {
-      showToast("Gagal memuat data dari Sheets", "error");
-      return;
-    }
+    if (err || !rows) { showToast("Gagal memuat data dari Sheets", "error"); return; }
     allCustomers = rows;
     var today = new Date().toLocaleDateString("id-ID");
-    var todayRows = rows.filter(function(r){
-      return r[0] && r[0].trim() === today;
-    });
+    var todayRows = rows.filter(function(r){ return r[0] && r[0].trim() === today; });
 
-    document.getElementById("statTotal").textContent = todayRows.length;
-    document.getElementById("statBerangkat").textContent =
-      todayRows.filter(function(r){ return r[1] && isKeberangkatan(r[1]); }).length;
-    document.getElementById("statJemput").textContent =
-      todayRows.filter(function(r){ return r[1] && !isKeberangkatan(r[1]); }).length;
-    document.getElementById("statDrop").textContent =
-      todayRows.filter(function(r){ return r[6] && r[6].toLowerCase().includes("drop"); }).length;
+    document.getElementById("statTotal").textContent    = todayRows.length;
+    document.getElementById("statBerangkat").textContent = todayRows.filter(function(r){ return r[1] && isKeberangkatan(r[1]); }).length;
+    document.getElementById("statJemput").textContent   = todayRows.filter(function(r){ return r[1] && !isKeberangkatan(r[1]); }).length;
+    document.getElementById("statDrop").textContent     = todayRows.filter(function(r){ return r[6] && r[6].toLowerCase().includes("drop"); }).length;
 
     var html = "";
     if (todayRows.length === 0) {
       html = '<div class="empty-state"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg><p>Belum ada customer hari ini</p></div>';
     } else {
       html = '<div class="table-wrap"><table><thead><tr><th>#</th><th>Nama</th><th>Rute</th><th>Layanan</th><th>Jam</th><th>Pnp</th><th>Tujuan</th></tr></thead><tbody>';
-      todayRows.forEach(function(r, i){
-        html += "<tr>";
-        html += "<td>" + (i+1) + "</td>";
-        html += "<td><strong>" + (r[2]||"—") + "</strong></td>";
-        html += "<td>" + ruteBadge(r[1]) + "</td>";
-        html += "<td>" + ketBadge(r[6]) + "</td>";
-        html += "<td class='mono'>" + (r[3]||"—") + "</td>";
-        html += "<td>" + (r[7]||"1") + "</td>";
-        html += "<td style='max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap'>" + (r[5]||"—") + "</td>";
-        html += "</tr>";
+      todayRows.forEach(function(r, i) {
+        html += "<tr><td>" + (i+1) + "</td><td><strong>" + (r[2]||"—") + "</strong></td><td>" + ruteBadge(r[1]) + "</td><td>" + ketBadge(r[6]) + "</td><td class='mono'>" + (r[3]||"—") + "</td><td>" + (r[7]||"1") + "</td><td style='max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap'>" + (r[5]||"—") + "</td></tr>";
       });
       html += "</tbody></table></div>";
     }
@@ -1186,26 +1630,17 @@ function isKeberangkatan(rute) {
 }
 
 // ══════════════════════════════════════════
-//  FORM INPUT
+//  FORM MANUAL
 // ══════════════════════════════════════════
 var currentFormTab = "malang";
-
 var ruteOptions = {
-  malang: [
-    "MLG-JND", "MLG-SBY", "MLG-PRK", "MLG-SDA",
-    "BATU-JND","BATU-SBY","BATU-PRK",
-    "MALANG(DAU)-JND","MALANG(WAGIR)-JND","MALANG(KEBUNAGUNG)-JND","MALANG(KEDUNGKANDANG)-JND"
-  ],
-  juanda: [
-    "JND-MLG","JND-BATU","JND-MALANG(DAU)","JND-MALANG(WAGIR)",
-    "SBY-MLG","SBY-BATU",
-    "PRK-MLG","PRK-BATU","SDA-MLG"
-  ]
+  malang: ["MLG-JND","MLG-SBY","MLG-PRK","MLG-SDA","BATU-JND","BATU-SBY","BATU-PRK","MALANG(DAU)-JND","MALANG(WAGIR)-JND","MALANG(KEBUNAGUNG)-JND","MALANG(KEDUNGKANDANG)-JND"],
+  juanda: ["JND-MLG","JND-BATU","JND-MALANG(DAU)","JND-MALANG(WAGIR)","SBY-MLG","SBY-BATU","PRK-MLG","PRK-BATU","SDA-MLG"]
 };
 
 function switchFormTab(tab) {
   currentFormTab = tab;
-  document.querySelectorAll(".tab").forEach(function(t,i){
+  document.querySelectorAll("#modeManual .tab").forEach(function(t, i) {
     t.classList.toggle("active", (tab === "malang" && i===0)||(tab === "juanda" && i===1));
   });
   updateFormRuteOptions(tab);
@@ -1214,7 +1649,7 @@ function switchFormTab(tab) {
 function updateFormRuteOptions(tab) {
   var sel = document.getElementById("f_rute");
   sel.innerHTML = '<option value="">Pilih Rute</option>';
-  ruteOptions[tab].forEach(function(r){
+  ruteOptions[tab].forEach(function(r) {
     var o = document.createElement("option");
     o.value = r; o.textContent = r;
     sel.appendChild(o);
@@ -1223,25 +1658,17 @@ function updateFormRuteOptions(tab) {
 }
 
 function onRuteChange() {
-  var rute  = document.getElementById("f_rute").value;
+  var rute = document.getElementById("f_rute").value;
   var isBandara = rute.includes("JND");
   var isJuanda  = currentFormTab === "juanda";
-
-  // Tampilkan field bandara jika ada Juanda
   document.getElementById("f_bandara").style.display = isBandara ? "grid" : "none";
-
-  // Jam landing/angkatan
   if (isJuanda || rute.startsWith("JND") || rute.startsWith("SBY-") || rute.startsWith("PRK-") || rute.startsWith("SDA-")) {
     document.getElementById("f_jamAngkatanField").style.display = "none";
     document.getElementById("f_jamLandingField").style.display = "flex";
-    document.querySelector('label[for="f_jamLanding"], #f_jamLandingField label').textContent =
-      rute.includes("JND") ? "Jam Landing *" : "Jam *";
   } else {
     document.getElementById("f_jamAngkatanField").style.display = "flex";
     document.getElementById("f_jamLandingField").style.display = "none";
   }
-
-  // Auto isi tujuan jika ke Juanda
   var tujuan = document.getElementById("f_tujuan");
   if (rute.endsWith("-JND")) {
     tujuan.value = "Bandara Internasional Juanda, Surabaya";
@@ -1254,68 +1681,41 @@ function onRuteChange() {
 
 function submitReservasi(e) {
   e.preventDefault();
-  var rute   = document.getElementById("f_rute").value;
-  var ket    = document.getElementById("f_keterangan").value;
-  var tanggal = document.getElementById("f_tanggal").value;
-  var jamA   = document.getElementById("f_jamAngkatan").value;
-  var jamL   = document.getElementById("f_jamLanding").value;
-  var jam    = jamA || jamL;
-  var nama   = document.getElementById("f_nama").value.trim();
-  var telp   = document.getElementById("f_telp").value.trim();
-  var maskapai = document.getElementById("f_maskapai").value.trim();
-  var kode   = document.getElementById("f_kodepesawat").value.trim();
+  var rute = document.getElementById("f_rute").value;
+  var ket  = document.getElementById("f_keterangan").value;
+  var tgl  = document.getElementById("f_tanggal").value;
+  var jamA = document.getElementById("f_jamAngkatan").value;
+  var jamL = document.getElementById("f_jamLanding").value;
+  var jam  = jamA || jamL;
+  var nama = document.getElementById("f_nama").value.trim();
+  var telp = document.getElementById("f_telp").value.trim();
+  var maskapai    = document.getElementById("f_maskapai").value.trim();
+  var kode        = document.getElementById("f_kodepesawat").value.trim();
   var penjemputan = document.getElementById("f_penjemputan").value.trim();
-  var tujuan = document.getElementById("f_tujuan").value.trim();
-  var jumlah = document.getElementById("f_jumlah").value;
-  var catatan = document.getElementById("f_catatan").value.trim();
+  var tujuan      = document.getElementById("f_tujuan").value.trim();
+  var jumlah      = document.getElementById("f_jumlah").value;
+  var catatan     = document.getElementById("f_catatan").value.trim();
 
-  if (!rute || !jam || !nama || !telp) {
-    showToast("Lengkapi semua field wajib!", "error"); return;
-  }
+  if (!rute || !jam || !nama || !telp) { showToast("Lengkapi semua field wajib!", "error"); return; }
 
-  // Format tanggal ke ID
-  var tglObj = new Date(tanggal);
-  var tglStr = tglObj.toLocaleDateString("id-ID");
-
-  // Maskapai + kode gabungan
+  var tglStr = new Date(tgl).toLocaleDateString("id-ID");
   var maskapaiKode = [maskapai, kode].filter(Boolean).join(" / ") || "-";
-
-  // Data untuk Sheets (sesuaikan kolom)
   var rowData = {
     action: "appendReservasi",
-    data: [
-      tglStr,      // A: Tanggal
-      rute,        // B: Rute
-      nama,        // C: Nama
-      jam,         // D: Angkatan/Penjemputan
-      maskapaiKode,// E: Maskapai/Kode
-      tujuan,      // F: Alamat Tujuan
-      penjemputan, // G: Alamat Penjemputan (extra)
-      telp,        // H: No HP
-      ket,         // I: Keterangan
-      jumlah,      // J: Jumlah pnp
-      catatan,     // K: Catatan
-      "FALSE"      // L: Status (checkbox)
-    ]
+    data: [tglStr, rute, nama, jam, maskapaiKode, tujuan, penjemputan, telp, ket, jumlah, catatan, "FALSE"]
   };
 
   document.getElementById("submitFormBtn").disabled = true;
-  sendToSheet(rowData, function(err, res) {
+  sendToSheet(rowData, function(err) {
     document.getElementById("submitFormBtn").disabled = false;
-    if (err) {
-      showToast("Gagal menyimpan. Coba lagi.", "error");
-    } else {
-      showToast("Reservasi " + nama + " berhasil disimpan!", "success");
-      resetForm();
-      allCustomers = []; // invalidate cache
-    }
+    if (err) { showToast("Gagal menyimpan. Coba lagi.", "error"); }
+    else { showToast("Reservasi " + nama + " berhasil disimpan!", "success"); resetForm(); allCustomers = []; }
   });
 }
 
 function resetForm() {
   document.getElementById("reservasiForm").reset();
-  var today = new Date().toISOString().split("T")[0];
-  document.getElementById("f_tanggal").value = today;
+  document.getElementById("f_tanggal").value = new Date().toISOString().split("T")[0];
   onRuteChange();
 }
 
@@ -1323,7 +1723,7 @@ function resetForm() {
 //  DATA CUSTOMER TABLE
 // ══════════════════════════════════════════
 function loadCustomerData() {
-  fetchSheetData(function(err, rows){
+  fetchSheetData(function(err, rows) {
     if (err) { showToast("Gagal memuat data", "error"); return; }
     allCustomers = rows;
     filterCustomer();
@@ -1335,8 +1735,7 @@ function filterCustomer() {
   var rute = document.getElementById("filterRute").value;
   var ket  = document.getElementById("filterKet").value;
   var nama = document.getElementById("filterNama").value.toLowerCase();
-
-  var filtered = allCustomers.filter(function(r){
+  var filtered = allCustomers.filter(function(r) {
     if (!r || r.length < 3) return false;
     var tglMatch  = !tgl  || r[0] === new Date(tgl).toLocaleDateString("id-ID");
     var ruteMatch = !rute || (r[1] && r[1].includes(rute));
@@ -1344,7 +1743,6 @@ function filterCustomer() {
     var namaMatch = !nama || (r[2] && r[2].toLowerCase().includes(nama));
     return tglMatch && ruteMatch && ketMatch && namaMatch;
   });
-
   renderCustomerTable(filtered);
 }
 
@@ -1355,10 +1753,9 @@ function renderCustomerTable(rows) {
     return;
   }
   var html = "";
-  rows.forEach(function(r, i){
+  rows.forEach(function(r, i) {
     var statusChecked = r[11] === "TRUE" || r[11] === "1";
-    html += "<tr>";
-    html += "<td class='mono' style='color:#94a3b8'>" + (i+1) + "</td>";
+    html += "<tr><td class='mono' style='color:#94a3b8'>" + (i+1) + "</td>";
     html += "<td class='mono' style='white-space:nowrap'>" + (r[0]||"—") + "</td>";
     html += "<td><strong>" + (r[2]||"—") + "</strong><br><span style='font-size:0.75rem;color:#94a3b8'>" + (r[9]||"—") + "</span></td>";
     html += "<td>" + ruteBadge(r[1]) + "</td>";
@@ -1396,9 +1793,8 @@ function loadUnscheduled() {
   var tgl = document.getElementById("j_tanggal").value;
   if (!tgl) return;
   var tglStr = new Date(tgl).toLocaleDateString("id-ID");
-
   if (allCustomers.length === 0) {
-    fetchSheetData(function(err, rows){
+    fetchSheetData(function(err, rows) {
       if (!err) { allCustomers = rows; renderUnscheduled(tglStr); }
     });
   } else {
@@ -1408,41 +1804,31 @@ function loadUnscheduled() {
 
 function renderUnscheduled(tglStr) {
   var assigned = [];
-  jadwalSlots.forEach(function(slot){
-    slot.customers.forEach(function(c){ assigned.push(c._rowIdx); });
-  });
-
-  var list = allCustomers.filter(function(r, idx){
+  jadwalSlots.forEach(function(slot){ slot.customers.forEach(function(c){ assigned.push(c._rowIdx); }); });
+  var list = allCustomers.filter(function(r, idx) {
     return r[0] && r[0].trim() === tglStr && !assigned.includes(idx);
   });
-
   var el = document.getElementById("unscheduledList");
   if (list.length === 0) {
     el.innerHTML = '<div class="empty-state" style="padding:16px"><p>Semua customer sudah terjadwal ✓</p></div>';
     return;
   }
-
   var html = "";
-  list.forEach(function(r, i){
+  list.forEach(function(r) {
     var origIdx = allCustomers.indexOf(r);
     html += '<div class="customer-item" id="unsch_' + origIdx + '">';
     html += '<div class="type-dot ' + getDotClass(r[8]) + '"></div>';
-    html += '<div class="customer-detail">';
-    html += '<div class="customer-name">' + (r[2]||"—") + '</div>';
-    html += '<div class="customer-route">' + ruteBadgeText(r[1]) + " · " + (r[3]||"?") + " · " + (r[8]||"") + '</div>';
+    html += '<div class="customer-detail"><div class="customer-name">' + (r[2]||"—") + '</div>';
+    html += '<div class="customer-route">' + (r[1]||"") + ' · ' + (r[3]||"?") + ' · ' + (r[8]||"") + '</div>';
     if (r[4] && r[4] !== "-") { html += '<div style="font-size:0.76rem;color:#94a3b8">' + r[4] + '</div>'; }
-    html += '</div>';
-    html += '<button class="btn btn-primary btn-sm" onclick="assignToSlot(' + origIdx + ')">+ Jadwalkan</button>';
-    html += '</div>';
+    html += '</div><button class="btn btn-primary btn-sm" onclick="assignToSlot(' + origIdx + ')">+ Jadwalkan</button></div>';
   });
   el.innerHTML = html;
 }
 
 function addDriverSlot() {
   var drivers = getDrivers().filter(function(d){ return d.status === "Aktif"; });
-  if (drivers.length === 0) {
-    showToast("Belum ada driver aktif. Tambahkan driver dulu.", "error"); return;
-  }
+  if (drivers.length === 0) { showToast("Belum ada driver aktif!", "error"); return; }
   jadwalSlots.push({ driverId: drivers[0].id, jam: "01.00", customers: [] });
   renderDriverSlots();
   updateJadwalPreview();
@@ -1458,76 +1844,49 @@ function removeDriverSlot(idx) {
 function renderDriverSlots() {
   var container = document.getElementById("driverSlots");
   var drivers   = getDrivers().filter(function(d){ return d.status === "Aktif"; });
-
   if (jadwalSlots.length === 0) {
     container.innerHTML = '<div class="empty-state"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg><p>Klik "Tambah Slot Driver" untuk mulai</p></div>';
     return;
   }
-
-  container.innerHTML = jadwalSlots.map(function(slot, idx){
+  container.innerHTML = jadwalSlots.map(function(slot, idx) {
     var driver = drivers.find(function(d){ return d.id == slot.driverId; }) || drivers[0];
     var driverOpts = drivers.map(function(d){
       return '<option value="' + d.id + '"' + (d.id == slot.driverId ? " selected" : "") + '>' + d.nama + ' / ' + d.kendaraan + ' ' + d.plat + '</option>';
     }).join("");
-
     var jamOpts = ["01.00","03.00","05.00","07.00","09.00","11.00","13.00","15.00","17.00"].map(function(j){
       return '<option value="' + j + '"' + (j === slot.jam ? " selected" : "") + '>' + j + '</option>';
     }).join("");
-
     var customersHtml = slot.customers.length === 0
       ? '<div style="color:#94a3b8;font-size:0.82rem;padding:8px 0">Belum ada customer — jadwalkan dari daftar bawah</div>'
       : slot.customers.map(function(c, ci){
           return '<div class="customer-item">' +
             '<div class="type-dot ' + getDotClass(c.ket) + '"></div>' +
-            '<div class="customer-detail">' +
-            '<div class="customer-name">' + c.nama + '</div>' +
+            '<div class="customer-detail"><div class="customer-name">' + c.nama + '</div>' +
             '<div class="customer-route">' + c.rute + ' · ' + (c.jam||"") + (c.maskapai?" · "+c.maskapai:"") + '</div>' +
-            '<div style="font-size:0.76rem;color:#64748b">' + (c.tujuan||"") + '</div>' +
-            '</div>' +
-            '<button class="btn btn-danger btn-sm" onclick="removeCustomerFromSlot(' + idx + ',' + ci + ')">✕</button>' +
-            '</div>';
+            '<div style="font-size:0.76rem;color:#64748b">' + (c.tujuan||"") + '</div></div>' +
+            '<button class="btn btn-danger btn-sm" onclick="removeCustomerFromSlot(' + idx + ',' + ci + ')">✕</button></div>';
         }).join("");
-
     return '<div class="driver-slot">' +
       '<div class="driver-slot-header">' +
       '<div style="display:flex;gap:10px;align-items:center;flex:1;flex-wrap:wrap">' +
-      '<select class="field input" style="padding:7px 10px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:0.85rem;font-weight:600" onchange="updateSlotDriver(' + idx + ',this.value)">' + driverOpts + '</select>' +
-      '<select class="field input" style="padding:7px 10px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:0.85rem" onchange="updateSlotJam(' + idx + ',this.value)">' + jamOpts + '</select>' +
-      '</div>' +
-      '<button class="btn btn-danger btn-sm" onclick="removeDriverSlot(' + idx + ')">Hapus</button>' +
-      '</div>' +
-      customersHtml +
-      '</div>';
+      '<select style="padding:7px 10px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:0.85rem;font-weight:600" onchange="updateSlotDriver(' + idx + ',this.value)">' + driverOpts + '</select>' +
+      '<select style="padding:7px 10px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:0.85rem" onchange="updateSlotJam(' + idx + ',this.value)">' + jamOpts + '</select>' +
+      '</div><button class="btn btn-danger btn-sm" onclick="removeDriverSlot(' + idx + ')">Hapus</button></div>' +
+      customersHtml + '</div>';
   }).join("");
 }
 
-function updateSlotDriver(idx, val) {
-  jadwalSlots[idx].driverId = parseInt(val);
-  updateJadwalPreview();
-}
-function updateSlotJam(idx, val) {
-  jadwalSlots[idx].jam = val;
-  updateJadwalPreview();
-}
+function updateSlotDriver(idx, val) { jadwalSlots[idx].driverId = parseInt(val); updateJadwalPreview(); }
+function updateSlotJam(idx, val)    { jadwalSlots[idx].jam = val; updateJadwalPreview(); }
 
 function assignToSlot(rowIdx) {
-  if (jadwalSlots.length === 0) {
-    showToast("Tambahkan slot driver dulu!", "error"); return;
-  }
+  if (jadwalSlots.length === 0) { showToast("Tambahkan slot driver dulu!", "error"); return; }
   var r = allCustomers[rowIdx];
   var customer = {
-    _rowIdx: rowIdx,
-    nama:    r[2] || "—",
-    rute:    r[1] || "",
-    jam:     r[3] || "",
-    maskapai: r[4] || "",
-    penjemputan: r[6] || "",
-    tujuan:  r[5] || "",
-    ket:     r[8] || "Reguler",
-    jumlah:  r[9] || "1"
+    _rowIdx: rowIdx, nama: r[2]||"—", rute: r[1]||"", jam: r[3]||"",
+    maskapai: r[4]||"", penjemputan: r[6]||"", tujuan: r[5]||"",
+    ket: r[8]||"Reguler", jumlah: r[9]||"1"
   };
-
-  // Assign ke slot terakhir
   var targetSlot = jadwalSlots.length - 1;
   jadwalSlots[targetSlot].customers.push(customer);
   renderDriverSlots();
@@ -1539,81 +1898,67 @@ function assignToSlot(rowIdx) {
 function removeCustomerFromSlot(slotIdx, custIdx) {
   jadwalSlots[slotIdx].customers.splice(custIdx, 1);
   renderDriverSlots();
-  var tgl = document.getElementById("j_tanggal").value;
-  renderUnscheduled(new Date(tgl).toLocaleDateString("id-ID"));
+  renderUnscheduled(new Date(document.getElementById("j_tanggal").value).toLocaleDateString("id-ID"));
   updateJadwalPreview();
 }
 
 function updateJadwalPreview() {
   var tgl = document.getElementById("j_tanggal").value;
   if (!tgl) { document.getElementById("jadwalPreview").textContent = "Pilih tanggal..."; return; }
-
-  var tglObj  = new Date(tgl);
-  var hari    = tglObj.toLocaleDateString("id-ID", { weekday:"long" }).toUpperCase();
-  var tglFmt  = tglObj.toLocaleDateString("id-ID", { day:"numeric", month:"long", year:"numeric" }).toUpperCase();
+  var tglObj = new Date(tgl);
+  var hari   = tglObj.toLocaleDateString("id-ID", { weekday:"long" }).toUpperCase();
+  var tglFmt = tglObj.toLocaleDateString("id-ID", { day:"numeric", month:"long", year:"numeric" }).toUpperCase();
   var drivers = getDrivers();
-
-  var lines = [];
-  lines.push("JADWAL " + hari + " " + tglFmt);
-  lines.push("");
-
+  var lines = ["JADWAL " + hari + " " + tglFmt, ""];
   var assigned = [];
-  jadwalSlots.forEach(function(slot){
+
+  jadwalSlots.forEach(function(slot) {
     var driver = drivers.find(function(d){ return d.id == slot.driverId; });
     if (!driver) return;
-
     var carLine = driver.kendaraan.toUpperCase() + " " + driver.plat.toUpperCase();
     if (driver.keterangan) carLine += " " + driver.keterangan.toUpperCase();
     lines.push(slot.jam + "/" + driver.nama.toUpperCase() + "/" + carLine);
 
-    // Pisah B (berangkat) dan P (jemput)
     var bList = [], pList = [];
-    slot.customers.forEach(function(c){
-      if (isKeberangkatan(c.rute)) bList.push(c);
-      else pList.push(c);
+    slot.customers.forEach(function(c) {
+      if (isKeberangkatan(c.rute)) bList.push(c); else pList.push(c);
       assigned.push(c._rowIdx);
     });
 
     if (bList.length > 0) {
-      var totalPnp = bList.reduce(function(s,c){ return s + parseInt(c.jumlah||1); }, 0);
-      var isDrop = bList.some(function(c){ return c.ket && c.ket.toLowerCase().includes("drop"); });
-      var harga  = isDrop ? "(DROP)" : "(" + totalPnp + ")";
-      lines.push("B: " + harga + " NON TOL");
-      bList.forEach(function(c){
+      var totB = bList.reduce(function(s,c){ return s + parseInt(c.jumlah||1); }, 0);
+      var isDrpB = bList.some(function(c){ return c.ket && c.ket.toLowerCase().includes("drop"); });
+      lines.push("B: " + (isDrpB ? "(DROP)" : "(" + totB + ")") + " NON TOL");
+      bList.forEach(function(c) {
         var detail = "  * " + c.nama;
-        if (c.jam)     detail += " Pesawat jam " + c.jam;
+        if (c.jam) detail += " Pesawat jam " + c.jam;
         if (c.maskapai && c.maskapai !== "-") detail += " " + c.maskapai;
         detail += ": " + (c.penjemputan || c.rute);
         if (c.tujuan && c.tujuan !== c.penjemputan) detail += " : " + c.tujuan;
         lines.push(detail);
       });
     }
-
     if (pList.length > 0) {
-      var totalPnp2 = pList.reduce(function(s,c){ return s + parseInt(c.jumlah||1); }, 0);
-      var isDrop2 = pList.some(function(c){ return c.ket && c.ket.toLowerCase().includes("drop"); });
-      var harga2 = isDrop2 ? "DROP" : totalPnp2;
-      lines.push("P: " + harga2 + " NON TOL");
-      pList.forEach(function(c){
+      var totP = pList.reduce(function(s,c){ return s + parseInt(c.jumlah||1); }, 0);
+      var isDrpP = pList.some(function(c){ return c.ket && c.ket.toLowerCase().includes("drop"); });
+      lines.push("P: " + (isDrpP ? "DROP (500)" : totP) + " NON TOL");
+      pList.forEach(function(c) {
         var detail = "  * " + c.nama;
         if (c.jam) detail += " landing jam " + c.jam;
-        detail += ": " + (c.rute.split("-")[0] || "Juanda");
-        detail += ": " + (c.tujuan || "");
+        detail += ": " + (c.rute.split("-")[0] || "Juanda") + ": " + (c.tujuan || "");
         lines.push(detail);
       });
     }
     lines.push("");
   });
 
-  // Unscheduled
   var tglStr = tglObj.toLocaleDateString("id-ID");
-  var unscheduled = allCustomers.filter(function(r, idx){
+  var unscheduled = allCustomers.filter(function(r, idx) {
     return r[0] && r[0].trim() === tglStr && !assigned.includes(idx);
   });
-
   if (unscheduled.length > 0) {
     lines.push("BELUM TERKONDISIKAN");
-    unscheduled.forEach(function(r){
+    unscheduled.forEach(function(r) {
       var line = "  * " + (r[2]||"?");
       if (r[3]) line += " " + (isKeberangkatan(r[1]) ? "Pesawat jam " : "Landing jam ") + r[3];
       if (r[4] && r[4] !== "-") line += " " + r[4];
@@ -1622,15 +1967,12 @@ function updateJadwalPreview() {
       lines.push(line);
     });
   }
-
   document.getElementById("jadwalPreview").textContent = lines.join("\n");
 }
 
 function copyJadwal() {
   var text = document.getElementById("jadwalPreview").textContent;
-  if (!text || text.includes("Pilih tanggal")) {
-    showToast("Buat jadwal dulu!", "error"); return;
-  }
+  if (!text || text.includes("Pilih tanggal")) { showToast("Buat jadwal dulu!", "error"); return; }
   navigator.clipboard.writeText(text)
     .then(function(){ showToast("Jadwal berhasil di-copy!", "success"); })
     .catch(function(){ showToast("Gagal copy. Salin manual.", "error"); });
@@ -1640,14 +1982,11 @@ function simpanJadwal() {
   var text = document.getElementById("jadwalPreview").textContent;
   var tgl  = document.getElementById("j_tanggal").value;
   if (!text || !tgl) { showToast("Buat jadwal dulu!", "error"); return; }
-
-  var data = {
+  sendToSheet({
     action: "simpanJadwal",
     tanggal: new Date(tgl).toLocaleDateString("id-ID"),
-    jadwal:  text,
-    slots:   jadwalSlots
-  };
-  sendToSheet(data, function(err){
+    jadwal: text, slots: jadwalSlots
+  }, function(err) {
     if (err) showToast("Gagal menyimpan jadwal", "error");
     else showToast("Jadwal berhasil disimpan ke Sheets!", "success");
   });
@@ -1659,20 +1998,15 @@ function simpanJadwal() {
 function renderDriverTable() {
   var drivers = getDrivers();
   var html = "";
-  drivers.forEach(function(d, i){
-    html += "<tr>";
-    html += "<td class='mono' style='color:#94a3b8'>" + (i+1) + "</td>";
+  drivers.forEach(function(d, i) {
+    var statusCls = d.status === "Aktif" ? "badge-green" : d.status === "Libur" ? "badge-amber" : "badge-red";
+    html += "<tr><td class='mono' style='color:#94a3b8'>" + (i+1) + "</td>";
     html += "<td><strong>" + d.nama + "</strong></td>";
     html += "<td>" + d.kendaraan + "</td>";
     html += "<td class='mono'>" + d.plat + "</td>";
-    html += "<td>" + (d.keterangan || "—") + "</td>";
-    var statusCls = d.status === "Aktif" ? "badge-green" : d.status === "Libur" ? "badge-amber" : "badge-red";
+    html += "<td>" + (d.keterangan||"—") + "</td>";
     html += "<td><span class='badge " + statusCls + "'>" + d.status + "</span></td>";
-    html += "<td style='display:flex;gap:6px'>";
-    html += "<button class='btn btn-outline btn-sm' onclick='editDriver(" + d.id + ")'>Edit</button>";
-    html += "<button class='btn btn-danger btn-sm' onclick='deleteDriver(" + d.id + ")'>Hapus</button>";
-    html += "</td>";
-    html += "</tr>";
+    html += "<td style='display:flex;gap:6px'><button class='btn btn-outline btn-sm' onclick='editDriver(" + d.id + ")'>Edit</button><button class='btn btn-danger btn-sm' onclick='deleteDriver(" + d.id + ")'>Hapus</button></td></tr>";
   });
   document.getElementById("driverTableBody").innerHTML = html || '<tr><td colspan="7" style="text-align:center;padding:30px;color:#94a3b8">Belum ada driver</td></tr>';
 }
@@ -1684,25 +2018,22 @@ function openDriverModal(driverId) {
   if (driverId) {
     var d = getDrivers().find(function(x){ return x.id == driverId; });
     if (d) {
-      document.getElementById("dm_nama").value      = d.nama;
-      document.getElementById("dm_kendaraan").value = d.kendaraan;
-      document.getElementById("dm_plat").value      = d.plat;
+      document.getElementById("dm_nama").value       = d.nama;
+      document.getElementById("dm_kendaraan").value  = d.kendaraan;
+      document.getElementById("dm_plat").value       = d.plat;
       document.getElementById("dm_keterangan").value = d.keterangan || "";
-      document.getElementById("dm_status").value    = d.status;
+      document.getElementById("dm_status").value     = d.status;
     }
   } else {
-    document.getElementById("dm_nama").value = "";
-    document.getElementById("dm_plat").value = "";
-    document.getElementById("dm_keterangan").value = "";
+    ["dm_nama","dm_plat","dm_keterangan"].forEach(function(id){ document.getElementById(id).value = ""; });
   }
   document.getElementById("driverModal").classList.add("open");
 }
 function closeDriverModal() { document.getElementById("driverModal").classList.remove("open"); }
-function editDriver(id) { openDriverModal(id); }
+function editDriver(id)     { openDriverModal(id); }
 function deleteDriver(id) {
   if (!confirm("Hapus driver ini?")) return;
-  var drivers = getDrivers().filter(function(d){ return d.id != id; });
-  saveDrivers(drivers);
+  saveDrivers(getDrivers().filter(function(d){ return d.id != id; }));
   renderDriverTable();
   showToast("Driver dihapus", "success");
 }
@@ -1711,27 +2042,13 @@ function saveDriver() {
   if (!nama) { showToast("Nama driver wajib diisi!", "error"); return; }
   var drivers = getDrivers();
   if (editingDriverId) {
-    drivers = drivers.map(function(d){
+    drivers = drivers.map(function(d) {
       if (d.id != editingDriverId) return d;
-      return {
-        id: d.id,
-        nama:       document.getElementById("dm_nama").value.trim().toUpperCase(),
-        kendaraan:  document.getElementById("dm_kendaraan").value,
-        plat:       document.getElementById("dm_plat").value.trim().toUpperCase(),
-        keterangan: document.getElementById("dm_keterangan").value.trim(),
-        status:     document.getElementById("dm_status").value
-      };
+      return { id: d.id, nama: document.getElementById("dm_nama").value.trim().toUpperCase(), kendaraan: document.getElementById("dm_kendaraan").value, plat: document.getElementById("dm_plat").value.trim().toUpperCase(), keterangan: document.getElementById("dm_keterangan").value.trim(), status: document.getElementById("dm_status").value };
     });
   } else {
     var newId = Math.max.apply(null, drivers.map(function(d){ return d.id; }).concat([0])) + 1;
-    drivers.push({
-      id: newId,
-      nama:       document.getElementById("dm_nama").value.trim().toUpperCase(),
-      kendaraan:  document.getElementById("dm_kendaraan").value,
-      plat:       document.getElementById("dm_plat").value.trim().toUpperCase(),
-      keterangan: document.getElementById("dm_keterangan").value.trim(),
-      status:     document.getElementById("dm_status").value
-    });
+    drivers.push({ id: newId, nama: document.getElementById("dm_nama").value.trim().toUpperCase(), kendaraan: document.getElementById("dm_kendaraan").value, plat: document.getElementById("dm_plat").value.trim().toUpperCase(), keterangan: document.getElementById("dm_keterangan").value.trim(), status: document.getElementById("dm_status").value });
   }
   saveDrivers(drivers);
   renderDriverTable();
@@ -1744,21 +2061,19 @@ function saveDriver() {
 // ══════════════════════════════════════════
 function ruteBadge(rute) {
   if (!rute) return "—";
-  var r = rute.trim();
-  var cls = "badge-blue";
-  if (/^MLG-JND/i.test(r) || /^MALANG.*JND/i.test(r)) cls = "badge-red";
-  else if (/^JND-MLG/i.test(r) || /^JND-MALANG/i.test(r)) cls = "badge-blue";
-  else if (/^MLG-SBY/i.test(r) || /^MLG-PRK/i.test(r)) cls = "badge-amber";
-  else if (/^SBY-MLG/i.test(r) || /^PRK-MLG/i.test(r)) cls = "badge-green";
+  var r = rute.trim(), cls = "badge-blue";
+  if (/^MLG-JND/i.test(r)||/^MALANG.*JND/i.test(r)) cls = "badge-red";
+  else if (/^JND-MLG/i.test(r)||/^JND-MALANG/i.test(r)) cls = "badge-blue";
+  else if (/^MLG-SBY/i.test(r)||/^MLG-PRK/i.test(r)) cls = "badge-amber";
+  else if (/^SBY-MLG/i.test(r)||/^PRK-MLG/i.test(r)) cls = "badge-green";
   else if (/^BATU/i.test(r)) cls = "badge-purple";
   return '<span class="badge ' + cls + '">' + r + '</span>';
 }
-function ruteBadgeText(rute) { return rute || "—"; }
 function ketBadge(ket) {
   if (!ket) return "—";
   var k = ket.trim().toLowerCase();
-  if (k.includes("drop"))   return '<span class="badge badge-amber">Drop</span>';
-  if (k.includes("paket"))  return '<span class="badge badge-purple">Paket</span>';
+  if (k.includes("drop"))  return '<span class="badge badge-amber">Drop</span>';
+  if (k.includes("paket")) return '<span class="badge badge-purple">Paket</span>';
   return '<span class="badge badge-blue">Reguler</span>';
 }
 function getDotClass(ket) {
@@ -1768,18 +2083,15 @@ function getDotClass(ket) {
   if (k.includes("paket")) return "dot-p";
   return "dot-b";
 }
-function showLoading(show) {
-  document.getElementById("loadingBar").style.display = show ? "block" : "none";
-}
+function showLoading(show) { document.getElementById("loadingBar").style.display = show ? "block" : "none"; }
 function showToast(msg, type) {
-  var t   = document.getElementById("toast");
+  var t = document.getElementById("toast");
   var ico = document.getElementById("toastIcon");
-  var m   = document.getElementById("toastMsg");
   t.style.background = type === "success" ? "#15803d" : type === "error" ? "#dc2626" : "#1e293b";
   ico.innerHTML = type === "success"
     ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>'
     : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>';
-  m.textContent = msg;
+  document.getElementById("toastMsg").textContent = msg;
   t.classList.add("show");
   setTimeout(function(){ t.classList.remove("show"); }, 3500);
 }
