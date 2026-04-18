@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJS39P07P5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PJS39P07P5');
+    </script>
+    <title>Ga Perlu ke Bali, Tiga Pantai Malang Ini Juga Punya Pemandangan Indah! - UJS Travel</title>
+    <meta name="description" content="Malang punya deretan pantai tersembunyi yang tak kalah indah dari Bali. Simak 3 pantai terbaik di Malang yang wajib kamu kunjungi!" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "travellora-blue": "#305492",
+                        "travellora-dark": "#2C3E50",
+                        "travellora-gray": "#7F8C8D",
+                    },
+                    fontFamily: { sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"] },
+                },
+            },
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        .hero-article {
+            background: linear-gradient(160deg, #0a2540 0%, #1a4a7a 50%, #0d3b6e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-article::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('FOTO_HERO_PANTAI') center/cover no-repeat;
+            opacity: 0.35;
+        }
+        .wave-divider {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+        }
+
+        /* Nomor pantai besar dekoratif */
+        .pantai-number {
+            font-size: 7rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #305492;
+            opacity: 0.08;
+            position: absolute;
+            top: -1rem;
+            right: 1rem;
+            user-select: none;
+        }
+
+        /* Card pantai */
+        .pantai-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .pantai-img-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.25rem;
+        }
+        .pantai-img-wrap img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .pantai-img-wrap:hover img { transform: scale(1.05); }
+
+        .badge-pantai {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #305492;
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 9999px;
+        }
+
+        /* Quote CTA */
+        .cta-inline {
+            background: linear-gradient(135deg, #305492 0%, #1e3a6e 100%);
+            border-radius: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-inline::after {
+            content: '🌊';
+            position: absolute;
+            right: -10px;
+            bottom: -20px;
+            font-size: 8rem;
+            opacity: 0.08;
+            transform: rotate(-15deg);
+        }
+
+        /* TOC */
+        .toc-item:hover { color: #305492; padding-left: 8px; }
+        .toc-item { transition: all 0.2s ease; }
+
+        /* Reading progress bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #305492, #38bdf8);
+            z-index: 9999;
+            transition: width 0.1s linear;
+        }
+
+        /* Fade-in on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            border-left: 4px solid #305492;
+            background: #f0f5ff;
+            border-radius: 0 12px 12px 0;
+        }
+
+        body::-webkit-scrollbar { width: 6px; }
+        body::-webkit-scrollbar-track { background: #f8fafc; }
+        body::-webkit-scrollbar-thumb { background: #305492; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-travellora-dark">
+
+<!-- READING PROGRESS -->
+<div id="progress-bar" style="width:0%"></div>
+
+<!-- NAV -->
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <a href="index.html" class="flex items-center">
+                <img src="img/logo.png" alt="Logo UJS Travel" class="w-10 h-10 object-contain" />
+                <span class="text-xl font-bold text-travellora-dark ml-2">UJS TRAVEL</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-travellora-gray hover:text-travellora-dark transition-colors">Beranda</a>
+                <div class="relative group">
+                    <button class="text-travellora-gray hover:text-travellora-dark transition-colors flex items-center focus:outline-none">
+                        Layanan
+                        <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10 border border-gray-100">
+                        <div class="py-1">
+                            <a href="reguler.html" class="block px-4 py-2 text-sm text-travellora-gray hover:bg-gray-50">Reguler</a>
+                            <a href="carter-drop.html" class="block px-4 py-2 text-sm text-travellora-gray hover:bg-gray-50">Travel Drop</a>
+                            <a href="city-tour.html" class="block px-4 py-2 text-sm text-travellora-gray hover:bg-gray-50">City Tour</a>
+                            <a href="kirim-paket.html" class="block px-4 py-2 text-sm text-travellora-gray hover:bg-gray-50">Kirim Paket</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="index.html#jadwal" class="text-travellora-gray hover:text-travellora-dark transition-colors">Jadwal</a>
+                <a href="index.html#tentangkami" class="text-travellora-gray hover:text-travellora-dark transition-colors">Tentang</a>
+                <a href="blog.html" class="text-travellora-blue font-semibold hover:text-blue-700 transition-colors">Blog</a>
+                <a href="index.html#contact" class="text-travellora-gray hover:text-travellora-dark transition-colors">Kontak</a>
+                <a href="Form.html" class="bg-travellora-blue text-white px-5 py-2.5 rounded-lg font-medium border-2 border-travellora-blue hover:bg-white hover:text-travellora-blue transition-colors duration-300">Pesan Sekarang</a>
+            </div>
+            <div class="md:hidden">
+                <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-travellora-gray hover:text-travellora-dark focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="index.html" class="block px-3 py-2 text-travellora-gray">Beranda</a>
+            <a href="reguler.html" class="block px-3 py-2 text-travellora-gray">Reguler</a>
+            <a href="carter-drop.html" class="block px-3 py-2 text-travellora-gray">Travel Drop</a>
+            <a href="city-tour.html" class="block px-3 py-2 text-travellora-gray">City Tour</a>
+            <a href="blog.html" class="block px-3 py-2 text-travellora-blue font-semibold">Blog</a>
+            <a href="Form.html" class="block px-3 py-2 bg-travellora-blue text-white rounded-lg text-center mt-2">Pesan Sekarang</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO ARTIKEL -->
+<header class="hero-article py-20 md:py-32 relative">
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <!-- Breadcrumb -->
+        <div class="flex items-center justify-center gap-2 text-blue-200 text-sm mb-6">
+            <a href="index.html" class="hover:text-white transition-colors">Beranda</a>
+            <span>›</span>
+            <a href="blog.html" class="hover:text-white transition-colors">Blog</a>
+            <span>›</span>
+            <span class="text-white font-medium">Destinasi</span>
+        </div>
+
+        <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+            📍 Destinasi Wisata
+        </div>
+
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+            Ga Perlu ke Bali,<br>
+            <span class="text-yellow-300">Tiga Pantai Malang Ini</span><br>
+            Juga Punya Pemandangan Indah!
+        </h1>
+
+        <div class="flex items-center justify-center gap-4 text-blue-100 text-sm flex-wrap">
+            <span class="flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                April 2026
+            </span>
+            <span class="text-white/30">•</span>
+            <span class="flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                5 menit baca
+            </span>
+            <span class="text-white/30">•</span>
+            <span class="flex items-center gap-1.5">✍️ Tim UJS Travel</span>
+        </div>
+    </div>
+
+    <!-- Wave bottom -->
+    <svg class="wave-divider" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path fill="#f9fafb" d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z"/>
+    </svg>
+</header>
+
+<!-- KONTEN UTAMA -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+        <!-- ARTIKEL BODY -->
+        <article class="lg:col-span-2">
+
+            <!-- INTRO -->
+            <div class="fade-in mb-10">
+                <p class="text-lg leading-relaxed text-travellora-gray">
+                    Bali adalah destinasi paling terkenal di Indonesia — terutama pantainya. Tapi tau ga sih, sebenernya Malang juga punya banyak pilihan pantai yang bisa kamu kunjungi? Mulai dari <strong>pasir putih hingga air laut yang jernih</strong>, Malang punya deretan pantai tersembunyi yang memukau.
+                </p>
+                <p class="text-lg leading-relaxed text-travellora-gray mt-4">
+                    Eits, jangan salah — pemandangan dan ombaknya juga <strong>tidak kalah indah</strong> dengan pantai milik Bali. Untuk itu, berikut kami rangkum tiga pantai yang bisa kamu kunjungi selama di Malang. 🌊
+                </p>
+            </div>
+
+            <!-- TABLE OF CONTENTS -->
+            <div class="fade-in bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-12">
+                <p class="font-bold text-travellora-blue text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                    Daftar Pantai
+                </p>
+                <ol class="space-y-2">
+                    <li><a href="#pantai-modangan" class="toc-item flex items-center gap-3 text-travellora-dark font-semibold text-sm py-1">
+                        <span class="w-6 h-6 bg-travellora-blue text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                        Pantai Modangan — Eksotis + Paralayang
+                    </a></li>
+                    <li><a href="#pantai-ngliyep" class="toc-item flex items-center gap-3 text-travellora-dark font-semibold text-sm py-1">
+                        <span class="w-6 h-6 bg-travellora-blue text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                        Pantai Ngliyep — Karang & Legenda
+                    </a></li>
+                    <li><a href="#pantai-tiga-warna" class="toc-item flex items-center gap-3 text-travellora-dark font-semibold text-sm py-1">
+                        <span class="w-6 h-6 bg-travellora-blue text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                        Pantai Tiga Warna — Gradasi Warna & Konservasi
+                    </a></li>
+                </ol>
+            </div>
+
+            <!-- ======================== -->
+            <!-- PANTAI 1: MODANGAN -->
+            <!-- ======================== -->
+            <section id="pantai-modangan" class="fade-in mb-16 pantai-card">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="badge-pantai">🏖️ Pantai #1</span>
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                </div>
+
+                <h2 class="text-2xl md:text-3xl font-extrabold text-travellora-dark mb-5 leading-tight">
+                    Pantai Modangan
+                </h2>
+
+                <!-- FOTO MODANGAN -->
+                <div class="pantai-img-wrap mb-6 shadow-lg">
+                    <!--
+                    ============================================================
+                    📸 PANDUAN FOTO — PANTAI MODANGAN
+                    Ganti src di bawah ini dengan path foto kamu.
+                    Contoh: src="img/pantai-modangan.jpg"
+
+                    Ukuran ideal: 1200 x 640px (landscape)
+                    Format: .jpg atau .webp untuk performa terbaik
+                    ============================================================
+                    -->
+                    <img
+                        src="img/pantai-modangan.jpg"
+                        alt="Pantai Modangan Malang dengan pemandangan paralayang"
+                        onerror="this.parentElement.innerHTML=`
+                            <div style='height:320px;background:linear-gradient(135deg,#1e3a6e,#305492);border-radius:1.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;'>
+                                <span style='font-size:3rem;'>🏖️</span>
+                                <p style='color:white;font-weight:700;font-size:1rem;margin:0;'>Pantai Modangan</p>
+                                <p style='color:#93c5fd;font-size:0.8rem;margin:0;'>Tambahkan foto di sini — lihat panduan di komentar HTML</p>
+                            </div>`"
+                    />
+                    <div style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.5);color:white;font-size:0.7rem;padding:3px 10px;border-radius:9999px;backdrop-filter:blur(4px);">📷 Pantai Modangan, Donomulyo</div>
+                </div>
+
+                <div class="prose-custom space-y-4">
+                    <p class="text-travellora-gray leading-relaxed text-base">
+                        Pantai ini berada di <strong>Sumber Rejo, Sumber Broto, Donomulyo, Kabupaten Malang</strong> dan memiliki daya tarik yang berbeda dengan pantai di Malang pada umumnya.
+                    </p>
+                    <p class="text-travellora-gray leading-relaxed text-base">
+                        Selain menawarkan pemandangan pantai yang eksotis, Pantai Modangan juga menyediakan atraksi lain berupa <strong>olahraga ekstrim paralayang</strong>. Wisatawan bisa mencoba olahraga ini dengan datang ke <strong>Bukit Waung</strong> yang berada dalam satu area dengan jalur ke arah Pantai Modangan.
+                    </p>
+
+                    <div class="highlight-box p-4 my-6">
+                        <p class="text-travellora-dark font-semibold text-sm flex items-start gap-2">
+                            <span class="text-travellora-blue text-lg leading-none">✈️</span>
+                            Dengan menaiki paralayang, wisatawan bisa menikmati keindahan pemandangan Pantai Modangan dari ketinggian — sensasi yang tidak akan terlupakan!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Info Cepat -->
+                <div class="mt-6 bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <p class="text-xs font-bold text-travellora-blue uppercase tracking-wider mb-3">📌 Info Lokasi</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-travellora-gray">
+                        <div class="flex items-center gap-2"><span>📍</span> Donomulyo, Kabupaten Malang</div>
+                        <div class="flex items-center gap-2"><span>⭐</span> Paralayang di Bukit Waung</div>
+                        <div class="flex items-center gap-2"><span>🌅</span> Cocok untuk sunset</div>
+                        <div class="flex items-center gap-2"><span>🚗</span> ±2 jam dari Kota Malang</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================== -->
+            <!-- PANTAI 2: NGLIYEP -->
+            <!-- ======================== -->
+            <section id="pantai-ngliyep" class="fade-in mb-16 pantai-card">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="badge-pantai">🌊 Pantai #2</span>
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                </div>
+
+                <h2 class="text-2xl md:text-3xl font-extrabold text-travellora-dark mb-5 leading-tight">
+                    Pantai Ngliyep
+                </h2>
+
+                <!-- FOTO NGLIYEP -->
+                <div class="pantai-img-wrap mb-6 shadow-lg">
+                    <!--
+                    ============================================================
+                    📸 PANDUAN FOTO — PANTAI NGLIYEP
+                    Ganti src di bawah ini dengan path foto kamu.
+                    Contoh: src="img/pantai-ngliyep.jpg"
+
+                    Ukuran ideal: 1200 x 640px (landscape)
+                    Format: .jpg atau .webp untuk performa terbaik
+                    ============================================================
+                    -->
+                    <img
+                        src="img/pantai-ngliyep.jpg"
+                        alt="Pantai Ngliyep Malang dengan karang dan hutan lindung"
+                        onerror="this.parentElement.innerHTML=`
+                            <div style='height:320px;background:linear-gradient(135deg,#0d4a3e,#1a7a5e);border-radius:1.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;'>
+                                <span style='font-size:3rem;'>🪨</span>
+                                <p style='color:white;font-weight:700;font-size:1rem;margin:0;'>Pantai Ngliyep</p>
+                                <p style='color:#6ee7b7;font-size:0.8rem;margin:0;'>Tambahkan foto di sini — lihat panduan di komentar HTML</p>
+                            </div>`"
+                    />
+                    <div style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.5);color:white;font-size:0.7rem;padding:3px 10px;border-radius:9999px;backdrop-filter:blur(4px);">📷 Pantai Ngliyep, Donomulyo</div>
+                </div>
+
+                <div class="space-y-4">
+                    <p class="text-travellora-gray leading-relaxed text-base">
+                        Masih berada di satu kecamatan dengan Pantai Modangan, Pantai Ngliyep adalah pilihan sempurna untuk kamu yang ingin melihat <strong>keindahan karang di Malang</strong>. Pantai ini terletak di <strong>Kedungsalam, Donomulyo, Kabupaten Malang</strong>.
+                    </p>
+                    <p class="text-travellora-gray leading-relaxed text-base">
+                        Pantai Ngliyep merupakan salah satu <strong>pantai tertua yang dikelola secara resmi</strong> oleh Malang sejak tahun 1970-an. Pantai ini menawarkan pesona ombak sedang, hutan lindung, serta legenda yang mengelilinginya — menjadikannya destinasi yang kaya akan nuansa alam dan budaya.
+                    </p>
+
+                    <div class="highlight-box p-4 my-6">
+                        <p class="text-travellora-dark font-semibold text-sm flex items-start gap-2">
+                            <span class="text-travellora-blue text-lg leading-none">🌿</span>
+                            Salah satu pantai bersejarah Malang yang sudah dikelola sejak 1970-an — kombinasi ombak, karang, dan hutan lindung yang jarang ditemukan di tempat lain.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <p class="text-xs font-bold text-travellora-blue uppercase tracking-wider mb-3">📌 Info Lokasi</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-travellora-gray">
+                        <div class="flex items-center gap-2"><span>📍</span> Kedungsalam, Donomulyo</div>
+                        <div class="flex items-center gap-2"><span>⭐</span> Pantai bersejarah sejak 1970-an</div>
+                        <div class="flex items-center gap-2"><span>🪨</span> Pemandangan karang eksotis</div>
+                        <div class="flex items-center gap-2"><span>🌲</span> Dikelilingi hutan lindung</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================== -->
+            <!-- PANTAI 3: TIGA WARNA -->
+            <!-- ======================== -->
+            <section id="pantai-tiga-warna" class="fade-in mb-16 pantai-card">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="badge-pantai">🎨 Pantai #3</span>
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                </div>
+
+                <h2 class="text-2xl md:text-3xl font-extrabold text-travellora-dark mb-5 leading-tight">
+                    Pantai Tiga Warna
+                </h2>
+
+                <!-- FOTO TIGA WARNA -->
+                <div class="pantai-img-wrap mb-6 shadow-lg">
+                    <!--
+                    ============================================================
+                    📸 PANDUAN FOTO — PANTAI TIGA WARNA
+                    Ganti src di bawah ini dengan path foto kamu.
+                    Contoh: src="img/pantai-tiga-warna.jpg"
+
+                    Ukuran ideal: 1200 x 640px (landscape)
+                    Format: .jpg atau .webp untuk performa terbaik
+                    ============================================================
+                    -->
+                    <img
+                        src="img/pantai-tiga-warna.jpg"
+                        alt="Pantai Tiga Warna Malang dengan gradasi warna air laut"
+                        onerror="this.parentElement.innerHTML=`
+                            <div style='height:320px;background:linear-gradient(135deg,#1e40af,#0369a1,#0891b2);border-radius:1.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;'>
+                                <span style='font-size:3rem;'>🌈</span>
+                                <p style='color:white;font-weight:700;font-size:1rem;margin:0;'>Pantai Tiga Warna</p>
+                                <p style='color:#bae6fd;font-size:0.8rem;margin:0;'>Tambahkan foto di sini — lihat panduan di komentar HTML</p>
+                            </div>`"
+                    />
+                    <div style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.5);color:white;font-size:0.7rem;padding:3px 10px;border-radius:9999px;backdrop-filter:blur(4px);">📷 Pantai Tiga Warna, Clungup Mangrove Conservation</div>
+                </div>
+
+                <div class="space-y-4">
+                    <p class="text-travellora-gray leading-relaxed text-base">
+                        Selain sebuah pantai, tempat ini juga merupakan <strong>kawasan konservasi hutan mangrove</strong> yang dinamai <strong>Clungup Mangrove Conservation (CMC)</strong>. Tempat konservasi ini dikelola sangat disiplin guna bermanfaat sebagai bagian dari <em>sustainable tourism</em> di Malang.
+                    </p>
+                    <p class="text-travellora-gray leading-relaxed text-base">
+                        Pantai ini dikenal akan keunikannya yang memiliki <strong>gradasi warna air laut</strong> — biru tua, hijau toska, dan kemerahan atau putih. Itulah mengapa disebut "Tiga Warna"!
+                    </p>
+
+                    <div class="highlight-box p-4 my-6">
+                        <p class="text-travellora-dark font-semibold text-sm flex items-start gap-2">
+                            <span class="text-travellora-blue text-lg leading-none">♻️</span>
+                            Untuk datang ke sini kamu perlu <strong>reservasi terlebih dahulu</strong>. Saat masuk, akan ada cek bagasi yang menghitung jumlah sampah plastik yang kamu bawa — dan jumlahnya harus sama dengan yang kamu bawa saat keluar. Itulah yang membuat pantai ini tetap bersih dan terjaga!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <p class="text-xs font-bold text-travellora-blue uppercase tracking-wider mb-3">📌 Info Lokasi</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-travellora-gray">
+                        <div class="flex items-center gap-2"><span>📍</span> Clungup Mangrove Conservation</div>
+                        <div class="flex items-center gap-2"><span>📅</span> Wajib reservasi dulu</div>
+                        <div class="flex items-center gap-2"><span>🌈</span> Gradasi air: biru, toska, putih</div>
+                        <div class="flex items-center gap-2"><span>🌿</span> Zero-waste beach policy</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA INLINE -->
+            <div class="fade-in cta-inline p-8 mb-10 text-white">
+                <p class="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">Mau Ke Pantai Malang?</p>
+                <h3 class="text-2xl font-extrabold mb-3 leading-tight">Sewa Mobil City Tour<br>Mulai <span class="text-yellow-300">Rp600.000</span> Aja!</h3>
+                <p class="text-blue-100 mb-6 text-sm leading-relaxed">
+                    Buat kamu yang akan datang mengunjungi Malang, kamu juga bisa menyewa mobil di UJS Tour and Travel untuk City Tour ke pantai-pantai di Malang. Mulai dari 600 ribu aja, kamu ga perlu bingung mikirin kendaraan!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="city-tour.html" class="inline-flex items-center justify-center gap-2 bg-white text-travellora-blue font-bold py-3 px-6 rounded-xl hover:bg-yellow-50 transition-colors text-sm">
+                        Lihat Paket City Tour
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="https://wa.me/6282316290290" target="_blank" class="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-xl transition-colors text-sm">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+                        Chat WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- SHARE -->
+            <div class="fade-in flex items-center justify-between border-t border-gray-200 pt-6">
+                <p class="text-sm text-travellora-gray font-semibold">Bagikan artikel ini:</p>
+                <div class="flex gap-3">
+                    <a href="https://wa.me/?text=Ga%20Perlu%20ke%20Bali%2C%20Tiga%20Pantai%20Malang%20Ini%20Juga%20Punya%20Pemandangan%20Indah%21%20https%3A%2F%2Fujstravelmalangjuanda.com%2Fartikel-pantai-malang-tiga-pantai-indah.html" target="_blank" class="w-9 h-9 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+                    </a>
+                    <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('Link disalin!'))" class="w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors" title="Salin link">
+                        <svg class="w-4 h-4 text-travellora-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- SIDEBAR -->
+        <aside class="lg:col-span-1 space-y-6">
+
+            <!-- Sticky wrapper -->
+            <div class="sticky top-24 space-y-6">
+
+                <!-- INFO SINGKAT -->
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <p class="text-xs font-bold text-travellora-blue uppercase tracking-wider mb-4">📊 Ringkasan</p>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center text-base">🏖️</span>
+                            <div>
+                                <p class="font-bold text-travellora-dark">3 Pantai Pilihan</p>
+                                <p class="text-travellora-gray text-xs">Modangan, Ngliyep, Tiga Warna</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center text-base">📍</span>
+                            <div>
+                                <p class="font-bold text-travellora-dark">Kabupaten Malang</p>
+                                <p class="text-travellora-gray text-xs">Area Donomulyo & sekitarnya</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center text-base">🚗</span>
+                            <div>
+                                <p class="font-bold text-travellora-dark">City Tour Tersedia</p>
+                                <p class="text-travellora-gray text-xs">Mulai Rp600.000 dari Malang</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PESAN CTA SIDEBAR -->
+                <div class="bg-travellora-blue rounded-2xl p-6 text-white">
+                    <p class="font-extrabold text-lg mb-2">Mau City Tour<br>ke Pantai Malang? 🌊</p>
+                    <p class="text-blue-200 text-sm mb-4">Kami siapkan kendaraan nyaman mulai 600 ribu. Bebas pilih destinasi!</p>
+                    <a href="https://wa.me/6282316290290?text=Halo%20UJS%20Travel%2C%20saya%20mau%20tanya%20tentang%20City%20Tour%20ke%20pantai%20Malang" target="_blank"
+                       class="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-4 rounded-xl transition-colors text-sm w-full">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+                        Chat Sekarang
+                    </a>
+                </div>
+
+                <!-- BACK TO BLOG -->
+                <a href="blog.html" class="flex items-center gap-2 text-travellora-blue font-semibold text-sm hover:underline">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    Kembali ke Blog
+                </a>
+
+            </div>
+        </aside>
+
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-travellora-blue text-white py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="text-blue-100 text-sm">&copy; 2024 UJS Travel Malang - Juanda Surabaya. Hak Cipta Dilindungi.</p>
+    </div>
+</footer>
+
+<!-- FLOATING WA -->
+<div class="fixed bottom-6 right-6 z-50">
+    <a href="https://wa.me/6282316290290" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-4 rounded-full shadow-xl flex items-center space-x-3 hover:scale-105 transition-all duration-300">
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+        <span class="text-base font-bold whitespace-nowrap">Chat WhatsApp 24 Jam</span>
+    </a>
+</div>
+
+<script>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        document.getElementById('progress-bar').style.width = progress + '%';
+    });
+
+    // Fade-in on scroll
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
