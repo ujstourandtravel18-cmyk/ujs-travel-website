@@ -69,6 +69,11 @@
         body::-webkit-scrollbar { width:6px; }
         body::-webkit-scrollbar-track { background:#f8fafc; }
         body::-webkit-scrollbar-thumb { background:#305492; border-radius:3px; }
+
+        /* PAGINATION */
+        .page-btn { transition:all 0.2s ease; }
+        .page-btn.active { background:#305492; color:white; border-color:#305492; }
+        .page-btn:hover:not(.active) { background:#f0f4ff; border-color:#305492; color:#305492; }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
@@ -154,23 +159,35 @@
     </div>
 </div>
 
-<!-- ARTIKEL — dirender otomatis dari array ARTIKEL di bawah -->
+<!-- KONTEN ARTIKEL -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- FEATURED -->
     <div class="mb-8 reveal fade-bottom">
         <h2 class="text-xl font-bold text-travellora-dark flex items-center gap-2">
             <span class="w-1 h-6 bg-travellora-blue rounded-full inline-block"></span>
             Artikel Pilihan
         </h2>
     </div>
-    <div id="featured-card" class="mb-10"></div>
+    <div id="featured-card" class="mb-12"></div>
 
+    <!-- GRID SEMUA ARTIKEL -->
     <div class="mb-8 reveal fade-bottom">
-        <h2 class="text-xl font-bold text-travellora-dark flex items-center gap-2">
-            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
-            Artikel Terbaru
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-travellora-dark flex items-center gap-2">
+                <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+                Artikel Terbaru
+            </h2>
+            <span id="artikel-count" class="text-sm text-travellora-gray"></span>
+        </div>
     </div>
+
+    <!-- GRID — 3 kolom, nambah ke bawah, 6 per halaman -->
     <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+    <!-- PAGINATION -->
+    <div id="pagination" class="mt-10 flex items-center justify-center gap-2"></div>
+
 </section>
 
 <!-- CTA -->
@@ -255,7 +272,7 @@
 <script>
 // =============================================
 // DATA ARTIKEL
-// Admin panel otomatis inject artikel baru di sini
+// Tambah artikel baru di bagian paling atas array
 // =============================================
 const ARTIKEL = [
     {
@@ -296,6 +313,13 @@ const ARTIKEL = [
 ];
 
 // =============================================
+// CONFIG
+// =============================================
+const PER_PAGE = 6; // artikel per halaman di grid
+let currentPage = 1;
+let currentCat = 'semua';
+
+// =============================================
 // HELPER
 // =============================================
 const CAT_LABEL = {'wisata-kota':'Wisata Kota','tips':'Tips Perjalanan','kuliner':'Kuliner','destinasi':'Destinasi'};
@@ -307,8 +331,16 @@ function formatDate(d) {
     return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
 }
 
+function activateReveals() {
+    document.querySelectorAll('.reveal').forEach(el => {
+        new IntersectionObserver(([e]) => {
+            if (e.isIntersecting) e.target.classList.add('active');
+        }, { threshold: 0.12 }).observe(el);
+    });
+}
+
 // =============================================
-// RENDER
+// RENDER FEATURED
 // =============================================
 function renderFeatured(a, idx) {
     const cl = CAT_LABEL[a.category]||a.category;
@@ -340,6 +372,9 @@ function renderFeatured(a, idx) {
     </div>`;
 }
 
+// =============================================
+// RENDER CARD
+// =============================================
 function renderCard(a, idx) {
     const cl = CAT_LABEL[a.category]||a.category;
     const cc = CAT_COLOR[a.category]||'bg-travellora-blue text-white';
@@ -351,7 +386,7 @@ function renderCard(a, idx) {
         </div>
         <div class="p-5">
             <h3 class="text-base font-bold text-travellora-dark leading-snug mb-2 hover:text-travellora-blue transition-colors">${a.title}</h3>
-            <p class="text-travellora-gray text-sm leading-relaxed mb-4">${a.description||''}</p>
+            <p class="text-travellora-gray text-sm leading-relaxed mb-4 line-clamp-3">${a.description||''}</p>
             <div class="flex items-center justify-between">
                 <span class="text-xs text-travellora-gray flex items-center gap-1">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -370,34 +405,98 @@ function renderCard(a, idx) {
     </article>`;
 }
 
-function renderPlaceholder() {
-    return `<article class="blog-card bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 overflow-hidden reveal fade-bottom" style="min-height:300px;">
-        <div class="flex flex-col items-center justify-center h-full p-8 text-center min-h-[300px]">
-            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
-            </div>
-            <p class="text-travellora-gray font-semibold mb-1">Artikel Berikutnya</p>
-            <p class="text-gray-400 text-sm">Segera hadir...</p>
-        </div>
-    </article>`;
+// =============================================
+// RENDER PAGINATION
+// =============================================
+function renderPagination(totalItems, page) {
+    const totalPages = Math.ceil(totalItems / PER_PAGE);
+    const el = document.getElementById('pagination');
+    if (totalPages <= 1) { el.innerHTML = ''; return; }
+
+    let html = '';
+
+    // Prev
+    html += `<button onclick="goPage(${page-1})" ${page===1?'disabled':''} class="page-btn px-3 py-2 rounded-lg border-2 border-gray-200 text-travellora-gray disabled:opacity-30 disabled:cursor-not-allowed">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<button onclick="goPage(${i})" class="page-btn ${i===page?'active':''} w-10 h-10 rounded-lg border-2 border-gray-200 font-semibold text-sm">${i}</button>`;
+    }
+
+    // Next
+    html += `<button onclick="goPage(${page+1})" ${page===totalPages?'disabled':''} class="page-btn px-3 py-2 rounded-lg border-2 border-gray-200 text-travellora-gray disabled:opacity-30 disabled:cursor-not-allowed">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>`;
+
+    el.innerHTML = html;
 }
 
-function renderAll(cat) {
-    cat = cat || 'semua';
+function goPage(p) {
+    currentPage = p;
+    renderGrid(currentCat, currentPage);
+    // scroll ke atas grid
+    document.getElementById('articles-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// =============================================
+// RENDER GRID (dengan pagination)
+// =============================================
+function renderGrid(cat, page) {
     const filtered = cat === 'semua' ? ARTIKEL : ARTIKEL.filter(a => a.category === cat);
     const featured = filtered.find(a => a.featured) || filtered[0];
+
+    // Semua artikel kecuali yang featured, tampil di grid
     const rest = filtered.filter(a => a !== featured);
 
-    document.getElementById('featured-card').innerHTML = featured ? renderFeatured(featured, ARTIKEL.indexOf(featured)) : '';
+    // Update counter
+    document.getElementById('artikel-count').textContent = rest.length > 0 ? `${rest.length} artikel` : '';
 
-    let gridHTML = rest.map(a => renderCard(a, ARTIKEL.indexOf(a))).join('');
-    const needed = Math.max(0, 2 - rest.length);
-    for (let i = 0; i < needed; i++) gridHTML += renderPlaceholder();
-    document.getElementById('articles-grid').innerHTML = gridHTML;
+    // Pagination slice
+    const start = (page - 1) * PER_PAGE;
+    const pageItems = rest.slice(start, start + PER_PAGE);
 
-    document.querySelectorAll('.reveal').forEach(el =>
-        new IntersectionObserver(([e]) => { if (e.isIntersecting) e.target.classList.add('active'); }, { threshold: 0.12 }).observe(el)
-    );
+    const grid = document.getElementById('articles-grid');
+
+    if (pageItems.length === 0 && rest.length === 0) {
+        grid.innerHTML = `<div class="col-span-3 text-center py-16 text-travellora-gray">
+            <div class="text-5xl mb-4">📭</div>
+            <p class="font-semibold">Belum ada artikel di kategori ini.</p>
+        </div>`;
+        document.getElementById('pagination').innerHTML = '';
+        return;
+    }
+
+    grid.innerHTML = pageItems.map(a => renderCard(a, ARTIKEL.indexOf(a))).join('');
+    renderPagination(rest.length, page);
+    activateReveals();
+}
+
+// =============================================
+// RENDER SEMUA
+// =============================================
+function renderAll(cat) {
+    cat = cat || 'semua';
+    currentCat = cat;
+    currentPage = 1;
+
+    const filtered = cat === 'semua' ? ARTIKEL : ARTIKEL.filter(a => a.category === cat);
+    // Featured: yang punya featured:true, fallback ke pertama
+    const featured = filtered.find(a => a.featured) || (filtered.length > 0 ? filtered[0] : null);
+
+    // Render featured
+    const featuredEl = document.getElementById('featured-card');
+    if (featured) {
+        featuredEl.innerHTML = renderFeatured(featured, ARTIKEL.indexOf(featured));
+        featuredEl.style.display = '';
+        document.querySelector('[data-section="featured-title"]') && (document.querySelector('[data-section="featured-title"]').style.display = '');
+    } else {
+        featuredEl.innerHTML = '';
+        featuredEl.style.display = 'none';
+    }
+
+    renderGrid(cat, 1);
+    activateReveals();
 }
 
 // =============================================
