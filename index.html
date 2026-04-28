@@ -1570,26 +1570,35 @@ if (document.readyState !== 'loading') { showFlyer(0); }
             </div>
 
             <div class="relative group">
-              <select id="route-select" onchange="updateTicketInfo()"
-                class="w-full px-4 sm:px-6 py-4 sm:py-5 border-2 border-gray-200 rounded-xl sm:rounded-2xl focus:border-travellora-blue focus:ring-4 focus:ring-blue-100 transition-all text-base sm:text-lg appearance-none cursor-pointer bg-white shadow-sm hover:shadow-md transition-shadow duration-200 group-hover:border-blue-300">
-                <option value="">-- Silakan Pilih Rute --</option>
-                <optgroup label=" Rute Malang" class="text-gray-700">
-                  <option value="Malang → Juanda">Malang → Juanda</option>
-                  <option value="Juanda → Malang">Juanda → Malang</option>
-                  <option value="Malang → SBY Kota">Malang → SBY Kota</option>
-                  <option value="SBY Kota → Malang">SBY Kota → Malang</option>
-                  <option value="Malang → SBY Utara / SBY Barat / Perak">Malang → SBY Utara/SBY Barat/Perak</option>
-                  <option value="SBY Utara / SBY Barat / Perak → Malang">SBY Utara/SBY Barat/Perak → Malang</option>
-                </optgroup>
-                <optgroup label=" Rute Batu" class="text-gray-700">
-                  <option value="Batu → Juanda">Batu → Juanda</option>
-                  <option value="Juanda → Batu">Juanda → Batu</option>
-                  <option value="Batu → SBY Kota">Batu → SBY Kota</option>
-                  <option value="SBY Kota → Batu">SBY Kota → Batu</option>
-                  <option value="Batu → SBY Utara / SBY Barat / Perak">Batu → SBY Utara/SBY Barat/Perak</option>
-                  <option value="SBY Utara / SBY Barat / Perak → Batu">SBY Utara/SBY Barat/Perak → Batu</option>
-                </optgroup>
-              </select>
+             <select id="route-select" onchange="updateTicketInfo()"
+  class="w-full px-4 sm:px-6 py-4 sm:py-5 border-2 border-gray-200 rounded-xl sm:rounded-2xl
+         focus:border-travellora-blue focus:ring-4 focus:ring-blue-100 transition-all text-base
+         sm:text-lg appearance-none cursor-pointer bg-white shadow-sm hover:shadow-md
+         transition-shadow duration-200 group-hover:border-blue-300">
+  <option value="">-- Silakan Pilih Rute --</option>
+ 
+  <optgroup label=" Rute Malang" class="text-gray-700">
+    <option value="Malang → Juanda">Malang → Juanda</option>
+    <option value="Juanda → Malang">Juanda → Malang</option>
+    <option value="Malang → SBY Kota">Malang → SBY Kota</option>
+    <option value="SBY Kota → Malang">SBY Kota → Malang</option>
+    <option value="Malang → Perak">Malang → Perak</option>
+    <option value="Perak → Malang">Perak → Malang</option>
+    <option value="Malang → SBY Utara / SBY Barat">Malang → SBY Utara / SBY Barat</option>
+    <option value="SBY Utara / SBY Barat → Malang">SBY Utara / SBY Barat → Malang</option>
+  </optgroup>
+ 
+  <optgroup label=" Rute Batu" class="text-gray-700">
+    <option value="Batu → Juanda">Batu → Juanda</option>
+    <option value="Juanda → Batu">Juanda → Batu</option>
+    <option value="Batu → SBY Kota">Batu → SBY Kota</option>
+    <option value="SBY Kota → Batu">SBY Kota → Batu</option>
+    <option value="Batu → Perak">Batu → Perak</option>
+    <option value="Perak → Batu">Perak → Batu</option>
+    <option value="Batu → SBY Utara / SBY Barat">Batu → SBY Utara / SBY Barat</option>
+    <option value="SBY Utara / SBY Barat → Batu">SBY Utara / SBY Barat → Batu</option>
+  </optgroup>
+</select>
               <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 sm:px-5">
                 <svg class="w-5 h-5 sm:w-8 sm:h-8 text-travellora-blue" fill="none" stroke="currentColor"
                   viewBox="0 0 24 24">
@@ -2556,192 +2565,209 @@ if (document.readyState !== 'loading') { showFlyer(0); }
   <script>
     // Data Tiket dengan format LENGKAP - SESUAI PERMINTAAN CUSTOMER
     const ticketData = {
-      // RUTE MALANG
-      "Malang → Juanda": {
-        reguler: 150000,
-        drop: 500000,
-        schedule: [
-          { time: "01.00", domestic: "05.00 / 06.00", international: "06.00 / 07.00" },
-          { time: "03.00", domestic: "06.00 / 07.00 / 08.00", international: "08.00 / 09.00" },
-          { time: "05.00", domestic: "08.30 / 09.00 / 10.00", international: "09.30 / 10.00 / 11.00" },
-          { time: "07.00", domestic: "10.30 / 11.00 / 12.00", international: "11.30 / 12.00 / 13.00" },
-          { time: "09.00", domestic: "12.30 / 13.00 / 14.00", international: "13.30 / 14.00 / 15.00" },
-          { time: "11.00", domestic: "14.30 / 15.00 / 16.00", international: "15.30 / 16.00 / 17.00" },
-          { time: "13.00", domestic: "16.30 / 17.00 / 18.00", international: "17.30 / 18.00 / 19.00" },
-          { time: "15.00", domestic: "18.30 -", international: "19.30 -" },
-          { time: "17.00", domestic: "18.30 -", international: "19.30 -" }
-        ],
-        type: "departure_juanda_table",
-        info: "Jadwal keberangkatan dari Malang ke Juanda. Estimasi perjalanan 2-3 jam tergantung kondisi lalu lintas."
-      },
-
-      "Juanda → Malang": {
-        reguler: 150000,
-        drop: 500000,
-        schedule: [
-          "06.00 - 07.00",
-          "07.00 - 08.00",
-          "08.00 - 09.00",
-          "09.00 - 10.00",
-          "10.00 - 11.00",
-          "11.00 - 12.00",
-          "12.00 - 13.00",
-          "13.00 - 14.00",
-          "14.00 - 15.00",
-          "15.00 - 16.00",
-          "16.00 - 17.00",
-          "17.00 - 18.00",
-          "18.00 - 19.00",
-          "19.00 - 20.00",
-          "20.00 - 21.00"
-        ],
-        type: "juanda_duration",
-        info: "Durasi penjemputan dari Juanda ke Malang. Perjalanan sekitar 2-3 jam."
-      },
-
-      "Malang → SBY Kota": {
-        reguler: 165000,
-        drop: 500000,
-        schedule: ["01.00", "03.00", "05.00", "07.00", "09.00", "11.00", "13.00", "15.00", "17.00"],
-        type: "departure_time_only",
-        info: "Jam keberangkatan dari Malang ke Surabaya Kota. Estimasi perjalanan 2-3 jam."
-      },
-
-      "SBY Kota → Malang": {
-        reguler: 165000,
-        drop: 500000,
-        schedule: [
-          "06.00 - 08.00",
-          "08.00 - 10.00",
-          "10.00 - 12.00",
-          "12.00 - 14.00",
-          "14.00 - 16.00",
-          "16.00 - 18.00",
-          "18.00 - 20.00",
-          "20.00 - 22.00"
-        ],
-        type: "duration_only",
-        info: "Durasi penjemputan dari Surabaya Kota ke Malang. Estimasi perjalanan 2-3 jam."
-      },
-
-      "Malang → SBY Utara / SBY Barat / Perak": {
-        reguler: 180000,
-        drop: 550000,
-        schedule: ["01.00", "03.00", "05.00", "07.00", "09.00", "11.00", "13.00", "15.00", "17.00"],
-        type: "departure_time_only",
-        info: "Jam keberangkatan dari Malang ke Perak. Estimasi perjalanan 2-3 jam."
-      },
-
-      "SBY Utara / SBY Barat / Perak → Malang": {
-        reguler: 180000,
-        drop: 550000,
-        schedule: [
-          "06.00 - 08.00",
-          "08.00 - 10.00",
-          "10.00 - 12.00",
-          "12.00 - 14.00",
-          "14.00 - 16.00",
-          "16.00 - 18.00",
-          "18.00 - 20.00"
-        ],
-        type: "duration_only",
-        info: "Durasi penjemputan dari Perak ke Malang. Estimasi perjalanan 2-3 jam."
-      },
-
-      // RUTE BATU
-      "Batu → Juanda": {
-        reguler: 170000,
-        drop: 550000,
-        schedule: [
-          { time: "01.00", domestic: "05.00 / 06.00", international: "06.00 / 07.00" },
-          { time: "03.00", domestic: "06.00 / 07.00 / 08.00", international: "08.00 / 09.00" },
-          { time: "05.00", domestic: "08.30 / 09.00 / 10.00", international: "09.30 / 10.00 / 11.00" },
-          { time: "07.00", domestic: "10.30 / 11.00 / 12.00", international: "11.30 / 12.00 / 13.00" },
-          { time: "09.00", domestic: "12.30 / 13.00 / 14.00", international: "13.30 / 14.00 / 15.00" },
-          { time: "11.00", domestic: "14.30 / 15.00 / 16.00", international: "15.30 / 16.00 / 17.00" },
-          { time: "13.00", domestic: "16.30 / 17.00 / 18.00", international: "17.30 / 18.00 / 19.00" },
-          { time: "15.00", domestic: "18.30 -", international: "19.30 -" },
-          { time: "17.00", domestic: "18.30 -", international: "19.30 -" }
-        ],
-        type: "departure_juanda_table",
-        info: "Jadwal keberangkatan dari Batu ke Juanda. Estimasi perjalanan 2-3 jam tergantung kondisi lalu lintas."
-      },
-
-      "Juanda → Batu": {
-        reguler: 170000,
-        drop: 550000,
-        schedule: [
-          "06.00 - 07.00",
-          "07.00 - 08.00",
-          "08.00 - 09.00",
-          "09.00 - 10.00",
-          "10.00 - 11.00",
-          "11.00 - 12.00",
-          "12.00 - 13.00",
-          "13.00 - 14.00",
-          "14.00 - 15.00",
-          "15.00 - 16.00",
-          "16.00 - 17.00",
-          "17.00 - 18.00",
-          "18.00 - 19.00",
-          "19.00 - 20.00",
-          "20.00 - 21.00",
-          "21.00 - 22.00"
-        ],
-        type: "juanda_duration",
-        info: "Durasi penjemputan dari Juanda ke Batu. Perjalanan sekitar 2-3 jam."
-      },
-
-      "Batu → SBY Kota": {
-        reguler: 180000,
-        drop: 550000,
-        schedule: ["01.00", "03.00", "05.00", "07.00", "09.00", "11.00", "13.00", "15.00", "17.00"],
-        type: "departure_time_only",
-        info: "Jam keberangkatan dari Batu ke Surabaya Kota. Estimasi perjalanan 2-3 jam."
-      },
-
-      "SBY Kota → Batu": {
-        reguler: 180000,
-        drop: 550000,
-        schedule: [
-          "06.00 - 08.00",
-          "08.00 - 10.00",
-          "10.00 - 12.00",
-          "12.00 - 14.00",
-          "14.00 - 16.00",
-          "16.00 - 18.00",
-          "18.00 - 20.00",
-          "20.00 - 22.00"
-        ],
-        type: "duration_only",
-        info: "Durasi penjemputan dari Surabaya Kota ke Batu. Estimasi perjalanan 2-3 jam."
-      },
-
-      "Batu → SBY Utara / SBY Barat / Perak": {
-        reguler: 200000,
-        drop: 600000,
-        schedule: ["01.00", "03.00", "05.00", "07.00", "09.00", "11.00", "13.00", "15.00", "17.00"],
-        type: "departure_time_only",
-        info: "Jam keberangkatan dari Batu ke Perak. Estimasi perjalanan 2-3 jam."
-      },
-
-      "SBY Utara / SBY Barat / Perak → Batu": {
-        reguler: 200000,
-        drop: 600000,
-        schedule: [
-          "06.00 - 08.00",
-          "08.00 - 10.00",
-          "10.00 - 12.00",
-          "12.00 - 14.00",
-          "14.00 - 16.00",
-          "16.00 - 18.00",
-          "18.00 - 20.00"
-        ],
-        type: "duration_only",
-        info: "Durasi penjemputan dari Perak ke Batu. Estimasi perjalanan 2-3 jam."
-      }
-    };
-
+ 
+  /* ──────────────────────────────────────────────────────────────
+     RUTE MALANG
+  ────────────────────────────────────────────────────────────── */
+ 
+  // Malang → Juanda  |  Rp 150.000/orang
+  "Malang → Juanda": {
+    reguler: 150000,
+    drop: 500000,
+    schedule: [
+      { time: "01.00", domestic: "05.00 / 06.00",              international: "06.00 / 07.00" },
+      { time: "03.00", domestic: "06.00 / 07.00 / 08.00",      international: "08.00 / 09.00" },
+      { time: "05.00", domestic: "08.30 / 09.00 / 10.00",      international: "09.30 / 10.00 / 11.00" },
+      { time: "07.00", domestic: "10.30 / 11.00 / 12.00",      international: "11.30 / 12.00 / 13.00" },
+      { time: "09.00", domestic: "12.30 / 13.00 / 14.00",      international: "13.30 / 14.00 / 15.00" },
+      { time: "11.00", domestic: "14.30 / 15.00 / 16.00",      international: "15.30 / 16.00 / 17.00" },
+      { time: "13.00", domestic: "16.30 / 17.00 / 18.00",      international: "17.30 / 18.00 / 19.00" },
+      { time: "15.00", domestic: "18.30 -",                     international: "19.30 -" },
+      { time: "17.00", domestic: "18.30 -",                     international: "19.30 -" }
+    ],
+    type: "departure_juanda_table",
+    info: "Jadwal keberangkatan dari Malang ke Juanda. Estimasi perjalanan 2-3 jam tergantung kondisi lalu lintas."
+  },
+ 
+  // Juanda → Malang  |  Rp 150.000/orang
+  "Juanda → Malang": {
+    reguler: 150000,
+    drop: 500000,
+    schedule: [
+      "06.00 - 07.00","07.00 - 08.00","08.00 - 09.00","09.00 - 10.00",
+      "10.00 - 11.00","11.00 - 12.00","12.00 - 13.00","13.00 - 14.00",
+      "14.00 - 15.00","15.00 - 16.00","16.00 - 17.00","17.00 - 18.00",
+      "18.00 - 19.00","19.00 - 20.00","20.00 - 21.00"
+    ],
+    type: "juanda_duration",
+    info: "Durasi penjemputan dari Juanda ke Malang. Perjalanan sekitar 2-3 jam."
+  },
+ 
+  // Malang → SBY Kota  |  Rp 150.000/orang
+  "Malang → SBY Kota": {
+    reguler: 150000,
+    drop: 500000,
+    schedule: ["01.00","03.00","05.00","07.00","09.00","11.00","13.00","15.00","17.00"],
+    type: "departure_time_only",
+    info: "Jam keberangkatan dari Malang ke Surabaya Kota. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // SBY Kota → Malang  |  Rp 150.000/orang
+  "SBY Kota → Malang": {
+    reguler: 150000,
+    drop: 500000,
+    schedule: [
+      "06.00 - 08.00","08.00 - 10.00","10.00 - 12.00","12.00 - 14.00",
+      "14.00 - 16.00","16.00 - 18.00","18.00 - 20.00","20.00 - 22.00"
+    ],
+    type: "duration_only",
+    info: "Durasi penjemputan dari Surabaya Kota ke Malang. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // Malang → Perak  |  Rp 170.000/orang  ← BARU (pisah dari SBY Utara/Barat)
+  "Malang → Perak": {
+    reguler: 170000,
+    drop: 500000,
+    schedule: ["01.00","03.00","05.00","07.00","09.00","11.00","13.00","15.00","17.00"],
+    type: "departure_time_only",
+    info: "Jam keberangkatan dari Malang ke Perak. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // Perak → Malang  |  Rp 170.000/orang  ← BARU
+  "Perak → Malang": {
+    reguler: 170000,
+    drop: 500000,
+    schedule: [
+      "06.00 - 08.00","08.00 - 10.00","10.00 - 12.00","12.00 - 14.00",
+      "14.00 - 16.00","16.00 - 18.00","18.00 - 20.00"
+    ],
+    type: "duration_only",
+    info: "Durasi penjemputan dari Perak ke Malang. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // Malang → SBY Utara / SBY Barat  |  Rp 180.000/orang
+  "Malang → SBY Utara / SBY Barat": {
+    reguler: 180000,
+    drop: 500000,
+    schedule: ["01.00","03.00","05.00","07.00","09.00","11.00","13.00","15.00","17.00"],
+    type: "departure_time_only",
+    info: "Jam keberangkatan dari Malang ke SBY Utara / SBY Barat. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // SBY Utara / SBY Barat → Malang  |  Rp 180.000/orang
+  "SBY Utara / SBY Barat → Malang": {
+    reguler: 180000,
+    drop: 500000,
+    schedule: [
+      "06.00 - 08.00","08.00 - 10.00","10.00 - 12.00","12.00 - 14.00",
+      "14.00 - 16.00","16.00 - 18.00","18.00 - 20.00"
+    ],
+    type: "duration_only",
+    info: "Durasi penjemputan dari SBY Utara / SBY Barat ke Malang. Estimasi perjalanan 2-3 jam."
+  },
+ 
+ 
+  /* ──────────────────────────────────────────────────────────────
+     RUTE BATU
+  ────────────────────────────────────────────────────────────── */
+ 
+  // Batu → Juanda  |  Rp 170.000/orang
+  "Batu → Juanda": {
+    reguler: 170000,
+    drop: 550000,
+    schedule: [
+      { time: "01.00", domestic: "05.00 / 06.00",              international: "06.00 / 07.00" },
+      { time: "03.00", domestic: "06.00 / 07.00 / 08.00",      international: "08.00 / 09.00" },
+      { time: "05.00", domestic: "08.30 / 09.00 / 10.00",      international: "09.30 / 10.00 / 11.00" },
+      { time: "07.00", domestic: "10.30 / 11.00 / 12.00",      international: "11.30 / 12.00 / 13.00" },
+      { time: "09.00", domestic: "12.30 / 13.00 / 14.00",      international: "13.30 / 14.00 / 15.00" },
+      { time: "11.00", domestic: "14.30 / 15.00 / 16.00",      international: "15.30 / 16.00 / 17.00" },
+      { time: "13.00", domestic: "16.30 / 17.00 / 18.00",      international: "17.30 / 18.00 / 19.00" },
+      { time: "15.00", domestic: "18.30 -",                     international: "19.30 -" },
+      { time: "17.00", domestic: "18.30 -",                     international: "19.30 -" }
+    ],
+    type: "departure_juanda_table",
+    info: "Jadwal keberangkatan dari Batu ke Juanda. Estimasi perjalanan 2-3 jam tergantung kondisi lalu lintas."
+  },
+ 
+  // Juanda → Batu  |  Rp 170.000/orang
+  "Juanda → Batu": {
+    reguler: 170000,
+    drop: 550000,
+    schedule: [
+      "06.00 - 07.00","07.00 - 08.00","08.00 - 09.00","09.00 - 10.00",
+      "10.00 - 11.00","11.00 - 12.00","12.00 - 13.00","13.00 - 14.00",
+      "14.00 - 15.00","15.00 - 16.00","16.00 - 17.00","17.00 - 18.00",
+      "18.00 - 19.00","19.00 - 20.00","20.00 - 21.00","21.00 - 22.00"
+    ],
+    type: "juanda_duration",
+    info: "Durasi penjemputan dari Juanda ke Batu. Perjalanan sekitar 2-3 jam."
+  },
+ 
+  // Batu → SBY Kota  |  Rp 180.000/orang
+  "Batu → SBY Kota": {
+    reguler: 180000,
+    drop: 550000,
+    schedule: ["01.00","03.00","05.00","07.00","09.00","11.00","13.00","15.00","17.00"],
+    type: "departure_time_only",
+    info: "Jam keberangkatan dari Batu ke Surabaya Kota. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // SBY Kota → Batu  |  Rp 180.000/orang
+  "SBY Kota → Batu": {
+    reguler: 180000,
+    drop: 550000,
+    schedule: [
+      "06.00 - 08.00","08.00 - 10.00","10.00 - 12.00","12.00 - 14.00",
+      "14.00 - 16.00","16.00 - 18.00","18.00 - 20.00","20.00 - 22.00"
+    ],
+    type: "duration_only",
+    info: "Durasi penjemputan dari Surabaya Kota ke Batu. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // Batu → Perak  |  Rp 180.000/orang  ← BARU (pisah dari SBY Utara/Barat)
+  "Batu → Perak": {
+    reguler: 180000,
+    drop: 550000,
+    schedule: ["01.00","03.00","05.00","07.00","09.00","11.00","13.00","15.00","17.00"],
+    type: "departure_time_only",
+    info: "Jam keberangkatan dari Batu ke Perak. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // Perak → Batu  |  Rp 180.000/orang  ← BARU
+  "Perak → Batu": {
+    reguler: 180000,
+    drop: 550000,
+    schedule: [
+      "06.00 - 08.00","08.00 - 10.00","10.00 - 12.00","12.00 - 14.00",
+      "14.00 - 16.00","16.00 - 18.00","18.00 - 20.00"
+    ],
+    type: "duration_only",
+    info: "Durasi penjemputan dari Perak ke Batu. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // Batu → SBY Utara / SBY Barat  |  Rp 200.000/orang
+  "Batu → SBY Utara / SBY Barat": {
+    reguler: 200000,
+    drop: 550000,
+    schedule: ["01.00","03.00","05.00","07.00","09.00","11.00","13.00","15.00","17.00"],
+    type: "departure_time_only",
+    info: "Jam keberangkatan dari Batu ke SBY Utara / SBY Barat. Estimasi perjalanan 2-3 jam."
+  },
+ 
+  // SBY Utara / SBY Barat → Batu  |  Rp 200.000/orang
+  "SBY Utara / SBY Barat → Batu": {
+    reguler: 200000,
+    drop: 550000,
+    schedule: [
+      "06.00 - 08.00","08.00 - 10.00","10.00 - 12.00","12.00 - 14.00",
+      "14.00 - 16.00","16.00 - 18.00","18.00 - 20.00"
+    ],
+    type: "duration_only",
+    info: "Durasi penjemputan dari SBY Utara / SBY Barat ke Batu. Estimasi perjalanan 2-3 jam."
+  }
+ 
+};
     function updateTicketInfo() {
       const select = document.getElementById('route-select');
       const resultDiv = document.getElementById('ticket-result');
